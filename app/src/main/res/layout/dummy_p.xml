@@ -26,8 +26,7 @@ android:layout_height="wrap_content"
         android:layout_height="32dp"
         android:id="@+id/delete"
         android:scaleType="fitXY"
-        android:background="@drawable/ic_delete"
-
+        android:background="@drawable/ic_export"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 

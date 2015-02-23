@@ -19,4 +19,20 @@
     <color name="white">#ffffff</color>
     <color name="whitetrans">#80ffffff</color>
     <color name="fulltrans">#00000000</color>
+
+
+
+    <color name="color_a">#FFF8E1</color>
+    <color name="color_b">#FFECB3</color>
+    <color name="color_c">#FFE082</color>
+    <color name="color_d">#FFD54F</color>
+    <color name="color_e">#FFCA28</color>
+    <color name="color_f">#FFC107</color>
+    <color name="color_g">#FFB300</color>
+    <color name="color_h">#FFA000</color>
+    <color name="color_i">#FF8F00</color>
+    <color name="color_j">#FF6F00</color>
+
+
+
 </resources>

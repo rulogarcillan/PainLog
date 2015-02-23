@@ -31,9 +31,9 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/ic_diary"
-        fab:fab_colorNormal="@color/relajado"
-        fab:fab_colorPressed="@color/pulsado"
-        fab:fab_colorRipple="@color/ripple"
+        fab:fab_colorNormal="@color/color_f"
+        fab:fab_colorPressed="@color/color_h"
+        fab:fab_colorRipple="@color/color_c"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 

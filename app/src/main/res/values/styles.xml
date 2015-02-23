@@ -8,7 +8,9 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-
+        <item name="android:colorPrimary">@color/color_f</item>
+        <item name="android:colorPrimaryDark">@color/color_h</item>
+        <item name="android:colorAccent">@color/color_f</item>
     </style>
 
 
