@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#AD1457</color>
+    <color name="primary_dark">#880E4F</color>
+    <color name="accent">#AD1457</color>
+
+    <color name="relajado">#d81b60</color>
+    <color name="pulsado">#00838F</color>
+    <color name="ripple">#18FFFF</color>
+
+
+    <color name="stroke">#dddddd</color>
+    <color name="text_light">#66000000</color>
+    <color name="card_text">#ff8d8d8d</color>
+    <color name="card_title_text">#ff707070</color>
+    <color name="card_light_text">#ffb5b5b5</color>
+    <color name="card_separator">#ffe5e5e5</color>
+    <color name="card_border">#bebebe</color>
+    <color name="white">#ffffff</color>
+    <color name="whitetrans">#80ffffff</color>
+    <color name="fulltrans">#00000000</color>
+</resources>

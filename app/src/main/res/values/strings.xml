@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pain Log</string>
+    <string name="action_settings">Opciones</string>
+    <string name="vacio">No hay diarios</string>
+
+
+</resources>
