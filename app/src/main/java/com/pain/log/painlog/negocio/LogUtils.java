@@ -13,7 +13,7 @@ import java.nio.channels.FileChannel;
 
 public class LogUtils {
 
-    static final String TAG = "DEBUG_SELFIE: ";
+    static final String TAG = "DEBUG_PAINLOG: ";
 
     public static void LOGD(final String tag, String message) {
         if (BuildConfig.DEBUG) {

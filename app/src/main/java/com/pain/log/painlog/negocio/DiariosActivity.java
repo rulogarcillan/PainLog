@@ -7,9 +7,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 
@@ -26,6 +28,7 @@ public class DiariosActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private TextView mensajeVacio;
     private AdapterProyectos adapter;
+    private Consultas consultas;
     private MoonCalculation luna = new MoonCalculation();
     private ArrayList<Diarios> items = new ArrayList<>();
 
@@ -41,35 +44,42 @@ public class DiariosActivity extends BaseActivity {
         myDB = new MyDatabase(this);
         copybd();
         scroll();
+        consultas = new Consultas(this);
 
-        for(int x = 1; x < 31; x++) {
-            items.add(new Diarios(x, luna.phaseName(luna.moonPhase(2015,3,x+1))));
+        //carga de recyclerview
+        items = consultas.getDiarios(); // llamada a query BBDD
+        adapter = new AdapterProyectos(this, items); //Agregamos los items al adapter
 
-        }
-
-        adapter = new AdapterProyectos(this, items);
-
+        //definimos el recycler y agregamos el adaptaer
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
 
-
+        //add diario
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                View view = getLayoutInflater().inflate(R.layout.edittext, null );
+                final View view = getLayoutInflater().inflate(R.layout.edittext, null);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(DiariosActivity.this);
+
                 dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                    }
+
+                        EditText editText = (EditText) view.findViewById(R.id.edittext);
+
+                        Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"),editText.getText().toString()) ;
+                        consultas.addDiario(nuevo);
+                        adapter.add(nuevo, adapter.LAST_POSITION);
+
+                     }
                 });
                 dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

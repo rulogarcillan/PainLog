@@ -70,7 +70,6 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dummy_p, viewGroup, false);
         ViewHolder holder = new ViewHolder(v);
 
-
         return holder;
 
 

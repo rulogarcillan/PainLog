@@ -28,6 +28,29 @@ public class Consultas {
 
     }
 
+    public Integer genKeyIdTabla(String tabla) {
+
+
+        Cursor cur = null;
+        String query;
+
+        query = "select ifnull(max(clave),0) + 1 from " + tabla;
+        cur = db.query(query, LEER);
+        LOGI("genKeyIdTabla", query);
+
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+
+                return (cur.getInt(0));
+
+            } while (cur.moveToNext());
+        }
+        db.close();
+        return null;
+
+    }
+
 
     public ArrayList getDiarios() {
 
@@ -48,6 +71,25 @@ public class Consultas {
 
         db.close();
         return array;
+    }
+
+    public String addDiario(Diarios datos) {
+
+        String sql;
+        sql = "Insert into diarios (nombre) values ('" + datos.getNombre() + "')";
+        LOGI("addDiario", sql);
+
+        Cursor cur = db.query(sql, ESCRIBIR);
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+                return (cur.getString(0));
+
+            } while (cur.moveToNext());
+        }
+        db.close();
+        return "0";
+
     }
 
 }
