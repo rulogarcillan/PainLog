@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="LinearLayout"
 xmlns:fab="http://schemas.android.com/apk/res-auto"
-android:layout_width="wrap_content"
+android:layout_width="match_parent"
 android:layout_height="wrap_content"
-    android:background="?android:selectableItemBackground">
+android:background="?android:selectableItemBackground"
+    android:orientation="vertical">
 
     <TextView
         android:padding="@dimen/activity_horizontal_margin"
@@ -17,19 +18,36 @@ android:layout_height="wrap_content"
         android:text="Prueba"
         android:layout_width="match_parent"/>
 
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <ImageView
         android:padding="2dp"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:id="@+id/delete"
         android:scaleType="fitXY"
-        android:background="@drawable/ic_export"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@drawable/ic_delete"/>
+    <ImageView
+        android:padding="2dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/edit"
+        android:scaleType="fitXY"
+        android:background="@drawable/ic_edit"/>
+    <ImageView
+        android:padding="2dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/export"
+        android:scaleType="fitXY"
+        android:background="@drawable/ic_export"/>
+    </LinearLayout>
 
-</RelativeLayout>
+
+
+</LinearLayout>
 
 
