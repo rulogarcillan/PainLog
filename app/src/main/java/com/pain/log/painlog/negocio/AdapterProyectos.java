@@ -83,7 +83,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity,"Rulo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity,Integer.toString(items.get(i).getClave()),Toast.LENGTH_SHORT).show();
             }
         });
 
