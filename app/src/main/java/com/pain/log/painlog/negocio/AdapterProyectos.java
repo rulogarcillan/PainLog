@@ -42,7 +42,6 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             Text = (TextView) container.findViewById(R.id.text);
 
 
-
         }
     }
 
@@ -70,6 +69,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dummy_p, viewGroup, false);
         ViewHolder holder = new ViewHolder(v);
 
+
         return holder;
 
 
@@ -80,10 +80,10 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
         viewHolder.Text.setText(items.get(i).getNombre());
-        viewHolder.Text.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity,Integer.toString(items.get(i).getClave()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity,"Rulo",Toast.LENGTH_SHORT).show();
             }
         });
 
