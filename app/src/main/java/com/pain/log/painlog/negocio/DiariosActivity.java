@@ -55,9 +55,9 @@ public class DiariosActivity extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        RecyclerView.ItemDecoration itemDecoration =
+       /* RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
-        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(itemDecoration);*/
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 

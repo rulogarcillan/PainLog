@@ -1,53 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="LinearLayout"
-xmlns:fab="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="?android:selectableItemBackground"
-    android:orientation="vertical">
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
+    >
 
-    <TextView
-        android:padding="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:id="@+id/text"
-        android:textStyle="bold"
-        android:textColor="@color/card_text"
-        android:text="Prueba"
-        android:layout_width="match_parent"/>
+
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:padding="2dp"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/delete"
-        android:scaleType="fitXY"
-        android:background="@drawable/ic_delete"/>
-    <ImageView
-        android:padding="2dp"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/edit"
-        android:scaleType="fitXY"
-        android:background="@drawable/ic_edit"/>
-    <ImageView
-        android:padding="2dp"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/export"
-        android:scaleType="fitXY"
-        android:background="@drawable/ic_export"/>
+    <TextView
+
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Prueba"
+        android:textColor="@color/card_text"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_k">
+
+        </View>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_h"
+        android:padding="8dp">
+
+
+        <ImageButton
+
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_delete_d" />
+
+        <ImageButton
+
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_edit_d" />
+
+        <ImageButton
+
+            android:id="@+id/export"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_export_d" />
+
+
     </LinearLayout>
-
-
 
 </LinearLayout>
 
-
+</android.support.v7.widget.CardView>

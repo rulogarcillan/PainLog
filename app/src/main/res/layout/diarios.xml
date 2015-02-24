@@ -3,6 +3,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/stroke"
     tools:context=".DiariosActivity">
 
 
@@ -31,9 +32,9 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/ic_diary"
-        fab:fab_colorNormal="@color/color_f"
-        fab:fab_colorPressed="@color/color_h"
-        fab:fab_colorRipple="@color/color_c"
+        fab:fab_colorNormal="@color/color_h"
+        fab:fab_colorPressed="@color/color_j"
+        fab:fab_colorRipple="@color/color_d"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
