@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre diario"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="@color/color_d"
         android:textColor="@color/card_text"
         android:textStyle="bold" />
 
