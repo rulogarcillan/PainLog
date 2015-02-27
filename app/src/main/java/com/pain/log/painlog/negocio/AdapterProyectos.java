@@ -1,10 +1,13 @@
 package com.pain.log.painlog.negocio;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +38,18 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView Text;
+        ImageButton delete;
+        ImageButton edit;
+        ImageButton export;
+
 
         public ViewHolder(View container) {
             super(container);
 
             Text = (TextView) container.findViewById(R.id.text);
-
+            delete = (ImageButton) container.findViewById(R.id.delete);
+            edit = (ImageButton) container.findViewById(R.id.edit);
+            export = (ImageButton) container.findViewById(R.id.export);
 
         }
     }
@@ -84,6 +93,30 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity,Integer.toString(items.get(i).getClave()),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setMessage(R.string.confirmar)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                int clave = items.get(i).getClave();
+                                items.remove(i);
+                                notifyDataSetChanged();
+                                ((DiariosActivity)activity).deleteItem(clave);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 

@@ -4,6 +4,7 @@
     <string name="app_name">Pain Log</string>
     <string name="action_settings">Opciones</string>
     <string name="vacio">No hay diarios</string>
+    <string name="confirmar">¿Eliminar definitivamente el diario?</string>
 
 
 </resources>

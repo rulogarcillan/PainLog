@@ -83,6 +83,7 @@ public class DiariosActivity extends BaseActivity {
                         Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"),editText.getText().toString()) ;
                         consultas.addDiario(nuevo);
                         adapter.add(nuevo, adapter.LAST_POSITION);
+                        mensajeVacio.setVisibility(View.VISIBLE);
 
                      }
                 });
@@ -96,10 +97,13 @@ public class DiariosActivity extends BaseActivity {
             }
         });
 
+    }
 
+    protected void deleteItem(int clave){
 
-
-
+        consultas.deleteDiario(clave);
+        if (items.isEmpty())
+            mensajeVacio.setVisibility(View.VISIBLE);
 
     }
 

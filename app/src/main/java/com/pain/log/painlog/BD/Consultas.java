@@ -92,4 +92,33 @@ public class Consultas {
 
     }
 
+
+    public void deleteDiario(int clave) {
+
+
+        Cursor cur = null;
+        String query, query2;
+
+        query = "delete from diarios where clave = " + clave;
+        query2 = "delete from registros where diarios_clave = " + clave;
+        LOGI("deleteDiario", query2);
+        cur = db.query(query2, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        LOGI("deleteDiario", query);
+        cur = db.query(query, ESCRIBIR); //Borra proyectos
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        db.close();
+
+    }
+
 }
