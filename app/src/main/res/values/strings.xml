@@ -5,6 +5,7 @@
     <string name="action_settings">Opciones</string>
     <string name="vacio">No hay diarios</string>
     <string name="confirmar">¿Eliminar definitivamente el diario?</string>
+    <string name="errorvacio">Error, debe introducir un texto</string>
 
 
 </resources>

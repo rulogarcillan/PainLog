@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
@@ -80,16 +81,20 @@ public class DiariosActivity extends BaseActivity {
 
                         EditText editText = (EditText) view.findViewById(R.id.edittext);
 
-                        Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"),editText.getText().toString()) ;
-                        consultas.addDiario(nuevo);
-                        adapter.add(nuevo, adapter.LAST_POSITION);
-                        mensajeVacio.setVisibility(View.INVISIBLE);
+                        if (editText.getText().toString().trim().length()== 0){
+                            Toast.makeText(DiariosActivity.this,R.string.errorvacio,Toast.LENGTH_SHORT).show();
+                        } else {
+                            Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"), editText.getText().toString());
+                            consultas.addDiario(nuevo);
+                            adapter.add(nuevo, adapter.LAST_POSITION);
+                            mensajeVacio.setVisibility(View.INVISIBLE);
+                        }
 
                      }
                 });
                 dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+
                     }
                 });
                 dialog.setView(view);
