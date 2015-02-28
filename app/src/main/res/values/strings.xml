@@ -8,5 +8,8 @@
     <string name="errorvacio">Error, debe introducir un texto</string>
     <string name="eliminarTittle">Eliminar</string>
     <string name="editarTittle">Editar</string>
+    <string name="title_activity_log">LogActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

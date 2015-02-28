@@ -3,12 +3,14 @@ package com.pain.log.painlog.negocio;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +40,18 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Text;
+        TextView text;
         ImageButton delete;
         ImageButton edit;
         ImageButton export;
+        LinearLayout layo;
 
 
         public ViewHolder(View container) {
             super(container);
 
-            Text = (TextView) container.findViewById(R.id.text);
+            layo = (LinearLayout) container.findViewById(R.id.layo);
+            text = (TextView) container.findViewById(R.id.text);
             delete = (ImageButton) container.findViewById(R.id.delete);
             edit = (ImageButton) container.findViewById(R.id.edit);
             export = (ImageButton) container.findViewById(R.id.export);
@@ -89,11 +93,27 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
-        viewHolder.Text.setText(items.get(i).getNombre());
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.text.setText(items.get(i).getNombre());
+        viewHolder.layo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity,Integer.toString(items.get(i).getClave()),Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(activity,LogActivity.class);
+
+
+
+         /*       LOGI("viewHolder.cardImage.setOnClickListener", "LLAMADA A NUEVA ACTIVITY");
+                LOGI("PARM", proyecto.getP_id().toString());
+                LOGI("PARM", proyecto.getNombre());
+                LOGI("PARM", proyecto.getCarpeta());
+                LOGI("PARM", proyecto.getFechacreacion());
+                intent.putExtra(Constantes._ID, proyecto.getP_id());
+                intent.putExtra(Constantes._NOMBRE, proyecto.getNombre());
+                intent.putExtra(Constantes._CARPETA, proyecto.getCarpeta());
+                intent.putExtra(Constantes._FECHA, proyecto.getFechacreacion());*/
+
+                activity.startActivity(intent);
             }
         });
 
@@ -109,7 +129,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                                 int clave = items.get(i).getClave();
                                 items.remove(i);
                                 notifyDataSetChanged();
-                                ((DiariosActivity)activity).deleteItem(clave);
+                                ((DiariosActivity) activity).deleteItem(clave);
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -137,14 +157,14 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                                 int clave = items.get(i).getClave();
                                 String titu = editText.getText().toString();
 
-                                if (editText.getText().toString().trim().length()== 0){
-                                    Toast.makeText(activity,R.string.errorvacio,Toast.LENGTH_SHORT).show();
+                                if (editText.getText().toString().trim().length() == 0) {
+                                    Toast.makeText(activity, R.string.errorvacio, Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                items.get(i).setNombre(titu);
-                                notifyDataSetChanged();
-                                ((DiariosActivity)activity).editItem(clave, titu);
-                            }
+                                    items.get(i).setNombre(titu);
+                                    notifyDataSetChanged();
+                                    ((DiariosActivity) activity).editItem(clave, titu);
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -158,10 +178,6 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         });
 
     }
-
-
-
-
 
 
 

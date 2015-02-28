@@ -22,6 +22,7 @@
     android:layout_height="match_parent"
     android:background="?android:selectableItemBackground"
     android:clickable="true"
+    android:id="@+id/layo"
     android:orientation="vertical">
 
     <TextView
