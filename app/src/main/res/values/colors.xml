@@ -22,17 +22,17 @@
 
 
 
-    <color name="color_a">#FFF8E1</color>
-    <color name="color_b">#FFECB3</color>
-    <color name="color_c">#FFE082</color>
-    <color name="color_d">#FFD54F</color>
-    <color name="color_e">#FFCA28</color>
-    <color name="color_f">#FFC107</color>
-    <color name="color_g">#FFB300</color>
-    <color name="color_h">#FFA000</color>
-    <color name="color_i">#FF8F00</color>
-    <color name="color_j">#FF6F00</color>
-    <color name="color_k">#F57F17</color>
+    <color name="color_a">#EFEBE9</color>
+    <color name="color_b">#D7CCC8</color>
+    <color name="color_c">#BCAAA4</color>
+    <color name="color_d">#A1887F</color>
+    <color name="color_e">#8D6E63</color>
+    <color name="color_f">#795548</color>
+    <color name="color_g">#6D4C41</color>
+    <color name="color_h">#5D4037</color>
+    <color name="color_i">#4E342E</color>
+    <color name="color_j">#3E2723</color>
+    <color name="color_k">#000000</color>
 
 
 

@@ -4,15 +4,12 @@
     android:id="@+id/card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
     android:layout_marginTop="5dp"
-    card_view:cardCornerRadius="2dp"
-    card_view:cardElevation="2dp"
-    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="2dp">
     >
 
 
@@ -47,7 +44,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/color_k">
+            android:background="@color/card_separator">
 
         </View>
     </FrameLayout>
@@ -56,8 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/color_h"
-        android:padding="8dp">
+        android:background="@color/color_e"
+        android:padding="4dp">
 
 
         <ImageButton
