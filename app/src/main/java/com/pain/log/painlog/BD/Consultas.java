@@ -93,7 +93,7 @@ public class Consultas {
     }
 
 
-    public void deleteDiario(int clave) {
+       public void deleteDiario(int clave) {
 
 
         Cursor cur = null;
@@ -120,5 +120,27 @@ public class Consultas {
         db.close();
 
     }
+
+    public void editDiario(int clave, String titu) {
+
+
+        Cursor cur = null;
+        String query;
+
+        query = "update diarios set nombre='" + titu + "' where clave = " + clave;
+
+        LOGI("editDiario", query);
+        cur = db.query(query, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+
+        db.close();
+
+    }
+
 
 }

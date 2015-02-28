@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,6 +103,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage(R.string.confirmar)
                         .setCancelable(true)
+                        .setTitle(R.string.eliminarTittle)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 int clave = items.get(i).getClave();
@@ -120,7 +122,48 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             }
         });
 
+
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View view = activity.getLayoutInflater().inflate(R.layout.edittext, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setCancelable(true)
+                        .setTitle(R.string.editarTittle)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                EditText editText = (EditText) view.findViewById(R.id.edittext);
+                                int clave = items.get(i).getClave();
+                                String titu = editText.getText().toString();
+
+                                if (editText.getText().toString().trim().length()== 0){
+                                    Toast.makeText(activity,R.string.errorvacio,Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                items.get(i).setNombre(titu);
+                                notifyDataSetChanged();
+                                ((DiariosActivity)activity).editItem(clave, titu);
+                            }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                builder.setView(view);
+                builder.show();
+            }
+        });
+
     }
+
+
+
+
+
+
 
     public void add(Diarios s, int position) {
 

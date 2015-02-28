@@ -113,6 +113,11 @@ public class DiariosActivity extends BaseActivity {
     }
 
 
+    protected void editItem(int clave, String titu){
+        consultas.editDiario(clave, titu);
+
+    }
+
 
     private void scroll(){
 
