@@ -30,7 +30,7 @@ public class DiariosActivity extends BaseActivity {
     private TextView mensajeVacio;
     private AdapterProyectos adapter;
     private Consultas consultas;
-    private MoonCalculation luna = new MoonCalculation();
+
     private ArrayList<Diarios> items = new ArrayList<>();
 
     @Override
@@ -84,7 +84,7 @@ public class DiariosActivity extends BaseActivity {
                         if (editText.getText().toString().trim().length()== 0){
                             Toast.makeText(DiariosActivity.this,R.string.errorvacio,Toast.LENGTH_SHORT).show();
                         } else {
-                            Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"), editText.getText().toString());
+                            Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString());
                             consultas.addDiario(nuevo);
                             adapter.add(nuevo, adapter.LAST_POSITION);
                             mensajeVacio.setVisibility(View.INVISIBLE);

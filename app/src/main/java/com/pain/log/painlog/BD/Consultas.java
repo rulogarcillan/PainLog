@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.pain.log.painlog.negocio.Diarios;
+import com.pain.log.painlog.negocio.Logs;
 
 import java.util.ArrayList;
 
@@ -28,13 +29,34 @@ public class Consultas {
 
     }
 
-    public Integer genKeyIdTabla(String tabla) {
+    public Integer genKeyIdTablaDia() {
+        Cursor cur = null;
+        String query;
+
+        query = "select ifnull(max(clave),0) + 1 from diarios";
+        cur = db.query(query, LEER);
+        LOGI("genKeyIdTabla", query);
+
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+
+                return (cur.getInt(0));
+
+            } while (cur.moveToNext());
+        }
+        db.close();
+        return null;
+
+    }
+
+    public Integer genKeyIdTablaReg() {
 
 
         Cursor cur = null;
         String query;
 
-        query = "select ifnull(max(clave),0) + 1 from " + tabla;
+        query = "select ifnull(max(clave_r),0) + 1 from registros";
         cur = db.query(query, LEER);
         LOGI("genKeyIdTabla", query);
 
@@ -142,5 +164,46 @@ public class Consultas {
 
     }
 
+
+    public String addRegistros(Logs datos) {
+
+        String sql;
+        sql = "Insert into registros (fecha, intensidad, notas, diarios_clave) values ('" + datos.getFecha() + "',"+ datos.getIntensidad() + ",'" + datos.getNotas() +"'," + datos.getClave_d() +")";
+        LOGI("addRegistros", sql);
+
+        Cursor cur = db.query(sql, ESCRIBIR);
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+                return (cur.getString(0));
+
+            } while (cur.moveToNext());
+        }
+        db.close();
+        return "0";
+
+    }
+
+
+    public ArrayList getLogs(int clave) {
+
+        String sql;
+        sql = "select * from registros where diarios_clave = " + clave + " order by fecha desc";
+        LOGI("getLogs", sql);
+        ArrayList<Logs> array = new ArrayList<>();
+        Cursor cur = db.query(sql, LEER);
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+
+                Logs item = new Logs(cur.getInt(0), cur.getString(1),cur.getInt(2),cur.getString(3),cur.getInt(4));
+                array.add(item);
+
+            } while (cur.moveToNext());
+        }
+
+        db.close();
+        return array;
+    }
 
 }

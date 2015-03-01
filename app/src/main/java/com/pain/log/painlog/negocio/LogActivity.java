@@ -12,7 +12,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +26,9 @@ import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 import static com.pain.log.painlog.negocio.LogUtils.copybd;
 
 public class LogActivity extends BaseActivity {
@@ -37,9 +43,25 @@ public class LogActivity extends BaseActivity {
     private Consultas consultas;
     private MoonCalculation luna = new MoonCalculation();
     private ArrayList<Logs> items = new ArrayList<>();
+    private int clave;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //carga de recyclerview
+        items = consultas.getLogs(clave); // llamada a query BBDD
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
+        if (!items.isEmpty())
+            mensajeVacio.setVisibility(View.INVISIBLE);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
         ActionBar actionBar = getActionBar();
@@ -51,14 +73,10 @@ public class LogActivity extends BaseActivity {
 
         myDB = new MyDatabase(this);
         scroll();
+        cargaDatos();
         consultas = new Consultas(this);
 
-        //carga de recyclerview
-        //items = consultas.getDiarios(); // llamada a query BBDD
 
-
-        items.add(new Logs());
-        items.add(new Logs());
         adapter = new AdapterLogs(this, items); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
@@ -71,8 +89,6 @@ public class LogActivity extends BaseActivity {
         recyclerView.addItemDecoration(itemDecoration);*/
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-
-
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
@@ -85,18 +101,8 @@ public class LogActivity extends BaseActivity {
                 Intent intent = new Intent(LogActivity.this, DolActivity.class);
 
 
-
-         /*     LOGI("viewHolder.cardImage.setOnClickListener", "LLAMADA A NUEVA ACTIVITY");
-                LOGI("PARM", proyecto.getP_id().toString());
-                LOGI("PARM", proyecto.getNombre());
-                LOGI("PARM", proyecto.getCarpeta());
-                LOGI("PARM", proyecto.getFechacreacion());
-                intent.putExtra(Constantes._ID, proyecto.getP_id());
-                intent.putExtra(Constantes._NOMBRE, proyecto.getNombre());
-                intent.putExtra(Constantes._CARPETA, proyecto.getCarpeta());
-                intent.putExtra(Constantes._FECHA, proyecto.getFechacreacion());*/
-
-
+                intent.putExtra("CLAVE",clave);
+                LOGI("VALOR CLAVE", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "INS");
                 LogActivity.this.startActivity(intent);
 
@@ -121,6 +127,18 @@ public class LogActivity extends BaseActivity {
     }
 
 
+    private void cargaDatos() {
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+
+        }
+        clave = extras.getInt("CLAVE");
+        LOGI("VALOR CLAVE", Integer.toString(clave));
+
+
+    }
     private void scroll() {
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {

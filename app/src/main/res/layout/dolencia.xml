@@ -50,14 +50,13 @@
                         android:textColorHint="@color/color_d"
                         android:textStyle="bold" />
 
-                    <ImageButton
+                    <ImageView
 
                         android:id="@+id/edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
-                        android:background="?android:selectableItemBackground"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_date" />
 
@@ -108,9 +107,9 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="2"
-                    android:progress="1"
-                    android:indeterminate="false"/>
+                    android:max="99"
+                    android:progress="50"
+                    android:indeterminate="false" />
 
 
             </FrameLayout>

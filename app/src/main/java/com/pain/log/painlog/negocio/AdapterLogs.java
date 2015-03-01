@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
 
     private ArrayList<Logs> items = new ArrayList<>();
     private Activity activity;
+    private MoonCalculation luna = new MoonCalculation();
 
 
     public AdapterLogs(Activity activity, ArrayList<Logs> items) {
@@ -40,18 +42,26 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-
+        TextView textNotas;
+        TextView textLuna;
+        TextView textFecha;
+        ImageView imageLuna;
+        LinearLayout viewLay;
+        TextView textDolor;
 
 
         public ViewHolder(View container) {
             super(container);
 
-          //  layo = (LinearLayout) container.findViewById(R.id.layo);
-
+            viewLay = (LinearLayout) container.findViewById(R.id.viewLay);
+            textLuna = (TextView) container.findViewById(R.id.textLuna);
+            textNotas = (TextView) container.findViewById(R.id.textNotas);
+            textFecha = (TextView) container.findViewById(R.id.textFecha);
+            textDolor = (TextView) container.findViewById(R.id.textDolor);
+            imageLuna = (ImageView) container.findViewById(R.id.imageLuna);
 
         }
     }
-
 
 
     public ArrayList<Logs> getItems() {
@@ -86,8 +96,28 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
+        viewHolder.textFecha.setText(items.get(i).getFecha());
+        viewHolder.textNotas.setText(items.get(i).getNotas());
 
+        int fase =luna.moonPhase(items.get(i).getFecha());
+        viewHolder.textLuna.setText(luna.phaseName(activity,fase));
+        viewHolder.imageLuna.setImageDrawable(luna.phaseImage(activity,fase));
 
+        setDolor(viewHolder, items.get(i).getIntensidad());
+    }
+
+    private void setDolor(ViewHolder viewHolder, int progress){
+
+        if (progress <= 32) {
+            viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_b));
+            viewHolder.textDolor.setText(R.string.dolor1);
+        } else if (progress >= 33 && progress <= 65) {
+            viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_f));
+            viewHolder.textDolor.setText(R.string.dolor2);
+        } else if (progress >= 66) {
+            viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_j));
+            viewHolder.textDolor.setText(R.string.dolor3);
+        }
     }
 
     public void add(Logs s, int position) {

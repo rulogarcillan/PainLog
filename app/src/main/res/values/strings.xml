@@ -4,8 +4,10 @@
     <string name="app_name">Pain Log</string>
     <string name="action_settings">Opciones</string>
     <string name="vacio">No hay diarios</string>
+    <string name="vacioreg">No hay registros</string>
     <string name="confirmar">¿Eliminar definitivamente el diario?</string>
     <string name="errorvacio">Error, debe introducir un texto</string>
+    <string name="errorfecha">La fecha no es válida</string>
     <string name="eliminarTittle">Eliminar</string>
     <string name="editarTittle">Editar</string>
     <string name="addLog">Añadir</string>
@@ -18,6 +20,15 @@
     <string name="dolor2">Dolor Medio</string>
     <string name="dolor3">Dolor Agudo</string>
     <string name="sinnotas">Sin notas</string>
+
+    <string name="luna0">Luna nueva</string>
+    <string name="luna1">Creciente</string>
+    <string name="luna2">Cuarto Creciente</string>
+    <string name="luna3">Gibosa Creciente</string>
+    <string name="luna4">Luna llena</string>
+    <string name="luna5">Gibosa menguante</string>
+    <string name="luna6">Cuarto menguante</string>
+    <string name="luna7">Menguante</string>
 
 
 </resources>

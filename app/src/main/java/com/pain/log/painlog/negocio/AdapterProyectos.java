@@ -18,6 +18,8 @@ import com.pain.log.painlog.R;
 
 import java.util.ArrayList;
 
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
+
 /**
  * Created by RULO on 01/12/2014.
  */
@@ -97,22 +99,9 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         viewHolder.layo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity,Integer.toString(items.get(i).getClave()),Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(activity,LogActivity.class);
-
-
-
-         /*       LOGI("viewHolder.cardImage.setOnClickListener", "LLAMADA A NUEVA ACTIVITY");
-                LOGI("PARM", proyecto.getP_id().toString());
-                LOGI("PARM", proyecto.getNombre());
-                LOGI("PARM", proyecto.getCarpeta());
-                LOGI("PARM", proyecto.getFechacreacion());
-                intent.putExtra(Constantes._ID, proyecto.getP_id());
-                intent.putExtra(Constantes._NOMBRE, proyecto.getNombre());
-                intent.putExtra(Constantes._CARPETA, proyecto.getCarpeta());
-                intent.putExtra(Constantes._FECHA, proyecto.getFechacreacion());*/
-
+                intent.putExtra("CLAVE",items.get(i).getClave());
+                LOGI("VALOR CLAVE", Integer.toString(items.get(i).getClave()));
                 activity.startActivity(intent);
             }
         });

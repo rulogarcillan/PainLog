@@ -1,38 +1,56 @@
 package com.pain.log.painlog.negocio;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
+import com.pain.log.painlog.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
+
 /**
- File:      MoonCalculation.java
- Author:    Angus McIntyre <angus@pobox.com>
- Date:      31.05.96
- Updated:   01.06.96
- 
- Java class to calculate the phase of the moon, given a date. The
- 'moonPhase' method is a Java port of some public domain C source which 
- was apparently originally part of the Decus C distribution (whatever
- that was). Details of the algorithm are given below.
- 
- To use this in a program, create an object of class 'MoonCalculation'.
- 
- I'm not convinced that the algorithm is entirely accurate, but I don't
- know enough to confirm whether it is or not.
- 
-    HISTORY
-    -------
-    
-    31.05.96    SLAM    Converted from C
-    01.06.96    SLAM    Added 'phaseName' to return the name of a phase.
-                        Fixed leap year test in 'daysInMonth'.
-    
-    LEGAL
-    -----
-    
-    This software is free. It can be used and modified in any way you 
-    choose. The author assumes no liability for any loss or damage you 
-    may incur through use of or inability to use this software. This 
-    disclaimer must appear on any modified or unmodified version of 
-    the software in which the name of the author also appears.
-    
-**/
+ * File:      MoonCalculation.java
+ * Author:    Angus McIntyre <angus@pobox.com>
+ * Date:      31.05.96
+ * Updated:   01.06.96
+ * <p/>
+ * Java class to calculate the phase of the moon, given a date. The
+ * 'moonPhase' method is a Java port of some public domain C source which
+ * was apparently originally part of the Decus C distribution (whatever
+ * that was). Details of the algorithm are given below.
+ * <p/>
+ * To use this in a program, create an object of class 'MoonCalculation'.
+ * <p/>
+ * I'm not convinced that the algorithm is entirely accurate, but I don't
+ * know enough to confirm whether it is or not.
+ * <p/>
+ * HISTORY
+ * -------
+ * <p/>
+ * 31.05.96    SLAM    Converted from C
+ * 01.06.96    SLAM    Added 'phaseName' to return the name of a phase.
+ * Fixed leap year test in 'daysInMonth'.
+ * <p/>
+ * LEGAL
+ * -----
+ * <p/>
+ * This software is free. It can be used and modified in any way you
+ * choose. The author assumes no liability for any loss or damage you
+ * may incur through use of or inability to use this software. This
+ * disclaimer must appear on any modified or unmodified version of
+ * the software in which the name of the author also appears.
+ */
+
+
+/**
+ * *****************************
+ * EDIT BY RRC
+ * He adaptado la clase para retornar String desde resource en android.
+ */
 
 // MoonCalculation
 //
@@ -43,10 +61,10 @@ public class MoonCalculation {
     // day_year - gives the day of the year for the first day of each
     // month -1. i.e. 1st January is the 0th day of the year, 1st
     // February is the 31st etc. Used by 'moonPhase'.
-    
-    private static final int    day_year[] = { -1, -1, 30, 58, 89, 119, 
-                                               150, 180, 211, 241, 272, 
-                                               303, 333 };
+
+    private static final int day_year[] = {-1, -1, 30, 58, 89, 119,
+            150, 180, 211, 241, 272,
+            303, 333};
 
     // moon_phase_name - the English name for the different phases.
     // Change this if you need to localise the software.
@@ -60,15 +78,7 @@ public class MoonCalculation {
                                                       "Third quarter",
                                                       "Waning crescent" };*/
 
-      private static final String moon_phase_name[] = {"Luna nueva",
-                                                      "Creciente",
-                                                      "Cuarto Creciente",
-                                                      "Gibosa Creciente",
-                                                      "Luna llena",
-                                                      "Gibosa Menguante",
-                                                      "Cuarto Menguante",
-                                                      "Luna Menguante" };
-                                             
+
     // MoonPhase
     //
     // Output the phase of the moon for the given year, month, day.
@@ -115,17 +125,17 @@ public class MoonCalculation {
     // int     month    Jan = 1 
     // int     day      1 = 1
 
-    public int  moonPhase(int year, int month, int day) {
-            
-        int             phase;          // Moon phase
-        int             cent;           // Century number (1979 = 20)
-        int             epact;          // Age of the moon on Jan. 1
-        int             diy;            // Day in the year
-        int             golden;         // Moon's golden number
+    public int moonPhase(int year, int month, int day) {
+
+        int phase;          // Moon phase
+        int cent;           // Century number (1979 = 20)
+        int epact;          // Age of the moon on Jan. 1
+        int diy;            // Day in the year
+        int golden;         // Moon's golden number
 
         if (month < 0 || month > 12) month = 0;     // Just in case
         diy = day + day_year[month];                // Day in the year
-        if ((month > 2) && this.isLeapYearP(year)) 
+        if ((month > 2) && this.isLeapYearP(year))
             diy++;                                  // Leapyear fixup
         cent = (year / 100) + 1;                    // Century number
         golden = (year % 19) + 1;                   // Golden number
@@ -133,25 +143,25 @@ public class MoonCalculation {
                 + (((8 * cent) + 5) / 25) - 5       // 400 year cycle
                 - (((3 * cent) / 4) - 12)) % 30;    //Leap year correction
         if (epact <= 0)
-                epact += 30;                        // Age range is 1 .. 30
-        if ((epact == 25 && golden > 11) || 
-            epact == 24)
-                epact++;
-                
+            epact += 30;                        // Age range is 1 .. 30
+        if ((epact == 25 && golden > 11) ||
+                epact == 24)
+            epact++;
+
         // Calculate the phase, using the magic numbers defined above.
         // Note that (phase and 7) is equivalent to (phase mod 8) and
         // is needed on two days per year (when the algorithm yields 8).
 
         phase = (((((diy + epact) * 6) + 11) % 177) / 22) & 7;
 
-        return(phase);
+        return (phase);
     }
 
     // daysInMonth
     // 
     // Returns the number of days in a month given the month and the year.
-     
-    int daysInMonth(int month,int year) {
+
+    int daysInMonth(int month, int year) {
         int result = 31;
         switch (month) {
             case 4:
@@ -161,25 +171,125 @@ public class MoonCalculation {
                 result = 30;
                 break;
             case 2:
-                result = ( this.isLeapYearP(year) ? 29 : 28 );
+                result = (this.isLeapYearP(year) ? 29 : 28);
         }
-        return result; 
+        return result;
     }
-    
+
     // isLeapYearP
     //
     // Return true if the year is a leapyear
-    
-    public  boolean isLeapYearP(int year) {
-        return ((year % 4 == 0) && 
+
+    public boolean isLeapYearP(int year) {
+        return ((year % 4 == 0) &&
                 ((year % 400 == 0) || (year % 100 != 0)));
     }
-    
-    // phaseName
-    //
-    // Return the name of a given phase
-    
-    String  phaseName(int phase) {
+
+   /* String phaseName(int phase) {
         return moon_phase_name[phase];
+    }*/
+
+    public String phaseName(Context mContext, int phase) {
+
+        String textPhase = "";
+
+        LOGI("RULO",Integer.toString(phase));
+
+        switch (phase) {
+
+            case 0:
+                textPhase = mContext.getResources().getString(R.string.luna0);
+                break;
+            case 1:
+                textPhase = mContext.getResources().getString(R.string.luna1);
+                break;
+            case 2:
+                textPhase = mContext.getResources().getString(R.string.luna1);
+                break;
+            case 3:
+                textPhase = mContext.getResources().getString(R.string.luna2);
+                break;
+            case 4:
+                textPhase = mContext.getResources().getString(R.string.luna3);
+                break;
+            case 5:
+                textPhase = mContext.getResources().getString(R.string.luna4);
+                break;
+            case 6:
+                textPhase = mContext.getResources().getString(R.string.luna5);
+                break;
+            case 7:
+                textPhase = mContext.getResources().getString(R.string.luna6);
+                break;
+            default:
+                break;
+        }
+
+        return textPhase;
     }
+
+
+    public Drawable phaseImage(Context mContext, int phase) {
+
+        Drawable drawPhase = null;
+
+        switch (phase) {
+
+            case 0:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna0);
+                break;
+            case 1:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna1);
+                break;
+
+            case 2:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna1);
+                break;
+            case 3:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna2);
+                break;
+            case 4:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna3);
+                break;
+            case 5:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna4);
+                break;
+            case 6:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna5);
+                break;
+            case 7:
+                drawPhase = mContext.getResources().getDrawable(R.drawable.luna6);
+                break;
+            default:
+                break;
+        }
+
+        return drawPhase;
+    }
+
+
+    public int moonPhase(String date) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateD = null;
+
+        try {
+
+            dateD = formatter.parse(date);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateD);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int month =  cal.get(Calendar.MONTH);
+        int fase;
+        fase = moonPhase(year, month, day);
+        return fase;
+    }
+
 }

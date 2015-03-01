@@ -8,7 +8,7 @@ import java.util.Date;
 public class Logs {
 
     private int clave;
-    private Date fecha;
+    private String fecha;
     private int intensidad;
     private String notas;
     private int clave_d;
@@ -16,7 +16,7 @@ public class Logs {
     public Logs() {
     }
 
-    public Logs(int clave, Date fecha, int intensidad, String notas, int clave_d) {
+    public Logs(int clave, String fecha, int intensidad, String notas, int clave_d) {
         this.clave = clave;
         this.fecha = fecha;
         this.intensidad = intensidad;
@@ -32,11 +32,11 @@ public class Logs {
         this.clave = clave;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

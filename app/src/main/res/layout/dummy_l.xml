@@ -29,7 +29,8 @@
                 android:layout_alignRight="@+id/textLuna"
                 android:layout_alignParentTop="true"
                 android:background="@color/color_b"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/viewLay">
 
                 <TextView
                     android:id="@+id/textDolor"
@@ -48,8 +49,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_launcher" />
+                android:scaleType="fitXY"
+                android:src="@drawable/luna1" />
 
             <TextView
                 android:id="@+id/textLuna"
@@ -62,7 +63,7 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/textFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textLuna"
