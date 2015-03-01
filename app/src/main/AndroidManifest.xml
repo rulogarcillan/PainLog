@@ -24,6 +24,10 @@
             android:name=".negocio.LogActivity">
         </activity>
 
+        <activity
+            android:name=".negocio.DolActivity">
+        </activity>
+
     </application>
 
 </manifest>

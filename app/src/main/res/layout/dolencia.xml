@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin">
+
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/textFecha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="21/09/2013"
+                        android:inputType="date"
+                        android:textColor="@color/card_text"
+                        android:textColorHint="@color/color_d"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+
+                        android:id="@+id/edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:background="?android:selectableItemBackground"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_date" />
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/textLuna"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/viewLay"
+                    android:layout_marginLeft="@dimen/activity_botton_less"
+                    android:layout_marginRight="@dimen/activity_botton_less"
+                    android:background="@color/color_f"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textDolor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/dolor1"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/card_separator" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin">
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="2"
+                    android:progress="1"
+                    android:indeterminate="false"/>
+
+
+            </FrameLayout>
+
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin">
+
+                <EditText
+                    android:id="@+id/textNotas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+
+                    android:hint="@string/notas"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/card_text"
+                    android:textColorHint="@color/color_d"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/boton"
+        android:text="@android:string/ok"
+        android:textColor="@color/cardview_light_background" />
+</LinearLayout>
+
+
+

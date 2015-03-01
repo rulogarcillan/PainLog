@@ -26,9 +26,9 @@
             <LinearLayout
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/textLuna"
+                android:layout_alignRight="@+id/textLuna"
                 android:layout_alignParentTop="true"
-                android:background="@color/relajado"
+                android:background="@color/color_b"
                 android:orientation="vertical">
 
                 <TextView
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Dolor moderado"
+                    android:text="@string/dolor1"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/card_separator" />
             </LinearLayout>
@@ -45,9 +45,9 @@
                 android:id="@+id/imageLuna"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
                 android:scaleType="center"
                 android:src="@drawable/ic_launcher" />
 
@@ -55,9 +55,9 @@
                 android:id="@+id/textLuna"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/imageLuna"
-                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
                 android:text="Luna menguante"
                 android:textStyle="italic" />
 
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textLuna"
-                android:layout_toEndOf="@+id/imageLuna"
+                android:layout_toRightOf="@+id/imageLuna"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="9dp"
-                android:text="Sin notas"
+                android:text="@string/sinnotas"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/cardview_dark_background" />
 

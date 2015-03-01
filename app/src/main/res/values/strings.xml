@@ -8,8 +8,16 @@
     <string name="errorvacio">Error, debe introducir un texto</string>
     <string name="eliminarTittle">Eliminar</string>
     <string name="editarTittle">Editar</string>
+    <string name="addLog">Añadir</string>
     <string name="title_activity_log">LogActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="nombre">Nombre diario</string>
+    <string name="notas">Notas y comentarios</string>
+
+    <string name="dolor1">Dolor moderado</string>
+    <string name="dolor2">Dolor Medio</string>
+    <string name="dolor3">Dolor Agudo</string>
+    <string name="sinnotas">Sin notas</string>
+
 
 </resources>

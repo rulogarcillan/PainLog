@@ -1,8 +1,10 @@
 package com.pain.log.painlog.negocio;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -26,105 +28,100 @@ import static com.pain.log.painlog.negocio.LogUtils.copybd;
 public class LogActivity extends BaseActivity {
 
 
-        // BBDD
-        private MyDatabase myDB; //base de datos
-        private FloatingActionButton fab; //boton añadir
-        private RecyclerView recyclerView;
-        private TextView mensajeVacio;
-        private AdapterLogs adapter;
-        private Consultas consultas;
-        private MoonCalculation luna = new MoonCalculation();
-        private ArrayList<Logs> items = new ArrayList<>();
+    // BBDD
+    private MyDatabase myDB; //base de datos
+    private FloatingActionButton fab; //boton añadir
+    private RecyclerView recyclerView;
+    private TextView mensajeVacio;
+    private AdapterLogs adapter;
+    private Consultas consultas;
+    private MoonCalculation luna = new MoonCalculation();
+    private ArrayList<Logs> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
-
-            mensajeVacio = (TextView) findViewById(R.id.txtMnsVacio);
-            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            fab = (FloatingActionButton) findViewById(R.id.btn_add);
-
-            myDB = new MyDatabase(this);
-            scroll();
-            consultas = new Consultas(this);
-
-            //carga de recyclerview
-            //items = consultas.getDiarios(); // llamada a query BBDD
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        mensajeVacio = (TextView) findViewById(R.id.txtMnsVacio);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        fab = (FloatingActionButton) findViewById(R.id.btn_add);
 
 
-        items.add(new Logs());items.add(new Logs());
-            adapter = new AdapterLogs(this, items); //Agregamos los items al adapter
+        myDB = new MyDatabase(this);
+        scroll();
+        consultas = new Consultas(this);
 
-            //definimos el recycler y agregamos el adaptaer
-            recyclerView.setHasFixedSize(true);
-            RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //carga de recyclerview
+        //items = consultas.getDiarios(); // llamada a query BBDD
+
+
+        items.add(new Logs());
+        items.add(new Logs());
+        adapter = new AdapterLogs(this, items); //Agregamos los items al adapter
+
+        //definimos el recycler y agregamos el adaptaer
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
        /* RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);*/
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
 
 
-            if (!items.isEmpty())
-                mensajeVacio.setVisibility(View.INVISIBLE);
+        if (!items.isEmpty())
+            mensajeVacio.setVisibility(View.INVISIBLE);
 
 
-            //add diario
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        //add log
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LogActivity.this, DolActivity.class);
 
 
-                    final View view = getLayoutInflater().inflate(R.layout.edittext, null);
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(LogActivity.this);
 
-                    dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+         /*     LOGI("viewHolder.cardImage.setOnClickListener", "LLAMADA A NUEVA ACTIVITY");
+                LOGI("PARM", proyecto.getP_id().toString());
+                LOGI("PARM", proyecto.getNombre());
+                LOGI("PARM", proyecto.getCarpeta());
+                LOGI("PARM", proyecto.getFechacreacion());
+                intent.putExtra(Constantes._ID, proyecto.getP_id());
+                intent.putExtra(Constantes._NOMBRE, proyecto.getNombre());
+                intent.putExtra(Constantes._CARPETA, proyecto.getCarpeta());
+                intent.putExtra(Constantes._FECHA, proyecto.getFechacreacion());*/
 
-                            EditText editText = (EditText) view.findViewById(R.id.edittext);
 
-                            if (editText.getText().toString().trim().length()== 0){
-                                Toast.makeText(LogActivity.this, R.string.errorvacio, Toast.LENGTH_SHORT).show();
-                            } else {
-                                Diarios nuevo = new Diarios(consultas.genKeyIdTabla("diarios"), editText.getText().toString());
-                                consultas.addDiario(nuevo);
-                                //adapter.add(nuevo, adapter.LAST_POSITION);
-                                mensajeVacio.setVisibility(View.INVISIBLE);
-                            }
+                intent.putExtra("SERVICIO", "INS");
+                LogActivity.this.startActivity(intent);
 
-                        }
-                    });
-                    dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
 
-                        }
-                    });
-                    dialog.setView(view);
-                    dialog.show();
-                }
-            });
+            }
+        });
 
-        }
+    }
 
-    protected void deleteItem(int clave){
+    protected void deleteItem(int clave) {
 
-       // consultas.deleteDiario(clave);
+        // consultas.deleteDiario(clave);
         if (items.isEmpty())
             mensajeVacio.setVisibility(View.VISIBLE);
 
     }
 
 
-    protected void editItem(int clave, String titu){
-      //  consultas.editDiario(clave, titu);
+    protected void editItem(int clave, String titu) {
+        //  consultas.editDiario(clave, titu);
 
     }
 
 
-    private void scroll(){
+    private void scroll() {
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
