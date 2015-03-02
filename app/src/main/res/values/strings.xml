@@ -5,7 +5,7 @@
     <string name="action_settings">Options</string>
     <string name="vacio">No records</string>
     <string name="vacioreg">No records</string>
-    <string name="confirmar">¿Eliminar Are you sure to delete? el diario?</string>
+    <string name="confirmar">¿Are you sure to delete? el diario?</string>
     <string name="errorvacio">Error, you must enter text</string>
     <string name="errorfecha">The date is invalid</string>
     <string name="eliminarTittle">Delete</string>
