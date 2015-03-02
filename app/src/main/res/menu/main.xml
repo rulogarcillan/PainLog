@@ -1,6 +1,24 @@
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100" />
+        android:icon="@drawable/ic_action_navigation"
+        android:orderInCategory="100"
+        android:showAsAction="never|always"
+        android:title="@string/action_settings">
+        <menu>
+            <item
+                android:id="@+id/puntuar"
+                android:icon="@drawable/ic_action_rating"
+                android:showAsAction="ifRoom"
+                android:title="@string/puntuar"/>
+            <item
+                android:id="@+id/changelog"
+                android:icon="@drawable/ic_action_changelog"
+                android:showAsAction="ifRoom"
+                android:title="@string/changelog"/>
+        </menu>
+    </item>
+
 </menu>

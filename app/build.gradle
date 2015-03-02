@@ -8,7 +8,7 @@ android {
         applicationId "com.pain.log.painlog"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 1
+        versionCode 10
         versionName "1.0"
     }
     buildTypes {
@@ -20,11 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     //sql
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile files('libs/jxl.jar')
+    compile "com.android.support:cardview-v7:21.0.+"
 }

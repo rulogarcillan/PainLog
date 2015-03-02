@@ -16,6 +16,7 @@ import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
+import com.pain.log.painlog.log.ChangeLog;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,11 @@ public class DiariosActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diarios);
+
+        ChangeLog cl = new ChangeLog(this);
+        if (cl.isFirstRun()) {
+            cl.getLogDialog().show();
+        }
 
         mensajeVacio = (TextView) findViewById(R.id.txtMnsVacio);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
