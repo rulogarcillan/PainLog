@@ -124,8 +124,8 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
                             public void onClick(DialogInterface dialog, int id) {
                                 int clave = items.get(i).getClave();
                                 int clave_d = items.get(i).getClave_d();
-                                items.remove(i);
-                                notifyDataSetChanged();
+                               /* items.remove(i);
+                                notifyDataSetChanged();*/
                                 ((LogActivity) activity).deleteItem(clave,clave_d);
                             }
                         })
@@ -173,12 +173,7 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
         }
     }
 
-    public void add(Logs s, int position) {
 
-        position = position == LAST_POSITION ? getItemCount() : position;
-        items.add(position, s);
-        notifyItemInserted(position);
-    }
 
 }
 

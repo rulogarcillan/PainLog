@@ -33,4 +33,12 @@
     <string name="luna7">Menguante</string>
 
 
+    <string name="col1excel">FECHA</string>
+    <string name="col1exce2">INTENSIDAD</string>
+    <string name="col1exce3">NOTAS</string>
+    <string name="col1exce4">LUNA</string>
+
+
+
+
 </resources>

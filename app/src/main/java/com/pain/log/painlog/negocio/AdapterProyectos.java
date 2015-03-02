@@ -116,9 +116,10 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 int clave = items.get(i).getClave();
-                                items.remove(i);
-                                notifyDataSetChanged();
+                                /*items.remove(i);
+                                notifyDataSetChanged();*/
                                 ((DiariosActivity) activity).deleteItem(clave);
+
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -150,8 +151,8 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                                     Toast.makeText(activity, R.string.errorvacio, Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                    items.get(i).setNombre(titu);
-                                    notifyDataSetChanged();
+                                   /*items.get(i).setNombre(titu);
+                                    notifyDataSetChanged();*/
                                     ((DiariosActivity) activity).editItem(clave, titu);
                                 }
                             }
@@ -166,15 +167,14 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             }
         });
 
-    }
+        viewHolder.export.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int clave = items.get(i).getClave();
+                ((DiariosActivity) activity).exportItem(clave, items.get(i).getNombre());
+            }
+        });
 
-
-
-    public void add(Diarios s, int position) {
-
-        position = position == LAST_POSITION ? getItemCount() : position;
-        items.add(position, s);
-        notifyItemInserted(position);
     }
 
 }

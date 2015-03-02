@@ -15,6 +15,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.exportLog;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,19 @@ public class DiariosActivity extends BaseActivity {
 
     private ArrayList<Diarios> items = new ArrayList<>();
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //carga de recyclerview
+        items = consultas.getDiarios(); // llamada a query BBDD
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
+        if (!items.isEmpty())
+            mensajeVacio.setVisibility(View.INVISIBLE);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +61,7 @@ public class DiariosActivity extends BaseActivity {
         scroll();
         consultas = new Consultas(this);
 
-        //carga de recyclerview
-        items = consultas.getDiarios(); // llamada a query BBDD
+
         adapter = new AdapterProyectos(this, items); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
@@ -61,11 +74,6 @@ public class DiariosActivity extends BaseActivity {
         recyclerView.addItemDecoration(itemDecoration);*/
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-
-
-        if (!items.isEmpty())
-            mensajeVacio.setVisibility(View.INVISIBLE);
-
 
         //add diario
         fab.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +94,7 @@ public class DiariosActivity extends BaseActivity {
                         } else {
                             Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString());
                             consultas.addDiario(nuevo);
-                            adapter.add(nuevo, adapter.LAST_POSITION);
+                            carga();
                             mensajeVacio.setVisibility(View.INVISIBLE);
                         }
 
@@ -107,14 +115,25 @@ public class DiariosActivity extends BaseActivity {
     protected void deleteItem(int clave){
 
         consultas.deleteDiario(clave);
+        carga();
         if (items.isEmpty())
             mensajeVacio.setVisibility(View.VISIBLE);
+
+
 
     }
 
 
     protected void editItem(int clave, String titu){
         consultas.editDiario(clave, titu);
+        carga();
+
+    }
+
+    protected void exportItem(int clave, String name){
+
+        exportLog exp = new exportLog(DiariosActivity.this);
+        exp.exportToExcel(consultas.getLogs(clave), name);
 
     }
 
@@ -142,5 +161,10 @@ public class DiariosActivity extends BaseActivity {
         });
     }
 
+    private void carga(){
+        items = consultas.getDiarios(); // llamada a query BBDD
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
+    }
 
 }

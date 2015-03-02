@@ -37,9 +37,7 @@ public class LogActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         //carga de recyclerview
-        items = consultas.getLogs(clave); // llamada a query BBDD
-        adapter.setItems(items);
-        adapter.notifyDataSetChanged();
+        carga();
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
@@ -100,6 +98,7 @@ public class LogActivity extends BaseActivity {
     protected void deleteItem(int clave, int clave_d) {
 
         consultas.deleteLog(clave, clave_d);
+        carga();
         if (items.isEmpty())
             mensajeVacio.setVisibility(View.VISIBLE);
 
@@ -145,6 +144,12 @@ public class LogActivity extends BaseActivity {
 
 
         });
+    }
+
+    private void carga(){
+        items = consultas.getLogs(clave); // llamada a query BBDD
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
     }
 
 }
