@@ -21,17 +21,17 @@
     <color name="fulltrans">#00000000</color>
 
 
-    <color name="color_a">#EFEBE9</color>
-    <color name="color_b">#D7CCC8</color>
-    <color name="color_c">#BCAAA4</color>
-    <color name="color_d">#A1887F</color>
-    <color name="color_e">#8D6E63</color>
-    <color name="color_f">#795548</color>
-    <color name="color_g">#6D4C41</color>
-    <color name="color_h">#5D4037</color>
-    <color name="color_i">#4E342E</color>
-    <color name="color_j">#3E2723</color>
-    <color name="color_k">#000000</color>
+    <color name="color_a">#E3F2FD</color>
+    <color name="color_b">#BBDEFB</color>
+    <color name="color_c">#90CAF9</color>
+    <color name="color_d">#64B5F6</color>
+    <color name="color_e">#42A5F5</color>
+    <color name="color_f">#2196F3</color>
+    <color name="color_g">#1E88E5</color>
+    <color name="color_h">#1976D2</color>
+    <color name="color_i">#1565C0</color>
+    <color name="color_j">#0D47A1</color>
+    <color name="color_k">#2962FF</color>
 
 
 </resources>

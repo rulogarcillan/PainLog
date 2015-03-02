@@ -17,8 +17,7 @@
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+
             android:paddingTop="@dimen/activity_horizontal_margin">
 
 
@@ -26,71 +25,126 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin">
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/textFecha"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="21/09/2013"
-                        android:inputType="date"
-                        android:textColor="@color/card_text"
-                        android:textColorHint="@color/color_d"
-                        android:textStyle="bold" />
-
-                    <ImageView
-
-                        android:id="@+id/edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="16dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_date" />
-
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-            <FrameLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/textLuna"
-                    android:layout_alignParentTop="true"
-                    android:id="@+id/viewLay"
-                    android:layout_marginLeft="@dimen/activity_botton_less"
-                    android:layout_marginRight="@dimen/activity_botton_less"
-                    android:background="@color/color_f"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textDolor"
+                        android:id="@+id/text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/dolor1"
+                        android:padding="5dp"
+                        android:text="@string/fechadol"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/card_separator" />
+                        android:textColor="@color/cardview_dark_background" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/textFecha"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="21/09/2013"
+                            android:inputType="date"
+                            android:textColor="@color/color_d"
+                            android:textColorHint="@color/color_d"
+                            android:textStyle="bold" />
+
+                        <ImageView
+
+                            android:id="@+id/edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="16dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_date" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/card_separator">
+
+                </View>
+            </FrameLayout>
+
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_horizontal_margin">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/viewLay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignRight="@+id/textLuna"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                        android:background="@color/color_f"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textDolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/dolor1"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/card_separator" />
+
+                    </LinearLayout>
+
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="false"
+                        android:max="99"
+                        android:progress="50" />
 
                 </LinearLayout>
             </FrameLayout>
@@ -98,42 +152,52 @@
             <FrameLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin">
+                android:layout_height="wrap_content">
 
-                <SeekBar
-                    android:id="@+id/seekBar"
 
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="99"
-                    android:progress="50"
-                    android:indeterminate="false" />
+                    android:layout_height="0.5dp"
+                    android:background="@color/card_separator">
 
-
+                </View>
             </FrameLayout>
-
-
             <FrameLayout
-
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_horizontal_margin">
 
-                <EditText
-                    android:id="@+id/textNotas"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ems="10"
+                    android:orientation="vertical">
 
-                    android:hint="@string/notas"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/card_text"
-                    android:textColorHint="@color/color_d"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/notascom"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/cardview_dark_background" />
+
+                    <EditText
+                        android:id="@+id/textNotas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+
+                        android:hint="@string/notas"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/color_d"
+                        android:textColorHint="@color/color_d"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
             </FrameLayout>
 
         </LinearLayout>

@@ -29,7 +29,7 @@ import static com.pain.log.painlog.negocio.LogUtils.LOGI;
  */
 public class DolActivity extends BaseActivity {
 
-    private int clave;
+    private int clave, clave_i;
     private String servicio;
     private SeekBar seekBar;
     private Button btnNext;
@@ -37,6 +37,7 @@ public class DolActivity extends BaseActivity {
     private EditText textFecha, textNotas;
     private ActionBar actionBar;
     private LinearLayout viewLay;
+    private Logs item;
     // BBDD
     private MyDatabase myDB; //base de datos
     private Consultas consultas;
@@ -49,48 +50,6 @@ public class DolActivity extends BaseActivity {
         cargaDatos();
         myDB = new MyDatabase(this);
         consultas = new Consultas(this);
-
-        if (servicio.equals("INS")) {
-            actionBar.setTitle(R.string.addLog);
-        } else if (servicio.equals("UPD")) {
-            actionBar.setTitle(R.string.editarTittle);
-        }
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (isFechaValida(textFecha.getText().toString())){
-                    if (servicio.equals("INS")) {
-                        inserta();
-                    } else if (servicio.equals("UPD")) {
-                        actualiza();
-                    }
-                    finish();
-                }else
-                {
-                    Toast.makeText(DolActivity.this, R.string.errorfecha, Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
-
-
-        textFecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR);
-                int mMonth = c.get(Calendar.MONTH);
-                int mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(DolActivity.this,
-                        new mDateSetListener(), mYear, mMonth, mDay);
-                dialog.show();
-            }
-        });
-
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                                                @Override
@@ -121,6 +80,50 @@ public class DolActivity extends BaseActivity {
                                            }
 
         );
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (isFechaValida(textFecha.getText().toString())) {
+                    if (servicio.equals("INS")) {
+                        inserta();
+                    } else if (servicio.equals("UPD")) {
+                        actualiza();
+                    }
+                    finish();
+                } else {
+                    Toast.makeText(DolActivity.this, R.string.errorfecha, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        textFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(DolActivity.this,
+                        new mDateSetListener(), mYear, mMonth, mDay);
+                dialog.show();
+            }
+        });
+
+
+        //que hacemos
+        if (servicio.equals("INS")) {
+            actionBar.setTitle(R.string.addLog);
+        } else if (servicio.equals("UPD")) {
+            item = consultas.getOneLog(clave_i, clave);
+            actionBar.setTitle(R.string.editarTittle);
+
+            textFecha.setText(item.getFecha());
+            seekBar.setProgress(item.getIntensidad());
+            textNotas.setText(item.getNotas());
+        }
     }
 
 
@@ -145,8 +148,12 @@ public class DolActivity extends BaseActivity {
         viewLay = (LinearLayout) findViewById(R.id.viewLay);
 
         clave = extras.getInt("CLAVE");
+        clave_i = extras.getInt("CLAVE_I");
         LOGI("VALOR CLAVE", Integer.toString(clave));
+        LOGI("VALOR CLAVE_I", Integer.toString(clave_i));
+
         servicio = extras.getString("SERVICIO");
+        LOGI("VALOR SERVICIO", servicio);
 
 
         textFecha.setText(new StringBuilder()
@@ -172,15 +179,19 @@ public class DolActivity extends BaseActivity {
         }
     }
 
-    private void inserta(){
+    private void inserta() {
         Logs item;
         int claveLog = consultas.genKeyIdTablaReg();
         item = new Logs(claveLog, textFecha.getText().toString(), seekBar.getProgress(), textNotas.getText().toString(), clave);
         consultas.addRegistros(item);
-
     }
 
-    private void actualiza(){
+    private void actualiza() {
+
+        item.setFecha(textFecha.getText().toString());
+        item.setIntensidad(seekBar.getProgress());
+        item.setNotas(textNotas.getText().toString());
+        consultas.editlog(item);
 
     }
 

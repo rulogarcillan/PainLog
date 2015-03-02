@@ -115,7 +115,7 @@ public class Consultas {
     }
 
 
-       public void deleteDiario(int clave) {
+    public void deleteDiario(int clave) {
 
 
         Cursor cur = null;
@@ -168,7 +168,7 @@ public class Consultas {
     public String addRegistros(Logs datos) {
 
         String sql;
-        sql = "Insert into registros (fecha, intensidad, notas, diarios_clave) values ('" + datos.getFecha() + "',"+ datos.getIntensidad() + ",'" + datos.getNotas() +"'," + datos.getClave_d() +")";
+        sql = "Insert into registros (fecha, intensidad, notas, diarios_clave) values ('" + datos.getFecha() + "'," + datos.getIntensidad() + ",'" + datos.getNotas() + "'," + datos.getClave_d() + ")";
         LOGI("addRegistros", sql);
 
         Cursor cur = db.query(sql, ESCRIBIR);
@@ -196,7 +196,7 @@ public class Consultas {
             // Recorremos el cursor hasta que no haya más registros
             do {
 
-                Logs item = new Logs(cur.getInt(0), cur.getString(1),cur.getInt(2),cur.getString(3),cur.getInt(4));
+                Logs item = new Logs(cur.getInt(0), cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
                 array.add(item);
 
             } while (cur.moveToNext());
@@ -205,5 +205,67 @@ public class Consultas {
         db.close();
         return array;
     }
+
+
+    public Logs getOneLog(int clave, int clave_d) {
+
+        String sql;
+        sql = "select * from registros where diarios_clave = " + clave_d + " and clave_r = " + clave;
+        LOGI("getLogs", sql);
+        Logs item = new Logs();
+        Cursor cur = db.query(sql, LEER);
+        if (cur.moveToFirst()) {
+            // Recorremos el cursor hasta que no haya más registros
+            do {
+
+                item = new Logs(cur.getInt(0), cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
+
+
+            } while (cur.moveToNext());
+        }
+
+        db.close();
+        return item;
+    }
+
+    public void deleteLog(int clave, int clave_d) {
+
+        Cursor cur = null;
+        String query;
+
+        query = "delete from registros where diarios_clave = " + clave_d + " and clave_r = " + clave;
+        LOGI("deleteLog", query);
+        cur = db.query(query, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        db.close();
+
+    }
+
+
+    public void editlog(Logs item) {
+
+        Cursor cur = null;
+        String query;
+
+        query = "update registros set notas='" + item.getNotas() + "', fecha = '" + item.getFecha() + "', intensidad = " + item.getIntensidad() + " where diarios_clave = " + item.getClave_d() + " and clave_r = " + item.getClave();
+
+        LOGI("editlog", query);
+        cur = db.query(query, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+
+        db.close();
+
+    }
+
 
 }

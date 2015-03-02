@@ -1,24 +1,13 @@
 package com.pain.log.painlog.negocio;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
@@ -26,10 +15,8 @@ import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
-import static com.pain.log.painlog.negocio.LogUtils.copybd;
 
 public class LogActivity extends BaseActivity {
 
@@ -99,8 +86,6 @@ public class LogActivity extends BaseActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(LogActivity.this, DolActivity.class);
-
-
                 intent.putExtra("CLAVE",clave);
                 LOGI("VALOR CLAVE", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "INS");
@@ -112,9 +97,9 @@ public class LogActivity extends BaseActivity {
 
     }
 
-    protected void deleteItem(int clave) {
+    protected void deleteItem(int clave, int clave_d) {
 
-        // consultas.deleteDiario(clave);
+        consultas.deleteLog(clave, clave_d);
         if (items.isEmpty())
             mensajeVacio.setVisibility(View.VISIBLE);
 

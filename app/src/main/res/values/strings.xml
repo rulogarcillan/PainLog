@@ -14,12 +14,14 @@
     <string name="title_activity_log">LogActivity</string>
 
     <string name="nombre">Nombre diario</string>
-    <string name="notas">Notas y comentarios</string>
+    <string name="notas">Escriba aquí su nota</string>
 
     <string name="dolor1">Dolor moderado</string>
     <string name="dolor2">Dolor Medio</string>
     <string name="dolor3">Dolor Agudo</string>
     <string name="sinnotas">Sin notas</string>
+    <string name="fechadol">Fecha de la dolencia</string>
+    <string name="notascom">Notas y comentarios</string>
 
     <string name="luna0">Luna nueva</string>
     <string name="luna1">Creciente</string>

@@ -8,16 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pain.log.painlog.R;
 
 import java.util.ArrayList;
+
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 /**
  * Created by RULO on 01/12/2014.
@@ -48,6 +48,8 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
         ImageView imageLuna;
         LinearLayout viewLay;
         TextView textDolor;
+        ImageButton delete;
+        ImageButton edit;
 
 
         public ViewHolder(View container) {
@@ -59,6 +61,8 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
             textFecha = (TextView) container.findViewById(R.id.textFecha);
             textDolor = (TextView) container.findViewById(R.id.textDolor);
             imageLuna = (ImageView) container.findViewById(R.id.imageLuna);
+            delete = (ImageButton) container.findViewById(R.id.delete);
+            edit = (ImageButton) container.findViewById(R.id.edit);
 
         }
     }
@@ -97,13 +101,62 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
         viewHolder.textFecha.setText(items.get(i).getFecha());
-        viewHolder.textNotas.setText(items.get(i).getNotas());
+        if (items.get(i).getNotas().toString().trim().length() == 0)
+            viewHolder.textNotas.setText(activity.getResources().getString(R.string.sinnotas));
+        else
+            viewHolder.textNotas.setText(items.get(i).getNotas());
 
         int fase =luna.moonPhase(items.get(i).getFecha());
         viewHolder.textLuna.setText(luna.phaseName(activity,fase));
         viewHolder.imageLuna.setImageDrawable(luna.phaseImage(activity,fase));
 
         setDolor(viewHolder, items.get(i).getIntensidad());
+
+
+        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setMessage(R.string.confirmar)
+                        .setCancelable(true)
+                        .setTitle(R.string.eliminarTittle)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                int clave = items.get(i).getClave();
+                                int clave_d = items.get(i).getClave_d();
+                                items.remove(i);
+                                notifyDataSetChanged();
+                                ((LogActivity) activity).deleteItem(clave,clave_d);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int clave = items.get(i).getClave();
+                int clave_d = items.get(i).getClave_d();
+
+                Intent intent = new Intent(activity, DolActivity.class);
+                intent.putExtra("CLAVE",clave_d);
+                intent.putExtra("CLAVE_I",clave);
+                LOGI("VALOR CLAVE", Integer.toString(clave_d));
+                LOGI("VALOR CLAVE_I", Integer.toString(clave));
+                intent.putExtra("SERVICIO", "UPD");
+                activity.startActivity(intent);
+            }
+        });
+
+
     }
 
     private void setDolor(ViewHolder viewHolder, int progress){
