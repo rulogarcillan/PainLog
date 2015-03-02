@@ -2,47 +2,47 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">Pain Log</string>
-    <string name="action_settings">Opciones</string>
-    <string name="vacio">No hay diarios</string>
-    <string name="vacioreg">No hay registros</string>
-    <string name="confirmar">¿Eliminar definitivamente el diario?</string>
-    <string name="errorvacio">Error, debe introducir un texto</string>
-    <string name="errorfecha">La fecha no es válida</string>
-    <string name="eliminarTittle">Eliminar</string>
-    <string name="editarTittle">Editar</string>
-    <string name="addLog">Añadir</string>
+    <string name="action_settings">Options</string>
+    <string name="vacio">No records</string>
+    <string name="vacioreg">No records</string>
+    <string name="confirmar">¿Eliminar Are you sure to delete? el diario?</string>
+    <string name="errorvacio">Error, you must enter text</string>
+    <string name="errorfecha">The date is invalid</string>
+    <string name="eliminarTittle">Delete</string>
+    <string name="editarTittle">Edit</string>
+    <string name="addLog">Add</string>
     <string name="title_activity_log">LogActivity</string>
 
-    <string name="nombre">Nombre diario</string>
-    <string name="notas">Escriba aquí su nota</string>
+    <string name="nombre">Name</string>
+    <string name="notas">Type in your note</string>
 
-    <string name="dolor1">Dolor moderado</string>
-    <string name="dolor2">Dolor Medio</string>
-    <string name="dolor3">Dolor Agudo</string>
-    <string name="sinnotas">Sin notas</string>
-    <string name="fechadol">Fecha de la dolencia</string>
-    <string name="notascom">Notas y comentarios</string>
+    <string name="dolor1">Moderate pain</string>
+    <string name="dolor2">Medium pain</string>
+    <string name="dolor3">Throe</string>
+    <string name="sinnotas">No notes</string>
+    <string name="fechadol">Date of ailment</string>
+    <string name="notascom">Notes and comments</string>
 
-    <string name="luna0">Luna nueva</string>
-    <string name="luna1">Creciente</string>
-    <string name="luna2">Cuarto Creciente</string>
-    <string name="luna3">Gibosa Creciente</string>
-    <string name="luna4">Luna llena</string>
-    <string name="luna5">Gibosa menguante</string>
-    <string name="luna6">Cuarto menguante</string>
-    <string name="luna7">Menguante</string>
+    <string name="luna0">New</string>
+    <string name="luna1">Waxing crescent</string>
+    <string name="luna2">First quarter</string>
+    <string name="luna3">Waxing gibbous</string>
+    <string name="luna4">Full moon</string>
+    <string name="luna5">Waning gibbous</string>
+    <string name="luna6">Third quarter</string>
+    <string name="luna7">Waning crescent</string>
 
-    <string name="changelog">Changelog</string>
-    <string name="puntuar">Valorar aplicación</string>
+    <string name="changelog" translatable="false">Changelog</string>
+    <string name="puntuar">Rate this app</string>
 
-    <string name="col1excel">FECHA</string>
-    <string name="col1exce2">INTENSIDAD</string>
-    <string name="col1exce3">NOTAS</string>
-    <string name="col1exce4">LUNA</string>
+    <string name="col1excel">DATE</string>
+    <string name="col1exce2">INTENSITY</string>
+    <string name="col1exce3">NOTES</string>
+    <string name="col1exce4">MOON PHASE</string>
 
-    <string name="changelog_full_title">ChangeLog</string>
+    <string name="changelog_full_title" translatable="false">ChangeLog</string>
     <string name="changelog_title">What\'s New</string>
-    <string name="changelog_ok_button">OK</string>
+    <string name="changelog_ok_button">Ok</string>
     <string name="changelog_show_full">More…</string>
     <string name="changelog_version_format">Version <xliff:g id="version_name">%s</xliff:g></string>
 
