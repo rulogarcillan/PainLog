@@ -35,10 +35,10 @@ public class exportLog {
 
     public void exportToExcel(ArrayList<Logs> items, String name) {
 
-        final String fileName = name + ".xls";
+        final String fileName = remove(name) + ".xls";
 
         //Manejo de ficheros
-        String lect = "/PainLog" + fileName;
+        String lect = "/PainLog/" + fileName;
         File sdCard = Environment.getExternalStorageDirectory();
         String ruta = sdCard.getAbsolutePath() + "/PainLog";
         File directory = new File(ruta);
@@ -95,11 +95,14 @@ public class exportLog {
             } catch (WriteException e) {
                 e.printStackTrace();
             }
+
+            Toast.makeText(activity, lect, Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(activity, "error", Toast.LENGTH_LONG).show();
         }
 
-        Toast.makeText(activity, lect, Toast.LENGTH_LONG).show();
+
     }
 
 
@@ -116,6 +119,19 @@ public class exportLog {
         }
 
         return nombreDolor;
+    }
+
+
+    public static String remove(String input) {
+
+        String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ.\\/:?*\"<>|";
+        String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC----------";
+        String output = input;
+        for (int i=0; i<original.length(); i++) {
+
+            output = output.replace(original.charAt(i), ascii.charAt(i));
+        }
+        return output;
     }
 
 }

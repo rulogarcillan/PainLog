@@ -3,8 +3,8 @@
 
     <string name="app_name">Pain Log</string>
     <string name="action_settings">Options</string>
-    <string name="vacio">No records</string>
-    <string name="vacioreg">No records</string>
+    <string name="vacio">Press the button to add a record</string>
+    <string name="vacioreg">Press the button to add a record</string>
     <string name="confirmar">¿Are you sure to delete? el diario?</string>
     <string name="errorvacio">Error, you must enter text</string>
     <string name="errorfecha">The date is invalid</string>
