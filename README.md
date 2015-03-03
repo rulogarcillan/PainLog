@@ -18,6 +18,6 @@ Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pas
 Fácil y sencillo.
 
 
-Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia GNU GPL V3.0. Si estás interesado en el proyecto puedes visitar la siguiente dirección:
+Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) .Si estás interesado en el proyecto puedes visitar la siguiente dirección:
 
 https://github.com/rulogarcillan/PainLog
