@@ -28,6 +28,7 @@
             android:name=".negocio.DolActivity">
         </activity>
 
+
     </application>
 
 </manifest>

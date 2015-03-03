@@ -40,6 +40,34 @@
     <string name="col1exce3">NOTES</string>
     <string name="col1exce4">MOON PHASE</string>
 
+    <string name="license">License</string>
+    <string name="aboutLibraries_description_showIcon">true</string>
+    <string name="aboutLibraries_description_showVersion">true</string>
+
+ <string name="escrita">Application Written By Raúl R.C</string>
+
+
+    <!-- If you include it in your own library use this pattern: define_* -->
+    <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
+    <string name="define_int_sqliteassethelper"></string>
+    <string name="library_sqliteassethelper_author">Jeff Gilfelt</string>
+    <string name="library_sqliteassethelper_authorWebsite">http://jeffgilfelt.com</string>
+    <string name="library_sqliteassethelper_libraryName">SQLiteAssetHelper</string>
+    <string name="library_sqliteassethelper_libraryDescription">An Android helper class to manage database creation and version management using an application\'s raw asset files.</string>
+    <string name="library_sqliteassethelper_libraryVersion">2.0</string>
+    <string name="library_sqliteassethelper_libraryWebsite">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_sqliteassethelper_licenseId">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_sqliteassethelper_isOpenSource">true</string>
+    <string name="library_sqliteassethelper_repositoryLink">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+
+
+
+
+
+
 
 
 </resources>

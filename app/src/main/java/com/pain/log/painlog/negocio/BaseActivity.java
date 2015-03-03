@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.ui.LibsActivity;
 import com.pain.log.painlog.R;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -17,7 +21,7 @@ import de.cketti.library.changelog.ChangeLog;
 /**
  * Created by raul.rodriguezconcep on 20/02/15.
  */
-public class BaseActivity extends Activity{
+public class BaseActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,6 +46,23 @@ public class BaseActivity extends Activity{
 
                 new LanzaChangelog(BaseActivity.this).getFullLogDialog().show();
                 break;
+            case R.id.license:
+                //Create an intent with context and the Activity class
+
+                new Libs.Builder()
+                        //Pass the fields of your application to the lib so it can find all external lib information
+                        .withFields(R.string.class.getFields())
+                        .withVersionShown(true)
+                        .withLicenseShown(true)
+                        .withAutoDetect(true)
+                        .withLibraries("sqliteassethelper")
+                        .withActivityTitle(getResources().getString(R.string.license))
+                        .withAboutDescription(getResources().getString(R.string.escrita) + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/PainLog\">Project in Github</a>")
+                        .withActivityTheme(R.style.AppTheme)
+                                //start the activity
+                        .start(this);
+                break;
+
             default:
                 onBackPressed();
         }
@@ -51,7 +72,7 @@ public class BaseActivity extends Activity{
 
     private void LanzaRate() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.signaturemaker.app"));
+        intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
         startActivity(intent);
     }
 

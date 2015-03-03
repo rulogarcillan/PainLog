@@ -35,7 +35,7 @@ public class DolActivity extends BaseActivity {
     private Button btnNext;
     private TextView textDolor;
     private EditText textFecha, textNotas;
-    private ActionBar actionBar;
+
     private LinearLayout viewLay;
     private Logs item;
     // BBDD
@@ -115,10 +115,10 @@ public class DolActivity extends BaseActivity {
 
         //que hacemos
         if (servicio.equals("INS")) {
-            actionBar.setTitle(R.string.addLog);
+            getSupportActionBar().setTitle(R.string.addLog);
         } else if (servicio.equals("UPD")) {
             item = consultas.getOneLog(clave_i, clave);
-            actionBar.setTitle(R.string.editarTittle);
+            getSupportActionBar().setTitle(R.string.editarTittle);
 
             textFecha.setText(item.getFecha());
             seekBar.setProgress(item.getIntensidad());
@@ -135,8 +135,8 @@ public class DolActivity extends BaseActivity {
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         Bundle extras = getIntent().getExtras();
-        actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
