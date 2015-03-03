@@ -16,12 +16,12 @@ import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
-import com.pain.log.painlog.log.ChangeLog;
 
 import java.util.ArrayList;
 
-import static com.pain.log.painlog.negocio.LogUtils.copybd;
+import de.cketti.library.changelog.ChangeLog;
 
+import static com.pain.log.painlog.negocio.LogUtils.copybd;
 
 public class DiariosActivity extends BaseActivity {
 
@@ -55,7 +55,7 @@ public class DiariosActivity extends BaseActivity {
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
-            cl.getLogDialog().show();
+            new LanzaChangelog(DiariosActivity.this).getLogDialog().show();
         }
 
         mensajeVacio = (TextView) findViewById(R.id.txtMnsVacio);

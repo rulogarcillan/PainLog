@@ -40,12 +40,6 @@
     <string name="col1exce3">NOTES</string>
     <string name="col1exce4">MOON PHASE</string>
 
-    <string name="changelog_full_title" translatable="false">ChangeLog</string>
-    <string name="changelog_title">What\'s New</string>
-    <string name="changelog_ok_button">Ok</string>
-    <string name="changelog_show_full">More…</string>
-    <string name="changelog_version_format">Version <xliff:g id="version_name">%s</xliff:g></string>
-
 
 
 </resources>

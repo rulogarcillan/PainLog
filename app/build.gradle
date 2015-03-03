@@ -22,8 +22,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.melnykov:floatingactionbutton:1.2.0'
-    compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
+    compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
     //sql
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+
     compile "com.android.support:cardview-v7:21.0.+"
 }
