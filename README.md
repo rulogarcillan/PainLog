@@ -1,3 +1,5 @@
+<img src="app/src/main/logogrande.png" width="50%">
+
 # PainLog
 Pain Log es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
