@@ -3,9 +3,9 @@
 
     <string name="app_name">Pain Log</string>
     <string name="action_settings">Opciones</string>
-    <string name="vacio">Pulse el botón para añadir un diario</string>
+    <string name="vacio">Pulse el botón para añadir un calendario</string>
     <string name="vacioreg">Pulse el botón para añadir un registro</string>
-    <string name="confirmar">¿Eliminar definitivamente el diario?</string>
+    <string name="confirmar">¿Eliminar definitivamente el calendario?</string>
     <string name="errorvacio">Error, debe introducir un texto</string>
     <string name="errorfecha">La fecha no es válida</string>
     <string name="eliminarTittle">Eliminar</string>
@@ -13,7 +13,7 @@
     <string name="addLog">Añadir</string>
     <string name="title_activity_log">LogActivity</string>
 
-    <string name="nombre">Nombre diario</string>
+    <string name="nombre">Nombre calendario</string>
     <string name="notas">Escriba aquí su nota</string>
 
     <string name="dolor1">Dolor moderado</string>
