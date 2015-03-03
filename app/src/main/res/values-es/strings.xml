@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+
+    <string name="app_name">Pain Log</string>
+    <string name="action_settings">Opciones</string>
+    <string name="vacio">Pulse el botón para añadir un diario</string>
+    <string name="vacioreg">Pulse el botón para añadir un registro</string>
+    <string name="confirmar">¿Eliminar definitivamente el diario?</string>
+    <string name="errorvacio">Error, debe introducir un texto</string>
+    <string name="errorfecha">La fecha no es válida</string>
+    <string name="eliminarTittle">Eliminar</string>
+    <string name="editarTittle">Editar</string>
+    <string name="addLog">Añadir</string>
+    <string name="title_activity_log">LogActivity</string>
+
+    <string name="nombre">Nombre diario</string>
+    <string name="notas">Escriba aquí su nota</string>
+
+    <string name="dolor1">Dolor moderado</string>
+    <string name="dolor2">Dolor Medio</string>
+    <string name="dolor3">Dolor Agudo</string>
+    <string name="sinnotas">Sin notas</string>
+    <string name="fechadol">Fecha de la dolencia</string>
+    <string name="notascom">Notas y comentarios</string>
+
+    <string name="luna0">Luna nueva</string>
+    <string name="luna1">Creciente</string>
+    <string name="luna2">Cuarto Creciente</string>
+    <string name="luna3">Gibosa Creciente</string>
+    <string name="luna4">Luna llena</string>
+    <string name="luna5">Gibosa menguante</string>
+    <string name="luna6">Cuarto menguante</string>
+    <string name="luna7">Menguante</string>
+
+    <string name="changelog">Changelog</string>
+    <string name="puntuar">Valorar aplicación</string>
+
+    <string name="col1excel">FECHA</string>
+    <string name="col1exce2">INTENSIDAD</string>
+    <string name="col1exce3">NOTAS</string>
+    <string name="col1exce4">LUNA</string>
+
+    <string name="changelog_full_title">ChangeLog</string>
+    <string name="changelog_title">Qué hay de nuevo</string>
+    <string name="changelog_ok_button">Aceptar</string>
+    <string name="changelog_show_full">Más…</string>
+    <string name="changelog_version_format">Versión <xliff:g id="version_name">%s</xliff:g></string>
+
+</resources>
+
+
+
