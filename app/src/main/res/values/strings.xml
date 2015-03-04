@@ -16,9 +16,9 @@
     <string name="nombre">Name</string>
     <string name="notas">Type in your note</string>
 
-    <string name="dolor1">Moderate pain</string>
-    <string name="dolor2">Medium pain</string>
-    <string name="dolor3">Throe</string>
+    <string name="dolor1">Mild pain</string>
+    <string name="dolor2">Moderate pain</string>
+    <string name="dolor3">Severe pain</string>
     <string name="sinnotas">No notes</string>
     <string name="fechadol">Date of ailment</string>
     <string name="notascom">Notes and comments</string>
