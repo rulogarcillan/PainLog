@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
-    <string name="app_name">Pain log</string>
     <string name="action_settings">Opciones</string>
     <string name="vacio">Pulse el botón para añadir un calendario</string>
     <string name="vacioreg">Pulse el botón para añadir un registro</string>
     <string name="confirmar">¿Eliminar definitivamente el calendario?</string>
     <string name="errorvacio">Error, debe introducir un texto</string>
     <string name="errorfecha">La fecha no es válida</string>
-    <string name="eliminartittle">Eliminar</string>
-    <string name="editartittle">Editar</string>
-    <string name="addlog">Añadir</string>
-
-
-    <string name="nombre">Nombre calendario</string>
+    <string name="nombre">Nombre del calendario</string>
     <string name="notas">Escriba aquí su nota</string>
-
-    <string name="dolor1">Dolor moderado</string>
-    <string name="dolor2">Dolor medio</string>
+    <string name="dolor1">Dolor leve</string>
+    <string name="dolor2">Dolor moderado</string>
     <string name="dolor3">Dolor agudo</string>
     <string name="sinnotas">Sin notas</string>
     <string name="fechadol">Fecha de la dolencia</string>
     <string name="notascom">Notas y comentarios</string>
-
     <string name="luna0">Luna nueva</string>
     <string name="luna1">Creciente</string>
     <string name="luna2">Cuarto creciente</string>
@@ -31,26 +23,16 @@
     <string name="luna5">Gibosa menguante</string>
     <string name="luna6">Cuarto menguante</string>
     <string name="luna7">Menguante</string>
-
-    <string name="changelog">Changelog</string>
     <string name="puntuar">Valorar aplicación</string>
-
-    <string name="col1excel">Fecha</string>
-    <string name="col1exce2">Intensidad</string>
-    <string name="col1exce3">Notas</string>
-    <string name="col1exce4">Luna</string>
-
-
+    <string name="col1excel">FECHA</string>
+    <string name="col1exce3">NOTAS</string>
+    <string name="col1exce4">LUNA</string>
     <string name="license">Licencias</string>
-    <string name="aboutlibraries_description_showicon">true</string>
-    <string name="aboutlibraries_description_showversion">true</string>
-
     <string name="escrita">Aplicación escrita por Raúl R.C</string>
-
-    <!-- if you include it in your own library use this pattern: define_* -->
-    <!-- if it should be included in the aboutlibraries lib use this pattern: define_int_* -->
-
-
+    <string name="editarTittle">Editar</string>
+    <string name="eliminarTittle">Eliminar</string>
+    <string name="addLog">Añadir</string>
+    <string name="col1exce2">INTENSIDAD</string>
 
 
 </resources>

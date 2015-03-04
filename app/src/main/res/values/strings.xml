@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
-    <string name="app_name">Pain Log</string>
+    <string name="app_name" translatable="false">Pain Log</string>
     <string name="action_settings">Options</string>
     <string name="vacio">Press the button to add a calendar</string>
     <string name="vacioreg">Press the button to add a record</string>
-    <string name="confirmar">¿Are you sure to delete?</string>
+    <string name="confirmar">Are you sure to delete?</string>
     <string name="errorvacio">Error, you must enter text</string>
     <string name="errorfecha">The date is invalid</string>
-    <string name="eliminarTittle">Delete</string>
     <string name="editarTittle">Edit</string>
+    <string name="eliminarTittle">Delete</string>
     <string name="addLog">Add</string>
 
 
@@ -41,31 +41,26 @@
     <string name="col1exce4">MOON PHASE</string>
 
     <string name="license">License</string>
-    <string name="aboutLibraries_description_showIcon">true</string>
-    <string name="aboutLibraries_description_showVersion">true</string>
-
- <string name="escrita">Application Written By Raúl R.C</string>
+    <string name="escrita">Application Written By Raúl R.C</string>
+    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
 
 
     <!-- If you include it in your own library use this pattern: define_* -->
     <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
-    <string name="define_int_sqliteassethelper"></string>
-    <string name="library_sqliteassethelper_author">Jeff Gilfelt</string>
-    <string name="library_sqliteassethelper_authorWebsite">http://jeffgilfelt.com</string>
-    <string name="library_sqliteassethelper_libraryName">SQLiteAssetHelper</string>
-    <string name="library_sqliteassethelper_libraryDescription">An Android helper class to manage database creation and version management using an application\'s raw asset files.</string>
-    <string name="library_sqliteassethelper_libraryVersion">2.0</string>
-    <string name="library_sqliteassethelper_libraryWebsite">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+    <string name="define_int_sqliteassethelper" translatable="false"></string>
+    <string name="library_sqliteassethelper_author" translatable="false">Jeff Gilfelt</string>
+    <string name="library_sqliteassethelper_authorWebsite" translatable="false">http://jeffgilfelt.com</string>
+    <string name="library_sqliteassethelper_libraryName" translatable="false">SQLiteAssetHelper</string>
+    <string name="library_sqliteassethelper_libraryDescription" translatable="false">An Android helper class to manage database creation and version management using an application\'s raw asset files.</string>
+    <string name="library_sqliteassethelper_libraryVersion" translatable="false">2.0</string>
+    <string name="library_sqliteassethelper_libraryWebsite" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
     <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_sqliteassethelper_licenseId">apache_2_0</string>
+    <string name="library_sqliteassethelper_licenseId" translatable="false">apache_2_0</string>
     <!-- you still can define the license within your library definition, but it is recommend to use the id -->
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_sqliteassethelper_isOpenSource">true</string>
-    <string name="library_sqliteassethelper_repositoryLink">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
-
-
-
-
+    <string name="library_sqliteassethelper_isOpenSource" translatable="false">true</string>
+    <string name="library_sqliteassethelper_repositoryLink" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
 
 
 
