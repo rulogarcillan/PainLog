@@ -41,8 +41,8 @@ If you are interested in the project, you can visit this link:
 #Descripción es-ES
 Pain Log es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
-
-Recopilar información acerca de tus dolores de cabeza en una libreta de notas puede ayudarte a encontrar sus desencadenantes. El estrés, la depresión, la falta de sueño pueden provocar un dolor de cabeza. Además, llevar un registro de estos dolores puede ayudar a tu médico a identificar el tipo de dolor de cabeza que padeces, ya que puede ser tensional o migrañoso. Brindar indicios a tu médico puede ayudarte a obtener un tratamiento eficaz y, quizás, a eliminar la causa del dolor.
+<p align="justify"> 
+Recopilar información acerca de tus dolores de cabeza en una libreta de notas puede ayudarte a encontrar sus desencadenantes. El estrés, la depresión, la falta de sueño pueden provocar un dolor de cabeza. Además, llevar un registro de estos dolores puede ayudar a tu médico a identificar el tipo de dolor de cabeza que padeces, ya que puede ser tensional o migrañoso. Brindar indicios a tu médico puede ayudarte a obtener un tratamiento eficaz y, quizás, a eliminar la causa del dolor.</p>
 
 Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pasos:
 
@@ -58,8 +58,8 @@ Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pas
 Fácil y sencillo.
 
 
-
-Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) 
+<p align="justify"> 
+Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) </p>
 
 Si estás interesado en el proyecto puedes visitar el siguiente enlace:
 
