@@ -29,9 +29,9 @@ Now you can do easily a register by using <b>Pain log</b>. You just have to foll
 Simple and really easy.
 
 
-<p align="justify"> 
+
 Pain log is an open-source application totally free, which is located un github with licence  [GNU GPL V3.0] (LICENSE.md)
-</p>
+
 
 If you are interested in the project, you can visit this link:
 
@@ -58,8 +58,8 @@ Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pas
 Fácil y sencillo.
 
 
-<p align="justify"> 
-Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) </p>
+
+Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) 
 
 Si estás interesado en el proyecto puedes visitar el siguiente enlace:
 
