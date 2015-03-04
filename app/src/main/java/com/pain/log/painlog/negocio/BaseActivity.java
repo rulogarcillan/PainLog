@@ -1,6 +1,5 @@
 package com.pain.log.painlog.negocio;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import com.mikepenz.aboutlibraries.Libs;
-import com.mikepenz.aboutlibraries.ui.LibsActivity;
 import com.pain.log.painlog.R;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -42,6 +39,12 @@ public class BaseActivity extends ActionBarActivity {
                 LanzaRate();
 
                 break;
+
+            case R.id.more:
+
+                LanzaMore();
+
+                break;
             case R.id.changelog:
 
                 new LanzaChangelog(BaseActivity.this).getFullLogDialog().show();
@@ -63,6 +66,7 @@ public class BaseActivity extends ActionBarActivity {
                         .start(this);
                 break;
 
+
             default:
                 onBackPressed();
         }
@@ -73,6 +77,13 @@ public class BaseActivity extends ActionBarActivity {
     private void LanzaRate() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
+        startActivity(intent);
+    }
+
+
+    private void LanzaMore() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
+
         startActivity(intent);
     }
 

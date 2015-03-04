@@ -41,6 +41,7 @@
     <string name="col1exce4">MOON PHASE</string>
 
     <string name="license">License</string>
+    <string name="more">Others app</string>
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
