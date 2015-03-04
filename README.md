@@ -12,8 +12,9 @@
 
 
 #Description en-EN
-
+<p align="justify"> 
 Collecting information about your headaches on a notebook can help you to get the deseases. Stress, depression or not sleeping properly can cause a headache. Moreover, having these pains registered could help your doctor to identify the kind of headache that you have, because it can be migraines or tension headaches. In this way, your doctor will help you to find a correct solution to your problem and probably to eliminate it.
+</p>
 
 Now you can do easily a register by using <b>Pain log</b>. You just have to follow these stages:
 
@@ -28,8 +29,9 @@ Now you can do easily a register by using <b>Pain log</b>. You just have to foll
 Simple and really easy.
 
 
-
+<p align="justify"> 
 Pain log is an open-source application totally free, which is located un github with licence  [GNU GPL V3.0] (LICENSE.md)
+</p>
 
 If you are interested in the project, you can visit this link:
 
