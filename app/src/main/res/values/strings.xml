@@ -11,7 +11,7 @@
     <string name="eliminarTittle">Delete</string>
     <string name="editarTittle">Edit</string>
     <string name="addLog">Add</string>
-    <string name="title_activity_log">LogActivity</string>
+
 
     <string name="nombre">Name</string>
     <string name="notas">Type in your note</string>
