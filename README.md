@@ -3,8 +3,8 @@
 
 <img src="app/src/main/logogrande.png" width="50%">
 
-<img src="app/src/main/getapp.png" width="20%">
-
+<a href="https://play.google.com/store/apps/details?id=com.pain.log.painlog">
+<img src="app/src/main/getapp.png" width="20%"> </a>
 # Index
 
  • [Description en-EN](https://github.com/rulogarcillan/PainLog/blob/master/README.md#description-en-en)
