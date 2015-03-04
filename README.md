@@ -7,8 +7,11 @@
 
  • [Description en-EN](https://github.com/rulogarcillan/PainLog/blob/master/README.md#description-en-en)
  
+ • [License-en-En](https://github.com/rulogarcillan/PainLog#license-en-en)
+ 
  • [Descripción es-ES](https://github.com/rulogarcillan/PainLog/blob/master/README.md#descripci%C3%B3n-es-es)
-
+ 
+ • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#license-es-eS)
 
 
 #Description en-EN
