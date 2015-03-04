@@ -25,8 +25,11 @@ Now you can do easily a register by using <b>Pain log</b>. You just have to foll
 • By clicking you could transfer your information to an excel chart.
 
 • Talk to your doctor.
+
 <br/>
+
 Simple and really easy.
+
 <br/><br/>
 
 
@@ -53,6 +56,7 @@ Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pas
 • Exporta las anotaciones con un simple click a una tabla excel.
 
 • Visita tu médico.
+
 <br/>
 
 Fácil y sencillo.
