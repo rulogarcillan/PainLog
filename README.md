@@ -3,6 +3,8 @@
 
 <img src="app/src/main/logogrande.png" width="50%">
 
+<img src="app/src/main/getapp.png" width="50%">
+
 # Index
 
  • [Description en-EN](https://github.com/rulogarcillan/PainLog/blob/master/README.md#description-en-en)
