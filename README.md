@@ -3,7 +3,7 @@
 
 <img src="app/src/main/logogrande.png" width="50%">
 
-<img src="app/src/main/getapp.png" width="50%">
+<img src="app/src/main/getapp.png" width="20%">
 
 # Index
 
