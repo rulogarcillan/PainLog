@@ -7,7 +7,7 @@
 
  • [Description en-EN](#Description en-EN)
  
- • [Descripción es-ES](#Descripción es-ES)
+ • [Descripción es-ES](https://github.com/rulogarcillan/PainLog/blob/master/README.md#descripci%C3%B3n-es-es)
 
 
 
