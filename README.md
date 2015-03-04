@@ -11,7 +11,7 @@
 
 
 
-# Description en-EN
+#Description en-EN
 
 Collecting information about your headaches on a notebook can help you to get the deseases. Stress, depression or not sleeping properly can cause a headache. Moreover, having these pains registered could help your doctor to identify the kind of headache that you have, because it can be migraines or tension headaches. In this way, your doctor will help you to find a correct solution to your problem and probably to eliminate it.
 
@@ -36,7 +36,7 @@ If you are interested in the project, you can visit this link:
 [Pain log] (https://github.com/rulogarcillan/PainLog)
 
 
-# Descripción es-ES
+#Descripción es-ES
 Pain Log es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
 
