@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nombre"
+android:maxLength="15"
         android:textColorHint="@color/color_d"
         android:textColor="@color/card_text"
         android:textStyle="bold" />

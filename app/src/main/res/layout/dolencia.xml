@@ -189,8 +189,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:ems="10"
-
+                        android:maxLength="1000"
                         android:hint="@string/notas"
                         android:inputType="textMultiLine"
                         android:textColor="@color/color_d"
