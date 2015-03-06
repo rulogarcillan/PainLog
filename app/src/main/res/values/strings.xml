@@ -10,9 +10,8 @@
     <string name="errorfecha">The date is invalid</string>
     <string name="editarTittle">Edit</string>
     <string name="eliminarTittle">Delete</string>
+    <string name="exportTittle">Export</string>
     <string name="addLog">Add</string>
-
-
     <string name="nombre">Name</string>
     <string name="notas">Type in your note</string>
 
@@ -62,8 +61,6 @@
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
     <string name="library_sqliteassethelper_isOpenSource" translatable="false">true</string>
     <string name="library_sqliteassethelper_repositoryLink" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
-
-
 
 
 </resources>

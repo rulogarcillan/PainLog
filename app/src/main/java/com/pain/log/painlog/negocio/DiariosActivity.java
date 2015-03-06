@@ -15,7 +15,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
-import com.pain.log.painlog.export.exportLog;
+import com.pain.log.painlog.export.ExportLog;
 
 import java.util.ArrayList;
 
@@ -65,6 +65,8 @@ public class DiariosActivity extends BaseActivity {
         myDB = new MyDatabase(this);
         copybd();
         scroll();
+      //  getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_pain));
+
         consultas = new Consultas(this);
 
 
@@ -138,7 +140,7 @@ public class DiariosActivity extends BaseActivity {
 
     protected void exportItem(int clave, String name){
 
-        exportLog exp = new exportLog(DiariosActivity.this);
+        ExportLog exp = new ExportLog(DiariosActivity.this);
         exp.exportToExcel(consultas.getLogs(clave), name);
 
     }

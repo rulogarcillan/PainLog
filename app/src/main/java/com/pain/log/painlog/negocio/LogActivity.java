@@ -1,6 +1,5 @@
 package com.pain.log.painlog.negocio;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,6 +30,7 @@ public class LogActivity extends BaseActivity {
     private MoonCalculation luna = new MoonCalculation();
     private ArrayList<Logs> items = new ArrayList<>();
     private int clave;
+    private String titulo;
 
 
     @Override
@@ -60,6 +60,9 @@ public class LogActivity extends BaseActivity {
         myDB = new MyDatabase(this);
         scroll();
         cargaDatos();
+        getSupportActionBar().setTitle(titulo);
+
+
         consultas = new Consultas(this);
 
 
@@ -89,8 +92,6 @@ public class LogActivity extends BaseActivity {
                 LOGI("VALOR CLAVE", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "INS");
                 LogActivity.this.startActivity(intent);
-
-
             }
         });
 
@@ -106,12 +107,6 @@ public class LogActivity extends BaseActivity {
     }
 
 
-    protected void editItem(int clave, String titu) {
-        //  consultas.editDiario(clave, titu);
-
-    }
-
-
     private void cargaDatos() {
 
         Bundle extras = getIntent().getExtras();
@@ -120,7 +115,9 @@ public class LogActivity extends BaseActivity {
 
         }
         clave = extras.getInt("CLAVE");
+        titulo = extras.getString("NOMBRE");
         LOGI("VALOR CLAVE", Integer.toString(clave));
+        LOGI("VALOR NOMBRE", titulo);
 
 
     }

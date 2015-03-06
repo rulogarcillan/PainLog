@@ -34,6 +34,7 @@
     <string name="addLog">Añadir</string>
     <string name="col1exce2">INTENSIDAD</string>
     <string name="more">Otras app</string>
+    <string name="exportTittle">Exportar</string>
 
 
 </resources>

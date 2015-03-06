@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pain.log.painlog.R;
 
@@ -153,6 +154,22 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
                 LOGI("VALOR CLAVE_I", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "UPD");
                 activity.startActivity(intent);
+            }
+        });
+
+        viewHolder.delete.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(activity, activity.getResources().getString(R.string.eliminarTittle), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+        viewHolder.edit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(activity, activity.getResources().getString(R.string.editarTittle), Toast.LENGTH_LONG).show();
+                return true;
             }
         });
 

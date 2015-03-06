@@ -101,6 +101,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             public void onClick(View v) {
                 Intent intent = new Intent(activity,LogActivity.class);
                 intent.putExtra("CLAVE",items.get(i).getClave());
+                intent.putExtra("NOMBRE",items.get(i).getNombre());
                 LOGI("VALOR CLAVE", Integer.toString(items.get(i).getClave()));
                 activity.startActivity(intent);
             }
@@ -172,6 +173,31 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             public void onClick(View v) {
                 int clave = items.get(i).getClave();
                 ((DiariosActivity) activity).exportItem(clave, items.get(i).getNombre());
+            }
+        });
+
+
+        viewHolder.delete.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(activity, activity.getResources().getString(R.string.eliminarTittle), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+        viewHolder.edit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(activity, activity.getResources().getString(R.string.editarTittle), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+        viewHolder.export.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(activity, activity.getResources().getString(R.string.exportTittle), Toast.LENGTH_LONG).show();
+                return true;
             }
         });
 
