@@ -13,7 +13,7 @@
  
  • [Descripción es-ES](https://github.com/rulogarcillan/PainLog/blob/master/README.md#descripci%C3%B3n-es-es)
  
- • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#license-es-es)
+ • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#licencia-es-es)
 
 
 #Description en-EN
