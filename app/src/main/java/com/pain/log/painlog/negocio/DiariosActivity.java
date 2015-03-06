@@ -15,7 +15,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
-import com.pain.log.painlog.export.ExportLog;
+import com.pain.log.painlog.export.exportLog;
 
 import java.util.ArrayList;
 
@@ -140,7 +140,7 @@ public class DiariosActivity extends BaseActivity {
 
     protected void exportItem(int clave, String name){
 
-        ExportLog exp = new ExportLog(DiariosActivity.this);
+        exportLog exp = new exportLog(DiariosActivity.this);
         exp.exportToExcel(consultas.getLogs(clave), name);
 
     }
