@@ -172,7 +172,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             @Override
             public void onClick(View v) {
                 int clave = items.get(i).getClave();
-                ((DiariosActivity) activity).exportItem(clave, items.get(i).getNombre());
+                ((DiariosActivity) activity).exportItem(clave, items.get(i).getNombre(),v);
             }
         });
 

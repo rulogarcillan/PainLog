@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:com.pain.log.painlog="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/export"
+            android:title="@string/exportTittle"
+            com.pain.log.painlog:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/exportYenviar"
+            android:title="@string/exportSendTittle"
+            com.pain.log.painlog:showAsAction="ifRoom" />
+
+
+
+</menu>

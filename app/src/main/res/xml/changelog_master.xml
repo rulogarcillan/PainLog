@@ -3,6 +3,7 @@
 
 
     <release version="1.01" versioncode="101">
+        <change>Añadido PopupMenu expotar</change>
         <change>Información en botones con pulsación larga.</change>
         <change>Añadido título de calendario en actionbar.</change>
     </release>

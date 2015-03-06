@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-    <release version="1.01" versioncode="101">
-        <change>Información en botones con pulsación larga.</change>
-    </release>
-
     <release version="1.0" versioncode="10">
         <change>Versión inicial</change>
     </release>

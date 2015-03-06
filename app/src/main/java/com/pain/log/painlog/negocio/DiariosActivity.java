@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +68,7 @@ public class DiariosActivity extends BaseActivity {
         myDB = new MyDatabase(this);
         copybd();
         scroll();
-      //  getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_pain));
+        //  getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_pain));
 
         consultas = new Consultas(this);
 
@@ -97,8 +100,8 @@ public class DiariosActivity extends BaseActivity {
 
                         EditText editText = (EditText) view.findViewById(R.id.edittext);
 
-                        if (editText.getText().toString().trim().length()== 0){
-                            Toast.makeText(DiariosActivity.this,R.string.errorvacio,Toast.LENGTH_SHORT).show();
+                        if (editText.getText().toString().trim().length() == 0) {
+                            Toast.makeText(DiariosActivity.this, R.string.errorvacio, Toast.LENGTH_SHORT).show();
                         } else {
                             Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString());
                             consultas.addDiario(nuevo);
@@ -106,7 +109,7 @@ public class DiariosActivity extends BaseActivity {
                             mensajeVacio.setVisibility(View.INVISIBLE);
                         }
 
-                     }
+                    }
                 });
                 dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -120,7 +123,7 @@ public class DiariosActivity extends BaseActivity {
 
     }
 
-    protected void deleteItem(int clave){
+    protected void deleteItem(int clave) {
 
         consultas.deleteDiario(clave);
         carga();
@@ -128,25 +131,48 @@ public class DiariosActivity extends BaseActivity {
             mensajeVacio.setVisibility(View.VISIBLE);
 
 
-
     }
 
 
-    protected void editItem(int clave, String titu){
+    protected void editItem(int clave, String titu) {
         consultas.editDiario(clave, titu);
         carga();
 
     }
 
-    protected void exportItem(int clave, String name){
+    protected void exportItem(final int clave, final String name, View v) {
 
-        exportLog exp = new exportLog(DiariosActivity.this);
-        exp.exportToExcel(consultas.getLogs(clave), name);
+        final PopupMenu popup = new PopupMenu(this, v);
+
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.export, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.export:
+
+                        exportLog exp = new exportLog(DiariosActivity.this);
+                        exp.exportToExcel(consultas.getLogs(clave), name);
+                        break;
+                    case R.id.exportYenviar:
+
+                        break;
+                    default:
+
+                        break;
+
+                }
+                return true;
+            }
+        });
+
+        popup.show();
 
     }
 
-
-    private void scroll(){
+    private void scroll() {
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -169,7 +195,7 @@ public class DiariosActivity extends BaseActivity {
         });
     }
 
-    private void carga(){
+    private void carga() {
         items = consultas.getDiarios(); // llamada a query BBDD
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
