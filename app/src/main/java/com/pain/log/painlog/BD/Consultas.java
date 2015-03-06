@@ -5,8 +5,13 @@ import android.database.Cursor;
 
 import com.pain.log.painlog.negocio.Diarios;
 import com.pain.log.painlog.negocio.Logs;
+import com.pain.log.painlog.negocio.Ordena;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
@@ -196,13 +201,14 @@ public class Consultas {
             // Recorremos el cursor hasta que no haya más registros
             do {
 
-                Logs item = new Logs(cur.getInt(0), cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
+                Logs item = new Logs(cur.getInt(0),cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
                 array.add(item);
 
             } while (cur.moveToNext());
         }
 
         db.close();
+        Collections.sort(array, new Ordena());
         return array;
     }
 
@@ -225,7 +231,8 @@ public class Consultas {
         }
 
         db.close();
-        return item;
+
+       return item;
     }
 
     public void deleteLog(int clave, int clave_d) {
@@ -266,6 +273,7 @@ public class Consultas {
         db.close();
 
     }
+
 
 
 }

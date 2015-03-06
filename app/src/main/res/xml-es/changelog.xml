@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.01" versioncode="101">
+        <change>Añadido PopupMenu expotar</change>
+        <change>Añadida información en botones con pulsación larga</change>
+        <change>Añadido título de calendario en actionbar</change>
+        <change>Corregido error en cálculo de la fase lunar</change>
+        <change>Corregidos pequeños errores</change>
+    </release>
+
     <release version="1.0" versioncode="10">
         <change>Versión inicial</change>
     </release>

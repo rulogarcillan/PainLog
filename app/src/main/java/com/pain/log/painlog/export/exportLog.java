@@ -1,6 +1,8 @@
 package com.pain.log.painlog.export;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
@@ -33,7 +35,7 @@ public class exportLog {
         this.activity = activity;
     }
 
-    public void exportToExcel(ArrayList<Logs> items, String name) {
+    public void exportToExcel(ArrayList<Logs> items, String name, Boolean send) {
 
         final String fileName = remove(name) + ".xls";
 
@@ -43,12 +45,11 @@ public class exportLog {
         String ruta = sdCard.getAbsolutePath() + "/PainLog";
         File directory = new File(ruta);
 
-        if(!directory.isDirectory()){
+        if (!directory.isDirectory()) {
             directory.mkdirs();
         }
 
         File file = new File(directory, fileName);
-
 
 
         WorkbookSettings wbSettings = new WorkbookSettings();
@@ -61,21 +62,21 @@ public class exportLog {
 
             try {
                 int i = 0;
-                sheet.addCell(new Label(0, i,  activity.getResources().getString(R.string.col1excel)));
-                sheet.addCell(new Label(1, i,  activity.getResources().getString(R.string.col1exce2)));
-                sheet.addCell(new Label(2, i,  activity.getResources().getString(R.string.col1exce3)));
-                sheet.addCell(new Label(3, i,  activity.getResources().getString(R.string.col1exce4)));
+                sheet.addCell(new Label(0, i, activity.getResources().getString(R.string.col1excel)));
+                sheet.addCell(new Label(1, i, activity.getResources().getString(R.string.col1exce2)));
+                sheet.addCell(new Label(2, i, activity.getResources().getString(R.string.col1exce3)));
+                sheet.addCell(new Label(3, i, activity.getResources().getString(R.string.col1exce4)));
 
 
                 for (Logs item : items) {
 
                     i++;
 
-                    String fecha = item.getFecha();
+                    String fecha = item.getFecha().toString();
                     String intensidad = getNombreIntensidad(item.getIntensidad());
                     String notas = item.getNotas();
                     int fase = luna.moonPhase(item.getFecha());
-                    String lunaNombre = luna.phaseName(activity,fase);
+                    String lunaNombre = luna.phaseName(activity, fase);
 
                     sheet.addCell(new Label(0, i, fecha));
                     sheet.addCell(new Label(1, i, intensidad));
@@ -97,25 +98,36 @@ public class exportLog {
             }
 
             Toast.makeText(activity, lect, Toast.LENGTH_LONG).show();
+
+            if (send == true) {
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+                shareIntent.setType("application/excel");
+                activity.startActivity(Intent.createChooser(shareIntent, activity.getText(R.string.exportSendTittle)));
+
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(activity, "error", Toast.LENGTH_LONG).show();
         }
 
-
     }
 
 
-    private String getNombreIntensidad(int progress){
+    private String getNombreIntensidad(int progress) {
 
-        String nombreDolor="";
+        String nombreDolor = "";
 
         if (progress <= 32) {
-            nombreDolor= activity.getResources().getString(R.string.dolor1);
+            nombreDolor = activity.getResources().getString(R.string.dolor1);
         } else if (progress >= 33 && progress <= 65) {
-            nombreDolor= activity.getResources().getString(R.string.dolor2);
+            nombreDolor = activity.getResources().getString(R.string.dolor2);
         } else if (progress >= 66) {
-            nombreDolor= activity.getResources().getString(R.string.dolor3);
+            nombreDolor = activity.getResources().getString(R.string.dolor3);
         }
 
         return nombreDolor;
@@ -127,11 +139,12 @@ public class exportLog {
         String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ.\\/:?*\"<>|";
         String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC----------";
         String output = input;
-        for (int i=0; i<original.length(); i++) {
+        for (int i = 0; i < original.length(); i++) {
 
             output = output.replace(original.charAt(i), ascii.charAt(i));
         }
         return output;
     }
+
 
 }

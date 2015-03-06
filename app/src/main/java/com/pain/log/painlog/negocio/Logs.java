@@ -1,5 +1,8 @@
 package com.pain.log.painlog.negocio;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -12,6 +15,7 @@ public class Logs {
     private int intensidad;
     private String notas;
     private int clave_d;
+    private Date date;
 
     public Logs() {
     }
@@ -22,6 +26,7 @@ public class Logs {
         this.intensidad = intensidad;
         this.notas = notas;
         this.clave_d = clave_d;
+        this.date = parseFecha(fecha);
     }
 
     public int getClave() {
@@ -38,6 +43,7 @@ public class Logs {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+        this.date = parseFecha(fecha);
     }
 
     public int getIntensidad() {
@@ -63,4 +69,27 @@ public class Logs {
     public void setClave_d(int clave_d) {
         this.clave_d = clave_d;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    private Date parseFecha (String date){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateD = null;
+
+        try {
+
+            dateD = formatter.parse(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateD);
+        return dateD;
+    }
+
+
 }

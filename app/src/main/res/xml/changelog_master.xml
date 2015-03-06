@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-
     <release version="1.01" versioncode="101">
-        <change>Añadido PopupMenu expotar</change>
-        <change>Información en botones con pulsación larga.</change>
-        <change>Añadido título de calendario en actionbar.</change>
+        <change>Added PopupMenu export</change>
+        <change>Added information in button when long press</change>
+        <change>Added calendar title in actionbar</change>
+        <change>Fix bug in Moon phase</change>
+        <change>Minor fix bug</change>
     </release>
 
     <release version="1.0" versioncode="10">

@@ -1,7 +1,10 @@
 package com.pain.log.painlog.negocio;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +23,7 @@ import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -37,6 +41,7 @@ public class DiariosActivity extends BaseActivity {
     private Consultas consultas;
 
     private ArrayList<Diarios> items = new ArrayList<>();
+    MoonCalculation prueba = new MoonCalculation();
 
 
     @Override
@@ -55,6 +60,7 @@ public class DiariosActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diarios);
+
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
@@ -150,13 +156,17 @@ public class DiariosActivity extends BaseActivity {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
 
+                exportLog exp = new exportLog(DiariosActivity.this);
+
                 switch (item.getItemId()) {
                     case R.id.export:
 
-                        exportLog exp = new exportLog(DiariosActivity.this);
-                        exp.exportToExcel(consultas.getLogs(clave), name);
+                        exp.exportToExcel(consultas.getLogs(clave), name, false);
                         break;
+
                     case R.id.exportYenviar:
+
+                        exp.exportToExcel(consultas.getLogs(clave), name, true);
 
                         break;
                     default:
@@ -169,6 +179,7 @@ public class DiariosActivity extends BaseActivity {
         });
 
         popup.show();
+
 
     }
 

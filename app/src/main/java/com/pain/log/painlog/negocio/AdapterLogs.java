@@ -101,13 +101,13 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
-        viewHolder.textFecha.setText(items.get(i).getFecha());
+        viewHolder.textFecha.setText(items.get(i).getFecha().toString());
         if (items.get(i).getNotas().toString().trim().length() == 0)
             viewHolder.textNotas.setText(activity.getResources().getString(R.string.sinnotas));
         else
             viewHolder.textNotas.setText(items.get(i).getNotas());
 
-        int fase =luna.moonPhase(items.get(i).getFecha());
+        int fase = luna.moonPhase(items.get(i).getFecha());
         viewHolder.textLuna.setText(luna.phaseName(activity,fase));
         viewHolder.imageLuna.setImageDrawable(luna.phaseImage(activity,fase));
 
