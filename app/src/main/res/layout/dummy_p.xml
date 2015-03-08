@@ -1,39 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    card_view:cardCornerRadius="0dp"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
+    card_view:cardCornerRadius="0dp"
     card_view:cardElevation="2dp">
 
 
-
     <LinearLayout
+        android:id="@+id/layo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/layo"
         android:orientation="vertical">
 
-        <TextView
 
-            android:id="@+id/text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="Prueba"
-            android:textColor="@color/card_text"
-            android:textSize="25dp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+
+                android:id="@+id/text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="Prueba"
+                android:textColor="@color/card_text"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                card_view:cardBackgroundColor="@color/color_c"
+                card_view:cardCornerRadius="1dp"
+                card_view:cardElevation="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="3dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3.5dp"
+                    android:background="@drawable/ovalo" />
+
+                <TextView
+                    android:id="@+id/diasSinText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/cardview_dark_background" />
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal"
+                android:maxLines="3"
+                android:text="@string/diassindolor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+        </LinearLayout>
+
 
         <FrameLayout
 
@@ -41,19 +94,13 @@
             android:layout_height="wrap_content">
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/card_separator">
-
-            </View>
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@color/color_e"
+            android:orientation="horizontal"
             android:padding="4dp">
 
 
@@ -63,9 +110,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
                 android:background="?android:selectableItemBackground"
                 android:scaleType="fitXY"
-                android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_delete_d" />
 
             <ImageButton
@@ -74,9 +121,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
                 android:background="?android:selectableItemBackground"
                 android:scaleType="fitXY"
-                android:layout_marginLeft="16dp"
                 android:src="@drawable/ic_edit_d" />
 
             <ImageButton
@@ -85,9 +132,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
                 android:background="?android:selectableItemBackground"
                 android:scaleType="fitXY"
-                android:layout_marginLeft="16dp"
                 android:src="@drawable/ic_export" />
 
 

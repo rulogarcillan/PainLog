@@ -1,7 +1,6 @@
 package com.pain.log.painlog.negocio;
 
 import android.app.AlertDialog;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +23,10 @@ import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import de.cketti.library.changelog.ChangeLog;
 
@@ -115,12 +117,17 @@ public class DiariosFragment extends Fragment {
                 dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+
+
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        final Calendar c = Calendar.getInstance();
+
                         EditText editText = (EditText) view.findViewById(R.id.edittext);
 
                         if (editText.getText().toString().trim().length() == 0) {
                             Toast.makeText(getActivity(), R.string.errorvacio, Toast.LENGTH_SHORT).show();
                         } else {
-                            Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString());
+                            Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString(), dateFormat.format(c.getTime()).toString());
                             consultas.addDiario(nuevo);
                             carga();
                             mensajeVacio.setVisibility(View.INVISIBLE);

@@ -92,7 +92,7 @@ public class Consultas {
     public ArrayList getDiarios() {
 
         String sql;
-        sql = "select * from diarios";
+        sql = "select diarios.*, fecha.f from diarios LEFT OUTER JOIN  (select  diarios_clave, substr(fecha ,7,4)|| substr(fecha ,4,2) || substr(fecha ,1,2)  as f from registros group by diarios_clave) as  fecha  ON  diarios.clave =  fecha.diarios_clave";
         LOGI("getDiarios", sql);
         ArrayList<Diarios> array = new ArrayList<>();
         Cursor cur = db.query(sql, LEER);
@@ -100,7 +100,7 @@ public class Consultas {
             // Recorremos el cursor hasta que no haya más registros
             do {
 
-                Diarios item = new Diarios(cur.getInt(0), cur.getString(1));
+                Diarios item = new Diarios(cur.getInt(0), cur.getString(1), cur.getString(2));
                 array.add(item);
 
             } while (cur.moveToNext());
@@ -211,7 +211,7 @@ public class Consultas {
             // Recorremos el cursor hasta que no haya más registros
             do {
 
-                Logs item = new Logs(cur.getInt(0),cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
+                Logs item = new Logs(cur.getInt(0), cur.getString(1), cur.getInt(2), cur.getString(3), cur.getInt(4));
                 array.add(item);
 
             } while (cur.moveToNext());
@@ -242,7 +242,7 @@ public class Consultas {
 
         db.close();
 
-       return item;
+        return item;
     }
 
     public void deleteLog(int clave, int clave_d) {
@@ -283,7 +283,6 @@ public class Consultas {
         db.close();
 
     }
-
 
 
 }
