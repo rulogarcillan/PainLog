@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.02" versioncode="102">
+        <change>Corregidos pequeños errores</change>
+    </release>
     <release version="1.01" versioncode="101">
         <change>Añadido PopupMenu expotar</change>
         <change>Añadida información en botones con pulsación larga</change>

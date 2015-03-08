@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+
+    <release version="1.02" versioncode="102">
+        <change>Minor fix bug</change>
+    </release>
+
     <release version="1.01" versioncode="101">
         <change>Added PopupMenu export</change>
         <change>Added information in button when long press</change>
