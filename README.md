@@ -1,4 +1,4 @@
-# Pain Log 1.0
+# Pain Log 1.01
 
 
 <img src="app/src/main/logogrande.png" width="50%">
@@ -13,7 +13,7 @@
  
  • [Descripción es-ES](https://github.com/rulogarcillan/PainLog/blob/master/README.md#descripci%C3%B3n-es-es)
  
- • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#license-es-eS)
+ • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#licencia-es-es)
 
 
 #Description en-EN
