@@ -36,6 +36,7 @@
     <string name="more">Otras app</string>
     <string name="exportTittle">Exportar</string>
     <string name="exportSendTittle">Exportar y enviar</string>
+    <string name="miscellaneous">Miscelaneo</string>
 
 
 </resources>

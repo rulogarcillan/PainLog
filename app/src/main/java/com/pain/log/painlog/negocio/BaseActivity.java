@@ -3,7 +3,6 @@ package com.pain.log.painlog.negocio;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -87,10 +86,6 @@ public class BaseActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-
-    public void onRetoreInstanceState(Bundle inState) {
-        // TODO Auto-generated method stub
-    }
 
     public static class LanzaChangelog extends ChangeLog {
 

@@ -4,7 +4,9 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:id="@+id/rowLayout"
     android:orientation="horizontal">
 
 

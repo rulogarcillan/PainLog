@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_i"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textFather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="xxxxxx"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/card_separator" />
+
+</LinearLayout>

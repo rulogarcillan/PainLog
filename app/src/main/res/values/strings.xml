@@ -32,6 +32,8 @@
     <string name="luna6">Third quarter</string>
     <string name="luna7">Waning crescent</string>
 
+
+    <string name="miscellaneous">Miscellaneous</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
 
