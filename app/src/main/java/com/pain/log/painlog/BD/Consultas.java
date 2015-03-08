@@ -7,11 +7,8 @@ import com.pain.log.painlog.negocio.Diarios;
 import com.pain.log.painlog.negocio.Logs;
 import com.pain.log.painlog.negocio.Ordena;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
@@ -25,6 +22,19 @@ public class Consultas {
 
     public Consultas() {
 
+    }
+
+
+    public static String remove(String input) {
+
+        String original = "'";
+        String ascii = "´";
+        String output = input;
+        for (int i = 0; i < original.length(); i++) {
+
+            output = output.replace(original.charAt(i), ascii.charAt(i));
+        }
+        return output;
     }
 
     public Consultas(Context c) {
@@ -103,7 +113,7 @@ public class Consultas {
     public String addDiario(Diarios datos) {
 
         String sql;
-        sql = "Insert into diarios (nombre) values ('" + datos.getNombre() + "')";
+        sql = "Insert into diarios (nombre) values ('" + remove(datos.getNombre()) + "')";
         LOGI("addDiario", sql);
 
         Cursor cur = db.query(sql, ESCRIBIR);
@@ -154,7 +164,7 @@ public class Consultas {
         Cursor cur = null;
         String query;
 
-        query = "update diarios set nombre='" + titu + "' where clave = " + clave;
+        query = "update diarios set nombre='" + remove(titu) + "' where clave = " + clave;
 
         LOGI("editDiario", query);
         cur = db.query(query, ESCRIBIR); //Borra
@@ -173,7 +183,7 @@ public class Consultas {
     public String addRegistros(Logs datos) {
 
         String sql;
-        sql = "Insert into registros (fecha, intensidad, notas, diarios_clave) values ('" + datos.getFecha() + "'," + datos.getIntensidad() + ",'" + datos.getNotas() + "'," + datos.getClave_d() + ")";
+        sql = "Insert into registros (fecha, intensidad, notas, diarios_clave) values ('" + datos.getFecha() + "'," + datos.getIntensidad() + ",'" + remove(datos.getNotas()) + "'," + datos.getClave_d() + ")";
         LOGI("addRegistros", sql);
 
         Cursor cur = db.query(sql, ESCRIBIR);
@@ -259,7 +269,7 @@ public class Consultas {
         Cursor cur = null;
         String query;
 
-        query = "update registros set notas='" + item.getNotas() + "', fecha = '" + item.getFecha() + "', intensidad = " + item.getIntensidad() + " where diarios_clave = " + item.getClave_d() + " and clave_r = " + item.getClave();
+        query = "update registros set notas='" + remove(item.getNotas()) + "', fecha = '" + item.getFecha() + "', intensidad = " + item.getIntensidad() + " where diarios_clave = " + item.getClave_d() + " and clave_r = " + item.getClave();
 
         LOGI("editlog", query);
         cur = db.query(query, ESCRIBIR); //Borra
