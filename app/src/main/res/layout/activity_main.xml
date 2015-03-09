@@ -22,12 +22,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.DrawerLayout
+
+        <com.charbgr.BlurNavigationDrawer.v7.BlurDrawerLayout
+
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="7dp"
-            tools:context=".MainActivity">
+            app:blurRadius="3"
+            app:downScaleFactor="5.0"
+            app:toolbar="@+id/toolbar">
 
 
             <FrameLayout
@@ -37,15 +40,17 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/RecyclerDrawer"
+
                 android:layout_width="@dimen/navigation_drawer_width"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:background="@color/white"
+                android:background="@color/whitetrans"
                 android:scrollbars="vertical">
 
             </android.support.v7.widget.RecyclerView>
 
-        </android.support.v4.widget.DrawerLayout>
+
+        </com.charbgr.BlurNavigationDrawer.v7.BlurDrawerLayout>
 
         <View
             android:layout_width="match_parent"
