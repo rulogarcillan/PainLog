@@ -14,19 +14,31 @@ public class Constantes {
     public Constantes() {
     }
 
-    private static final int titulo[] = {R.string.miscellaneous,
+    private static final int titulo[] = {-1,
+                                         R.string.archivos,
+                                         R.string.explorar,
+                                         R.string.exportall,
+                                         R.string.miscellaneous,
                                          R.string.puntuar,
                                          R.string.changelog,
                                          R.string.license,
                                          R.string.more};
 
     private static final int icono[] = {-1,
+                                        -1,
+                                        R.drawable.ic_folder,
+                                        R.drawable.ic_export_all,
+                                        -1,
                                         R.drawable.ic_action_rating,
                                         R.drawable.ic_action_changelog,
                                         R.drawable.ic_license,
                                         R.drawable.ic_more};
 
-    private static final int type[] = {MenuDrawer.TYPE_HEADER,
+    private static final int type[] = {MenuDrawer.TYPE_GRAN_HEADER,
+                                       MenuDrawer.TYPE_HEADER,
+                                       MenuDrawer.TYPE_ITEM,
+                                       MenuDrawer.TYPE_ITEM,
+                                       MenuDrawer.TYPE_HEADER,
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_ITEM,

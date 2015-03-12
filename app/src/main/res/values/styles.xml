@@ -9,21 +9,23 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="colorPrimary">@color/color_h</item>
-        <item name="colorPrimaryDark">@color/color_i</item>
+
+        <item name="colorPrimaryDark">@color/color_dark</item>
         <item name="colorAccent">@color/color_h</item>
     </style>
 
 
-    <style name="AppCompatTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-       <item name="windowActionBar">false</item>
+    <style name="AppCompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/color_h</item>
+        <item name="colorPrimary">@color/color_h</item>
+        <item name="colorPrimaryDark">@color/color_dark</item>
+        <item name="colorAccent">@color/color_h</item>
     </style>
+
     <!-- Application theme. -->
     <style name="AppThemeNoAction" parent="AppCompatTheme">
-        <item name="colorPrimary">@color/color_h</item>
-        <item name="colorPrimaryDark">@color/color_i</item>
-        <item name="colorAccent">@color/color_h</item>
-    </style>
 
+    </style>
 
 
 </resources>

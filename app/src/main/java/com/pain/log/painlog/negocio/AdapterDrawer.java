@@ -53,7 +53,8 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
         ImageView rowIcon;
         TextView rowText;
         TextView textFather;
-        LinearLayout rowLayout;
+        LinearLayout rowLayout, back;
+
 
 
         public ViewHolder(View container, int ViewType) {
@@ -68,6 +69,10 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
                 rowIcon = (ImageView) container.findViewById(R.id.rowIcon);
                 rowText = (TextView) container.findViewById(R.id.rowText);
                 rowLayout = (LinearLayout) container.findViewById(R.id.rowLayout);
+
+            } else if (ViewType == MenuDrawer.TYPE_GRAN_HEADER) {
+
+                back = (LinearLayout) container.findViewById(R.id.back);
             }
 
 
@@ -94,7 +99,17 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
             return vhHeader;
 
 
+        } else if (viewType == MenuDrawer.TYPE_GRAN_HEADER) {
+
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_grandfather, parent, false);
+
+            ViewHolder vhHeader = new ViewHolder(v, viewType);
+
+            return vhHeader;
+
+
         }
+
 
         return null;
 
@@ -129,7 +144,12 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
                     }
                 }
             });
+        }   else if (items.get(i).getType() == MenuDrawer.TYPE_ITEM) {
+
+
         }
+
+
 
 
     }
@@ -143,8 +163,11 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
         } else if (items.get(position).getType() == MenuDrawer.TYPE_ITEM) {
 
             return MenuDrawer.TYPE_ITEM;
-        }
 
+        } else if (items.get(position).getType() == MenuDrawer.TYPE_GRAN_HEADER) {
+
+            return MenuDrawer.TYPE_GRAN_HEADER;
+        }
         return -1;
 
     }

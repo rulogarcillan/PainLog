@@ -35,6 +35,9 @@
 
 
     <string name="miscellaneous">Miscellaneous</string>
+    <string name="archivos">Files</string>
+    <string name="explorar">Explore</string>
+    <string name="exportall">Export all</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
 

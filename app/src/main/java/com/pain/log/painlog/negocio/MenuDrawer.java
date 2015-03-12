@@ -5,8 +5,10 @@ package com.pain.log.painlog.negocio;
  */
 public class MenuDrawer {
 
-    public static final int TYPE_HEADER = 0;
-    public static final int TYPE_ITEM = 1;
+
+    public static final int TYPE_GRAN_HEADER = 0;
+    public static final int TYPE_HEADER = 1;
+    public static final int TYPE_ITEM = 2;
 
 
     private int titulo;

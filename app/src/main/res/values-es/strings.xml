@@ -38,6 +38,9 @@
     <string name="exportSendTittle">Exportar y enviar</string>
     <string name="miscellaneous">Miscelaneo</string>
     <string name="diassindolor">Días sin dolor</string>
+    <string name="archivos">Archivos</string>
+    <string name="explorar">Explorar</string>
+    <string name="exportall">Exportar todo</string>
 
 
 </resources>

@@ -3,16 +3,20 @@
     android:id="@+id/viewLay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_i"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textFather"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/material_drawer_item_secondary_text"
         android:text="xxxxxx"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/card_separator" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/material_drawer_hint_text" />
 
 </LinearLayout>

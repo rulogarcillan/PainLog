@@ -1,7 +1,6 @@
 package com.pain.log.painlog.negocio;
 
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.charbgr.BlurNavigationDrawer.v7.BlurActionBarDrawerToggle;
 import com.pain.log.painlog.Constantes.Constantes;
 import com.pain.log.painlog.R;
 
@@ -52,7 +50,8 @@ public class MainActivity extends ActionBarActivity {
         recyclerView.addItemDecoration(itemDecoration);*/
         mRecyclerView.setAdapter(adapter);
 
-        mDrawerToggle = new BlurActionBarDrawerToggle(this,
+
+        mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
                 toolbar,
                 R.string.changelog,
@@ -70,11 +69,13 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerLayout.setScrimColor(Color.TRANSPARENT);
 
+       // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
         mDrawerToggle.syncState();
 
 

@@ -7,5 +7,8 @@
     <dimen name="dialog">32dp</dimen>
     <dimen name="actions">150dp</dimen>
 
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="navigation_drawer_width">300dp</dimen>
+
+    <dimen name="material_drawer_item_secondary_text">14sp</dimen>
+
 </resources>

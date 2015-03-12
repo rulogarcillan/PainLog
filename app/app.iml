@@ -96,7 +96,6 @@
     <orderEntry type="library" exported="" name="floatingactionbutton-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="jxl" level="project" />
-    <orderEntry type="module" module-name="library" exported="" />
   </component>
 </module>
 
