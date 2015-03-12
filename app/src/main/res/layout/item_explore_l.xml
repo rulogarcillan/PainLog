@@ -1,0 +1,52 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="8dp" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_excel"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/primary_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Cabeza.xls"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toRightOf="@id/icon"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:id="@+id/secondary_info"
+        android:maxLines="1"
+        android:text="21/05/2015"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorTertiary"
+        android:layout_below="@+id/primary_info"
+        android:layout_alignLeft="@+id/primary_info" />
+
+    <TextView
+        android:id="@+id/tertiary_info"
+        android:maxLines="1"
+        android:text="357KB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorTertiary"
+        android:layout_alignBottom="@+id/secondary_info"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>
