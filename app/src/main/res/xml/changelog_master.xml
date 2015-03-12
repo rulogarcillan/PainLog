@@ -2,6 +2,14 @@
 <changelog>
 
 
+    <release version="1.1" versioncode="110">
+        <change>Se añade menu lateral</change>
+        <change>Explorador de ficheros</change>
+        <change>Exportar todo</change>
+        <change>Días sin dolor</change>
+        <change>Pequeños cambios de apariencia</change>
+    </release>
+
     <release version="1.02" versioncode="102">
         <change>Minor fix bug</change>
     </release>

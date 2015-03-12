@@ -4,6 +4,7 @@
     <string name="app_name" translatable="false">Pain Log</string>
     <string name="action_settings">Options</string>
     <string name="vacio">Press the button to add a calendar</string>
+    <string name="vacioFiles">No files</string>
     <string name="vacioreg">Press the button to add a record</string>
     <string name="confirmar">Are you sure to delete?</string>
     <string name="errorvacio">Error, you must enter text</string>

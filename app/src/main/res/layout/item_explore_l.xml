@@ -4,10 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
+    android:background="?android:selectableItemBackground"
+    android:id="@+id/files"
     android:padding="8dp" >
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/iconFile"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,36 +19,36 @@
         android:scaleType="centerInside" />
 
     <TextView
-        android:id="@+id/primary_info"
-        android:layout_width="wrap_content"
+        android:id="@+id/textName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toRightOf="@id/iconFile"
+        android:layout_marginLeft="8dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Cabeza.xls"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@id/icon"
-        android:layout_marginLeft="8dp" />
+        android:text="Cabeza.xls"/>
 
     <TextView
-        android:id="@+id/secondary_info"
+        android:id="@+id/textDate"
         android:maxLines="1"
         android:text="21/05/2015"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?android:attr/textColorTertiary"
-        android:layout_below="@+id/primary_info"
-        android:layout_alignLeft="@+id/primary_info" />
+        android:layout_below="@+id/textName"
+        android:layout_alignLeft="@+id/textName" />
 
     <TextView
-        android:id="@+id/tertiary_info"
+        android:id="@+id/textTam"
         android:maxLines="1"
         android:text="357KB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?android:attr/textColorTertiary"
-        android:layout_alignBottom="@+id/secondary_info"
+        android:layout_alignBottom="@+id/textDate"
         android:layout_alignParentRight="true" />
 
 </RelativeLayout>

@@ -29,6 +29,10 @@
             android:name=".negocio.DolActivity">
         </activity>
 
+        <activity
+            android:name=".negocio.ExplorerActivity">
+        </activity>
+
 
     </application>
 

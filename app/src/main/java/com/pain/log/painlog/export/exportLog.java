@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.negocio.Logs;
 import com.pain.log.painlog.negocio.MoonCalculation;
@@ -23,6 +24,8 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+
+
 /**
  * Created by raul.rodriguezconcep on 2/03/15.
  */
@@ -37,17 +40,14 @@ public class exportLog {
 
     public void exportToExcel(ArrayList<Logs> items, String name, Boolean send) {
 
-        final String fileName = remove(name) + ".xls";
+        final String fileName = Ficheros.generaNombre(name);
 
         //Manejo de ficheros
-        String lect = "/PainLog/" + fileName;
-        File sdCard = Environment.getExternalStorageDirectory();
-        String ruta = sdCard.getAbsolutePath() + "/PainLog";
-        File directory = new File(ruta);
 
-        if (!directory.isDirectory()) {
-            directory.mkdirs();
-        }
+
+        File directory = new File(Ficheros.path);
+
+        Ficheros.CreaRuta();
 
         File file = new File(directory, fileName);
 
@@ -97,7 +97,7 @@ public class exportLog {
                 e.printStackTrace();
             }
 
-            Toast.makeText(activity, lect, Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, fileName, Toast.LENGTH_LONG).show();
 
             if (send == true) {
 
@@ -134,17 +134,7 @@ public class exportLog {
     }
 
 
-    public static String remove(String input) {
 
-        String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ.\\/:?*\"<>|";
-        String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC----------";
-        String output = input;
-        for (int i = 0; i < original.length(); i++) {
-
-            output = output.replace(original.charAt(i), ascii.charAt(i));
-        }
-        return output;
-    }
 
 
 }

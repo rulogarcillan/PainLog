@@ -41,6 +41,7 @@
     <string name="archivos">Archivos</string>
     <string name="explorar">Explorar</string>
     <string name="exportall">Exportar todo</string>
+    <string name="vacioFiles">No hay archivos</string>
 
 
 </resources>

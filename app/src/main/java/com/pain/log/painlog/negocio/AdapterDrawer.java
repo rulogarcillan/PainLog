@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 import de.cketti.library.changelog.ChangeLog;
 
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
+
 public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder> {
 
 
@@ -141,6 +143,8 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
                         LanzaMore();
                     } else if (items.get(i).getTitulo() == R.string.changelog) {
                         new LanzaChangelog(activity).getFullLogDialog().show();
+                    } else if (items.get(i).getTitulo() == R.string.explorar){
+                        lanzaExplorer();
                     }
                 }
             });
@@ -148,9 +152,6 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
 
 
         }
-
-
-
 
     }
 
@@ -220,6 +221,13 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
                 .withActivityTheme(R.style.AppTheme)
                         //start the activity
                 .start(activity);
+    }
+
+    public void  lanzaExplorer(){
+
+
+        Intent intent = new Intent(activity,ExplorerActivity.class);
+        activity.startActivity(intent);
     }
 
 
