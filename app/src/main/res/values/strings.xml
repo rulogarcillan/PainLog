@@ -34,6 +34,9 @@
     <string name="luna6">Third quarter</string>
     <string name="luna7">Waning crescent</string>
 
+    <string name="exportok">Export terminated successfully</string>
+    <string name="exportnotok">Export terminated unsuccessfully</string>
+
 
     <string name="miscellaneous">Miscellaneous</string>
     <string name="archivos">Files</string>

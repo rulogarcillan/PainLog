@@ -42,6 +42,8 @@
     <string name="explorar">Explorar</string>
     <string name="exportall">Exportar todo</string>
     <string name="vacioFiles">No hay archivos</string>
+    <string name="exportok">Se ha exportado con éxito</string>
+    <string name="exportnotok">Se han producido errores al exportar</string>
 
 
 </resources>

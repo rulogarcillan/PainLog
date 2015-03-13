@@ -20,8 +20,6 @@ import java.util.ArrayList;
 
 import de.cketti.library.changelog.ChangeLog;
 
-import static com.pain.log.painlog.negocio.LogUtils.LOGI;
-
 public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder> {
 
 
@@ -137,15 +135,27 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
 
                     if (items.get(i).getTitulo() == R.string.puntuar) {
                         LanzaRate();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
                     } else if (items.get(i).getTitulo() == R.string.license) {
                         lanzaLicense();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
                     } else if (items.get(i).getTitulo() == R.string.more) {
                         LanzaMore();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
                     } else if (items.get(i).getTitulo() == R.string.changelog) {
                         new LanzaChangelog(activity).getFullLogDialog().show();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
                     } else if (items.get(i).getTitulo() == R.string.explorar){
                         lanzaExplorer();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
+                    }  else if (items.get(i).getTitulo() == R.string.exportall){
+                        ((MainActivity) activity).fragment.exportAllItem();
+                        ((MainActivity) activity).mDrawerLayout.closeDrawers();
                     }
+
+
+
+
                 }
             });
         }   else if (items.get(i).getType() == MenuDrawer.TYPE_ITEM) {

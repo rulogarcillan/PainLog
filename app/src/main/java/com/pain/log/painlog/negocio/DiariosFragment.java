@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.EventListener;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
@@ -65,7 +67,6 @@ public class DiariosFragment extends Fragment {
 
     public DiariosFragment() {
     }
-
 
 
     @Override
@@ -118,7 +119,6 @@ public class DiariosFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
 
 
-
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         final Calendar c = Calendar.getInstance();
 
@@ -165,27 +165,72 @@ public class DiariosFragment extends Fragment {
 
     }
 
+
+    public void exportAllItem() {
+
+        exportLog exp = new exportLog(getActivity());
+        Boolean result = false;
+
+
+        for (Diarios item : items) {
+
+            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre(), false);
+
+        }
+
+        if (result) {
+            muestraSnack(getResources().getString(R.string.exportok));
+
+        } else {
+
+            muestraSnack(getResources().getString(R.string.exportnotok));
+        }
+
+
+    }
+
     protected void exportItem(final int clave, final String name, View v) {
 
         final PopupMenu popup = new PopupMenu(getActivity(), v);
 
+
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.export, popup.getMenu());
+
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
 
                 exportLog exp = new exportLog(getActivity());
+                Boolean result = false;
 
                 switch (item.getItemId()) {
                     case R.id.export:
 
-                        exp.exportToExcel(consultas.getLogs(clave), name, false);
+                        result = exp.exportToExcel(consultas.getLogs(clave), name, false);
+
+                        if (result) {
+                            muestraSnack(getResources().getString(R.string.exportok));
+
+                        } else {
+
+                            muestraSnack(getResources().getString(R.string.exportnotok));
+                        }
+
                         break;
 
                     case R.id.exportYenviar:
 
-                        exp.exportToExcel(consultas.getLogs(clave), name, true);
+                        result = exp.exportToExcel(consultas.getLogs(clave), name, true);
+
+
+                        if (result) {
+                            muestraSnack(getResources().getString(R.string.exportok));
+
+                        } else {
+
+                            muestraSnack(getResources().getString(R.string.exportnotok));
+                        }
 
                         break;
                     default:
@@ -227,6 +272,41 @@ public class DiariosFragment extends Fragment {
         items = consultas.getDiarios(); // llamada a query BBDD
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
+    }
+
+
+    private void muestraSnack(String texto) {
+
+        Snackbar.with(getActivity()).text(texto).eventListener(new EventListener() {
+
+            @Override
+            public void onShow(Snackbar snackbar) {
+                fab.hide(true);
+            }
+
+            @Override
+            public void onDismiss(Snackbar snackbar) {
+                fab.show();
+            }
+
+            @Override
+            public void onShowByReplace(Snackbar snackbar) {
+            } //Ignorar
+
+            @Override
+            public void onDismissByReplace(Snackbar snackbar) {
+            }//Ignorar
+
+            @Override
+            public void onDismissed(Snackbar snackbar) {
+            }//Ignorar
+
+            @Override
+            public void onShown(Snackbar snackbar) {
+            }//Ignorar
+
+        }).show(getActivity());
+
     }
 
 

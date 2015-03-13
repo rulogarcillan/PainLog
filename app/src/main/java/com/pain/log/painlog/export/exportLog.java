@@ -3,8 +3,6 @@ package com.pain.log.painlog.export;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.widget.Toast;
 
 import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
@@ -38,7 +36,7 @@ public class exportLog {
         this.activity = activity;
     }
 
-    public void exportToExcel(ArrayList<Logs> items, String name, Boolean send) {
+    public boolean exportToExcel(ArrayList<Logs> items, String name, Boolean send) {
 
         final String fileName = Ficheros.generaNombre(name);
 
@@ -87,17 +85,18 @@ public class exportLog {
 
             } catch (RowsExceededException e) {
                 e.printStackTrace();
+                return false;
             } catch (WriteException e) {
                 e.printStackTrace();
+                return false;
             }
             workbook.write();
             try {
                 workbook.close();
             } catch (WriteException e) {
                 e.printStackTrace();
+                return false;
             }
-
-            Toast.makeText(activity, fileName, Toast.LENGTH_LONG).show();
 
             if (send == true) {
 
@@ -106,15 +105,14 @@ public class exportLog {
                 shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
                 shareIntent.setType("application/excel");
                 activity.startActivity(Intent.createChooser(shareIntent, activity.getText(R.string.exportSendTittle)));
-
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(activity, "error", Toast.LENGTH_LONG).show();
+            return false;
         }
 
+        return true;
     }
 
 
