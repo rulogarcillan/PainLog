@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <string name="app_name" translatable="false">Pain Log</string>
     <string name="action_settings">Options</string>
@@ -36,7 +36,7 @@
 
     <string name="exportok">Export terminated successfully</string>
     <string name="exportnotok">Export terminated unsuccessfully</string>
-
+    <string name="salir">Please click back again to exit</string>
 
     <string name="miscellaneous">Miscellaneous</string>
     <string name="archivos">Files</string>
@@ -44,6 +44,8 @@
     <string name="exportall">Export all</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
+    <string name="data">Data</string>
+    <string name="miscalendarios">My calendars</string>
 
     <string name="col1excel">DATE</string>
     <string name="col1exce2">INTENSITY</string>
@@ -55,6 +57,7 @@
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+
 
 
     <!-- If you include it in your own library use this pattern: define_* -->

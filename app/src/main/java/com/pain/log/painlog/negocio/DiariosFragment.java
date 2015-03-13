@@ -18,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.listeners.EventListener;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
 import com.pain.log.painlog.R;
@@ -166,28 +164,7 @@ public class DiariosFragment extends Fragment {
     }
 
 
-    public void exportAllItem() {
 
-        exportLog exp = new exportLog(getActivity());
-        Boolean result = false;
-
-
-        for (Diarios item : items) {
-
-            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre(), false);
-
-        }
-
-        if (result) {
-            muestraSnack(getResources().getString(R.string.exportok));
-
-        } else {
-
-            muestraSnack(getResources().getString(R.string.exportnotok));
-        }
-
-
-    }
 
     protected void exportItem(final int clave, final String name, View v) {
 
@@ -203,20 +180,19 @@ public class DiariosFragment extends Fragment {
 
                 exportLog exp = new exportLog(getActivity());
                 Boolean result = false;
+                Toast mens;
 
                 switch (item.getItemId()) {
                     case R.id.export:
 
                         result = exp.exportToExcel(consultas.getLogs(clave), name, false);
 
-                        if (result) {
-                            muestraSnack(getResources().getString(R.string.exportok));
+                        if (result)
+                            mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
+                        else
+                            mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportnotok), Toast.LENGTH_SHORT);
 
-                        } else {
-
-                            muestraSnack(getResources().getString(R.string.exportnotok));
-                        }
-
+                        mens.show();
                         break;
 
                     case R.id.exportYenviar:
@@ -224,14 +200,12 @@ public class DiariosFragment extends Fragment {
                         result = exp.exportToExcel(consultas.getLogs(clave), name, true);
 
 
-                        if (result) {
-                            muestraSnack(getResources().getString(R.string.exportok));
+                        if (result)
+                            mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
+                        else
+                            mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportnotok), Toast.LENGTH_SHORT);
 
-                        } else {
-
-                            muestraSnack(getResources().getString(R.string.exportnotok));
-                        }
-
+                        mens.show();
                         break;
                     default:
 
@@ -275,39 +249,7 @@ public class DiariosFragment extends Fragment {
     }
 
 
-    private void muestraSnack(String texto) {
 
-        Snackbar.with(getActivity()).text(texto).eventListener(new EventListener() {
-
-            @Override
-            public void onShow(Snackbar snackbar) {
-                fab.hide(true);
-            }
-
-            @Override
-            public void onDismiss(Snackbar snackbar) {
-                fab.show();
-            }
-
-            @Override
-            public void onShowByReplace(Snackbar snackbar) {
-            } //Ignorar
-
-            @Override
-            public void onDismissByReplace(Snackbar snackbar) {
-            }//Ignorar
-
-            @Override
-            public void onDismissed(Snackbar snackbar) {
-            }//Ignorar
-
-            @Override
-            public void onShown(Snackbar snackbar) {
-            }//Ignorar
-
-        }).show(getActivity());
-
-    }
 
 
 }

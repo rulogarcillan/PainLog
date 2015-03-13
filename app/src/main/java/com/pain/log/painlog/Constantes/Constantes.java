@@ -1,7 +1,6 @@
 package com.pain.log.painlog.Constantes;
 
 import com.pain.log.painlog.R;
-
 import com.pain.log.painlog.negocio.MenuDrawer;
 
 import java.util.ArrayList;
@@ -15,9 +14,11 @@ public class Constantes {
     }
 
     private static final int titulo[] = {-1,
-                                         R.string.archivos,
-                                         R.string.explorar,
-                                         R.string.exportall,
+                                        R.string.data,
+                                        R.string.miscalendarios,
+                                        R.string.exportall,
+                                        R.string.archivos,
+                                        R.string.explorar,
                                          R.string.miscellaneous,
                                          R.string.puntuar,
                                          R.string.changelog,
@@ -26,8 +27,10 @@ public class Constantes {
 
     private static final int icono[] = {-1,
                                         -1,
-                                        R.drawable.ic_folder,
+                                        R.drawable.ic_diary_d,
                                         R.drawable.ic_export_all,
+                                        -1,
+                                        R.drawable.ic_folder,
                                         -1,
                                         R.drawable.ic_action_rating,
                                         R.drawable.ic_action_changelog,
@@ -38,6 +41,8 @@ public class Constantes {
                                        MenuDrawer.TYPE_HEADER,
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_ITEM,
+                                        MenuDrawer.TYPE_HEADER,
+                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_HEADER,
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_ITEM,

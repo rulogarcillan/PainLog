@@ -7,16 +7,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Ficheros;
-
 import com.pain.log.painlog.R;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 /**
  * Created by rulo on 12/03/15.
@@ -78,17 +72,12 @@ public class ExplorerActivity  extends BaseActivity {
 
         private void carga(){
 
-
             items = Ficheros.cargaItems();
             adapter.setItems(items);
             adapter.notifyDataSetChanged();
 
-
         }
 
-
-
-
-    }
+   }
 
 
