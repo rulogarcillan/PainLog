@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="?android:selectableItemBackground"
+    android:clickable="true"
     android:id="@+id/files"
     android:padding="8dp" >
 

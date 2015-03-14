@@ -74,11 +74,7 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
                 mItemClickListener.onItemClick(v, getPosition());
             }
         }
-
-
-
     }
-
 
     public interface OnItemClickListener {
         public void onItemClick(View view , int position);
@@ -87,10 +83,6 @@ public class AdapterDrawer extends RecyclerView.Adapter<AdapterDrawer.ViewHolder
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-
-
-
-
 
     @Override
     public AdapterDrawer.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)  {

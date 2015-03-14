@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.pain.log.painlog.negocio.LogUtils.LOGI;
-
 public final class Ficheros {
 
 	public static final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog/";
+
+    public static String customPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog/";
 
 	public static String generaNombre(String titu) {
 
@@ -59,13 +59,14 @@ public final class Ficheros {
 
 			for (int i = archivos.length-1 ; i >= 0; i--) {
 
-
-				String name = archivos[i].getName();
 				java.util.Date myDate = new java.util.Date(archivos[i].lastModified());
-				String tam = Long.toString(archivos[i].length() / 1024) + " KB";
+                String tam = Long.toString(archivos[i].length() / 1024) + " KB";
+                String name = archivos[i].getName();
 
-                FicherosExcel item = new FicherosExcel(name, dateFormat.format(myDate), tam);
-				arrayItems.add(item);
+                if(name.contains(".xls") || name.contains(".xlsx")) {
+                    FicherosExcel item = new FicherosExcel(name, dateFormat.format(myDate), tam);
+                    arrayItems.add(item);
+                }
 			}
 		}
 		return arrayItems;
@@ -79,6 +80,12 @@ public final class Ficheros {
 			archivo.delete();
 
 	}
+
+    public static File getFile(String nombre){
+
+        return new File(path + "/" + nombre);
+
+    }
 
 
 	public static void CreaRuta() {

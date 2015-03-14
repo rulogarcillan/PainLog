@@ -66,6 +66,9 @@ public class LogActivity extends BaseActivity {
         consultas = new Consultas(this);
 
 
+
+
+
         adapter = new AdapterLogs(this, items); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer

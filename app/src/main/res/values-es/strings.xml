@@ -48,6 +48,10 @@
     <string name="miscalendarios">Mis calendarios</string>
     <string name="salir">Por favor, haga clic de nuevo para salir</string>
     <string name="exportedTitleOk">Archivos exportados</string>
+    <string name="deshacer">Deshacer</string>
+    <string name="eliminado">eliminado</string>
+    <string name="descargar">Descargar</string>
+    <string name="noappxls">Necesitas un visor de excel</string>
 
 
 </resources>

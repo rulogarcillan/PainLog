@@ -1,8 +1,6 @@
 package com.pain.log.painlog.export;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 
 import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
@@ -36,7 +34,7 @@ public class exportLog {
         this.activity = activity;
     }
 
-    public boolean exportToExcel(ArrayList<Logs> items, String name, Boolean send) {
+    public boolean exportToExcel(ArrayList<Logs> items, String name) {
 
         final String fileName = Ficheros.generaNombre(name);
 
@@ -98,14 +96,7 @@ public class exportLog {
                 return false;
             }
 
-            if (send == true) {
 
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                shareIntent.setType("application/excel");
-                activity.startActivity(Intent.createChooser(shareIntent, activity.getText(R.string.exportSendTittle)));
-            }
 
         } catch (IOException e) {
             e.printStackTrace();

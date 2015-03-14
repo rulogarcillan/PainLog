@@ -47,7 +47,12 @@
     <string name="data">Data</string>
     <string name="miscalendarios">My calendars</string>
     <string name="exportedTitleOk">Exported files</string>
+    <string name="eliminado">delete</string>
+    <string name="deshacer">Undo</string>
 
+
+    <string name="descargar">Donload</string>
+    <string name="noappxls">Need a viewer excel</string>
 
 
     <string name="col1excel">DATE</string>

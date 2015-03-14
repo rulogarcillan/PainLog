@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragmentD)
+                .replace(R.id.container, fragmentD,"DIARIOS")
                 .commit();
         getSupportActionBar().setTitle(R.string.miscalendarios);
 
@@ -175,15 +175,18 @@ public class MainActivity extends BaseActivity {
     public void  lanzaExplorer(){
 
 
-
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragmentE)
+                .replace(R.id.container, fragmentE, "EXPLORER")
                 .commit();
         getSupportActionBar().setTitle(R.string.explorar);
     }
 
     public void exportAllItem() {
+
+        android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
+        String tag = (String) fragment.getTag();
+
 
         Consultas consultas = new Consultas(this);
         exportLog exp = new exportLog(this);
@@ -196,15 +199,15 @@ public class MainActivity extends BaseActivity {
 
         for (Diarios item : items) {
 
-            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre(), false);
+            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre());
 
             if (result)
-                ok = ok + Ficheros.generaNombre(item.getNombre()) + "    <b><font color='#45ab2d'>OK</font></b><BR>";
+                ok = ok + "<b><font color='#45ab2d'>OK</font></b> -------- "  +  padLeft(Ficheros.generaNombre(item.getNombre()),10) + "<BR>";
             else
-                ok = ok + Ficheros.generaNombre(item.getNombre()) + "    <b><font color='#e71a03'>ERROR</font></b><BR>";
+
+                ok = ok + "<b><font color='#e71a03'>ERROR</font></b> -- "  +  padLeft(Ficheros.generaNombre(item.getNombre()),10) + "<BR>";
 
         }
-
 
         if (result)
             mens = Toast.makeText(this, getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
@@ -228,9 +231,12 @@ public class MainActivity extends BaseActivity {
                     });
             AlertDialog alert = builder.create();
             alert.show();
+
+            if (tag == "EXPLORER"){
+                fragmentE.carga();
+            }
+
         }
-
-
 
     }
 
@@ -253,6 +259,20 @@ public class MainActivity extends BaseActivity {
             }
         }, 2000);
     }
+
+
+
+    public String padLeft(String value, int length) {
+        StringBuilder result = new StringBuilder(length);
+        result.append(value);
+
+        while (result.length() < length) {
+            result.insert(0, " ");
+        }
+
+        return result.toString();
+    }
+
 
 
    /* private void LanzaRate() {

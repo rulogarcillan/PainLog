@@ -2,9 +2,10 @@ package com.pain.log.painlog.negocio;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -20,15 +21,19 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
+import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.cketti.library.changelog.ChangeLog;
+import jp.wasabeef.recyclerview.animators.FadeInAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 import static com.pain.log.painlog.negocio.LogUtils.copybd;
 
@@ -94,15 +99,23 @@ public class DiariosFragment extends Fragment {
         adapter = new AdapterProyectos(getActivity(), items); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
-        recyclerView.setHasFixedSize(true);
+
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        recyclerView.getItemAnimator().setAddDuration(300);
+        recyclerView.getItemAnimator().setRemoveDuration(300);
        /* RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);*/
         recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new FadeInAnimator());
         recyclerView.setAdapter(adapter);
+
+
+
+
 
         //add diario
         fab.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +198,7 @@ public class DiariosFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.export:
 
-                        result = exp.exportToExcel(consultas.getLogs(clave), name, false);
+                        result = exp.exportToExcel(consultas.getLogs(clave), name);
 
                         if (result)
                             mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
@@ -197,16 +210,18 @@ public class DiariosFragment extends Fragment {
 
                     case R.id.exportYenviar:
 
-                        result = exp.exportToExcel(consultas.getLogs(clave), name, true);
+                        result = exp.exportToExcel(consultas.getLogs(clave), name);
 
 
-                        if (result)
+                        if (result) {
                             mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
-                        else
+                            export(name);
+                        } else
                             mens = Toast.makeText(getActivity(), getResources().getString(R.string.exportnotok), Toast.LENGTH_SHORT);
 
                         mens.show();
                         break;
+
                     default:
 
                         break;
@@ -246,8 +261,21 @@ public class DiariosFragment extends Fragment {
         items = consultas.getDiarios(); // llamada a query BBDD
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
+        fab.show();
     }
 
+
+    private void export(String name){
+
+
+        File file = Ficheros.getFile(Ficheros.generaNombre(name));
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        shareIntent.setType("application/excel");
+        getActivity().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.exportSendTittle)));
+    }
 
 
 
