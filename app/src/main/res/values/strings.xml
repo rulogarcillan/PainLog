@@ -46,6 +46,9 @@
     <string name="puntuar">Rate this app</string>
     <string name="data">Data</string>
     <string name="miscalendarios">My calendars</string>
+    <string name="exportedTitleOk">Exported files</string>
+
+
 
     <string name="col1excel">DATE</string>
     <string name="col1exce2">INTENSITY</string>

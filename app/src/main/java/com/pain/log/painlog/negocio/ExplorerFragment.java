@@ -1,10 +1,14 @@
 package com.pain.log.painlog.negocio;
 
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pain.log.painlog.Constantes.Ficheros;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by rulo on 12/03/15.
  */
-public class ExplorerActivity  extends BaseActivity {
+public class ExplorerFragment  extends Fragment {
 
 
         private RecyclerView recyclerView;
@@ -25,8 +29,17 @@ public class ExplorerActivity  extends BaseActivity {
         private ArrayList<FicherosExcel> items = new ArrayList<>();
 
 
+    public static ExplorerFragment newInstance() {
+        ExplorerFragment fragment = new ExplorerFragment();
+        return fragment;
+    }
+
+    public ExplorerFragment() {
+    }
+
+
         @Override
-        protected void onResume() {
+        public void onResume() {
             super.onResume();
 
             carga();
@@ -36,22 +49,20 @@ public class ExplorerActivity  extends BaseActivity {
         }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
 
 
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.explorer);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-
-            mensajeVacio = (TextView) findViewById(R.id.txtMnsVacio);
-            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            View rootView = inflater.inflate(R.layout.explorer, container, false);
 
 
-            getSupportActionBar().setTitle(R.string.explorar);
+            mensajeVacio = (TextView) rootView.findViewById(R.id.txtMnsVacio);
+            recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
 
-            adapter = new AdapterFicheros(this, items, 0); //Agregamos los items al adapter
+
+            adapter = new AdapterFicheros(getActivity(), items, 0); //Agregamos los items al adapter
             carga();
             //definimos el recycler y agregamos el adaptaer
             recyclerView.setHasFixedSize(true);
@@ -59,7 +70,7 @@ public class ExplorerActivity  extends BaseActivity {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
                 RecyclerView.ItemDecoration itemDecoration =
-                        new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+                        new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
                 recyclerView.addItemDecoration(itemDecoration);
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(adapter);
@@ -67,6 +78,8 @@ public class ExplorerActivity  extends BaseActivity {
                 mensajeVacio.setVisibility(View.INVISIBLE);
 
 
+
+            return  rootView;
         }
 
 

@@ -47,6 +47,7 @@
     <string name="data">Datos</string>
     <string name="miscalendarios">Mis calendarios</string>
     <string name="salir">Por favor, haga clic de nuevo para salir</string>
+    <string name="exportedTitleOk">Archivos exportados</string>
 
 
 </resources>

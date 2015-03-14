@@ -124,7 +124,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                                 int clave = items.get(i).getClave();
                                 /*items.remove(i);
                                 notifyDataSetChanged();*/
-                                ((MainActivity) activity).fragment.deleteItem(clave);
+                                ((MainActivity) activity).fragmentD.deleteItem(clave);
 
                             }
                         })
@@ -159,7 +159,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
 
                                    /*items.get(i).setNombre(titu);
                                     notifyDataSetChanged();*/
-                                    ((MainActivity) activity).fragment.editItem(clave, titu);
+                                    ((MainActivity) activity).fragmentD.editItem(clave, titu);
                                 }
                             }
                         })
@@ -177,7 +177,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             @Override
             public void onClick(View v) {
                 int clave = items.get(i).getClave();
-                ((MainActivity) activity).fragment.exportItem(clave, items.get(i).getNombre(),v);
+                ((MainActivity) activity).fragmentD.exportItem(clave, items.get(i).getNombre(),v);
             }
         });
 

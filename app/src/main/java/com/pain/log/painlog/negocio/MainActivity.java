@@ -1,41 +1,37 @@
 package com.pain.log.painlog.negocio;
 
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextThemeWrapper;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mikepenz.aboutlibraries.Libs;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
+import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
 
 import java.util.ArrayList;
 
-import de.cketti.library.changelog.ChangeLog;
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
 
-    DiariosFragment fragment = new DiariosFragment();
+    DiariosFragment fragmentD = new DiariosFragment();
+    ExplorerFragment fragmentE = new ExplorerFragment();
 
     RecyclerView mRecyclerView;
     DrawerLayout mDrawerLayout;
@@ -139,30 +135,28 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(View view, int i) {
 
-
-                if (adapter.getItems().get(i).getTitulo() == R.string.puntuar) {
-                    LanzaRate();
+                if (adapter.getItems().get(i).getTitulo() == R.string.miscalendarios) {
                     mDrawerLayout.closeDrawers();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.license) {
-                    lanzaLicense();
-                    mDrawerLayout.closeDrawers();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.more) {
-                    LanzaMore();
-                   mDrawerLayout.closeDrawers();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.changelog) {
-                    new LanzaChangelog(MainActivity.this).getFullLogDialog().show();
-                  mDrawerLayout.closeDrawers();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar){
-                    lanzaExplorer();
-                    mDrawerLayout.closeDrawers();
-                }  else if (adapter.getItems().get(i).getTitulo() == R.string.exportall){
-
-                    exportAllItem();
-                    mDrawerLayout.closeDrawers();
-                }else if (adapter.getItems().get(i).getTitulo() == R.string.miscalendarios) {
                     LanzarMisDiarios();
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar){
                     mDrawerLayout.closeDrawers();
-                }
+                    lanzaExplorer();
+                }  else if (adapter.getItems().get(i).getTitulo() == R.string.exportall){
+                    mDrawerLayout.closeDrawers();
+                    exportAllItem();
+                }/* else if (adapter.getItems().get(i).getTitulo() == R.string.puntuar) {
+                    mDrawerLayout.closeDrawers();
+                    LanzaRate();
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.license) {
+                    mDrawerLayout.closeDrawers();
+                    lanzaLicense();
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.more) {
+                    mDrawerLayout.closeDrawers();
+                    LanzaMore();
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.changelog) {
+                    mDrawerLayout.closeDrawers();
+                    new LanzaChangelog(MainActivity.this).getFullLogDialog().show();
+                }*/
 
             }
         });
@@ -172,42 +166,72 @@ public class MainActivity extends ActionBarActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, fragmentD)
                 .commit();
         getSupportActionBar().setTitle(R.string.miscalendarios);
 
     }
 
-    private void LanzaRate() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
-        startActivity(intent);
-    }
-
-
-    private void LanzaMore() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
-        startActivity(intent);
-    }
-
     public void  lanzaExplorer(){
 
-        Intent intent = new Intent(this, ExplorerActivity.class);
-        startActivity(intent);
+
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragmentE)
+                .commit();
+        getSupportActionBar().setTitle(R.string.explorar);
     }
 
-    public static class LanzaChangelog extends ChangeLog {
+    public void exportAllItem() {
 
-        public static final String DEFAULT_CSS =
+        Consultas consultas = new Consultas(this);
+        exportLog exp = new exportLog(this);
+        Boolean result = false;
+        Toast mens;
+        ArrayList<Diarios> items;
+        items = consultas.getDiarios();
+        String ok= "";
 
-                "body {                                                           " + "	font-family: Verdana, Helvetica, Arial, sans-serif;   " + "	font-size: 11px;                                      " + "	color: #000000;                                       " + "	background-color: #ffffff;                            " + "	margin: 0px;                                          " + "	padding: 0px;                                         " + "}                                                        "
-                        + "h1 {                                                     " + "	font-size: 14px;                                      " + "	font-weight: bold;                                    " + "	text-transform: uppercase;                            " + "	color: #000000;                                       " + "	margin: 0px;                                          " + "	padding: 10px 0px 0px 8px;                            " + "}                                                        "
-                        + "h2 {                                                     " + "	font-size: 10px;                                      " + "	color: #999999;                                       " + "	font-weight: normal;                                  " + "	margin: 0px 0px 0px 8px;                              " + "	padding: 0px;                                         " + "}                                                        " + "ul {                                                     "
-                        + "	margin: 0px 0px 10px 15px;                            " + "	padding-left: 15px;                                " + "	padding-top: 8px;                                     " + "	list-style-type: square;                              " + "	color: #999999;                                       " + "}";
 
-        public LanzaChangelog(Context context) {
-            super(new ContextThemeWrapper(context, R.style.AppTheme), DEFAULT_CSS);
+        for (Diarios item : items) {
+
+            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre(), false);
+
+            if (result)
+                ok = ok + Ficheros.generaNombre(item.getNombre()) + "    <b><font color='#45ab2d'>OK</font></b><BR>";
+            else
+                ok = ok + Ficheros.generaNombre(item.getNombre()) + "    <b><font color='#e71a03'>ERROR</font></b><BR>";
+
         }
+
+
+        if (result)
+            mens = Toast.makeText(this, getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
+        else
+            mens = Toast.makeText(this, getResources().getString(R.string.exportnotok), Toast.LENGTH_SHORT);
+
+        mens.show();
+
+        if (ok != "") {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(Html.fromHtml(ok))
+                    .setCancelable(false)
+                    .setTitle(R.string.exportedTitleOk)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            dialog.dismiss();
+                        }
+
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+
+
     }
 
 
@@ -231,6 +255,32 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+   /* private void LanzaRate() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
+        startActivity(intent);
+    }
+
+    private void LanzaMore() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
+        startActivity(intent);
+    }
+
+    public static class LanzaChangelog extends ChangeLog {
+
+        public static final String DEFAULT_CSS =
+
+                "body {                                                           " + "	font-family: Verdana, Helvetica, Arial, sans-serif;   " + "	font-size: 11px;                                      " + "	color: #000000;                                       " + "	background-color: #ffffff;                            " + "	margin: 0px;                                          " + "	padding: 0px;                                         " + "}                                                        "
+                        + "h1 {                                                     " + "	font-size: 14px;                                      " + "	font-weight: bold;                                    " + "	text-transform: uppercase;                            " + "	color: #000000;                                       " + "	margin: 0px;                                          " + "	padding: 10px 0px 0px 8px;                            " + "}                                                        "
+                        + "h2 {                                                     " + "	font-size: 10px;                                      " + "	color: #999999;                                       " + "	font-weight: normal;                                  " + "	margin: 0px 0px 0px 8px;                              " + "	padding: 0px;                                         " + "}                                                        " + "ul {                                                     "
+                        + "	margin: 0px 0px 10px 15px;                            " + "	padding-left: 15px;                                " + "	padding-top: 8px;                                     " + "	list-style-type: square;                              " + "	color: #999999;                                       " + "}";
+        public LanzaChangelog(Context context) {
+            super(new ContextThemeWrapper(context, R.style.AppTheme), DEFAULT_CSS);
+        }
+
+
+    }
+
     public void lanzaLicense() {
 
 
@@ -243,6 +293,7 @@ public class MainActivity extends ActionBarActivity {
                 .withLibraries("sqliteassethelper")
                 .withAboutDescription(getResources().getString(R.string.escrita) + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/PainLog\">Project in Github</a>")
                 .withActivityTheme(R.style.AppTheme)
+                        .withAnimations(false)
                         //start the activity
                 .fragment();
 
@@ -253,32 +304,8 @@ public class MainActivity extends ActionBarActivity {
 
         getSupportActionBar().setTitle(R.string.license);
 
-    }
+    }*/
 
-    public void exportAllItem() {
-
-        Consultas consultas = new Consultas(this);
-        exportLog exp = new exportLog(this);
-        Boolean result = false;
-        Toast mens;
-        ArrayList<Diarios> items;
-        items = consultas.getDiarios();
-
-
-        for (Diarios item : items) {
-
-            result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre(), false);
-
-        }
-
-        if (result)
-            mens = Toast.makeText(this, getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
-        else
-            mens = Toast.makeText(this, getResources().getString(R.string.exportnotok), Toast.LENGTH_SHORT);
-
-        mens.show();
-
-    }
 
 
 }
