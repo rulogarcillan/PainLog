@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.pain.log.painlog.negocio.LogUtils.LOGI;
-
 /**
  * ***************************
  * Escrito por Rulogarcillan
@@ -31,7 +29,7 @@ public class MoonCalculation {
 
         String textPhase = "";
 
-        LOGI("RULO", Integer.toString(codPhase));
+
 
         if (codPhase == 29 || codPhase == 0 || codPhase == 1) {
 

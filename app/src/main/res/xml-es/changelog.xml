@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.1" versioncode="110">
+        <change>Añadido menú lateral</change>
+        <change>Añadido explorador de archivos</change>
+        <change>Añadida opción "exportar todo"</change>
+        <change>Añadido días sin dolor</change>
+        <change>Añadido Snackbars</change>
+        <change>Otros cambios visuales</change>
+    </release>
+
     <release version="1.02" versioncode="102">
         <change>Corregidos pequeños errores</change>
     </release>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <string name="action_settings">Opciones</string>
     <string name="vacio">Pulse el botón para añadir un calendario</string>
@@ -36,6 +36,22 @@
     <string name="more">Otras app</string>
     <string name="exportTittle">Exportar</string>
     <string name="exportSendTittle">Exportar y enviar</string>
+    <string name="miscellaneous">Miscelaneo</string>
+    <string name="diassindolor">Días sin dolor</string>
+    <string name="archivos">Archivos</string>
+    <string name="explorar">Explorar</string>
+    <string name="exportall">Exportar todo</string>
+    <string name="vacioFiles">No hay archivos</string>
+    <string name="exportok">Se ha exportado con éxito</string>
+    <string name="exportnotok">Se han producido errores al exportar</string>
+    <string name="data">Datos</string>
+    <string name="miscalendarios">Mis calendarios</string>
+    <string name="salir">Por favor, haga clic de nuevo para salir</string>
+    <string name="exportedTitleOk">Archivos exportados</string>
+    <string name="deshacer">Deshacer</string>
+    <string name="eliminado">eliminado</string>
+    <string name="descargar">Descargar</string>
+    <string name="noappxls">Necesitas un visor de excel</string>
 
 
 </resources>

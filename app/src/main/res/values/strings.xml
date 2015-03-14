@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <string name="app_name" translatable="false">Pain Log</string>
     <string name="action_settings">Options</string>
     <string name="vacio">Press the button to add a calendar</string>
+    <string name="vacioFiles">No files</string>
     <string name="vacioreg">Press the button to add a record</string>
     <string name="confirmar">Are you sure to delete?</string>
     <string name="errorvacio">Error, you must enter text</string>
@@ -15,6 +16,7 @@
     <string name="addLog">Add</string>
     <string name="nombre">Name</string>
     <string name="notas">Type in your note</string>
+    <string name="diassindolor">Days without pain</string>
 
     <string name="dolor1">Mild pain</string>
     <string name="dolor2">Moderate pain</string>
@@ -32,8 +34,26 @@
     <string name="luna6">Third quarter</string>
     <string name="luna7">Waning crescent</string>
 
+    <string name="exportok">Export terminated successfully</string>
+    <string name="exportnotok">Export terminated unsuccessfully</string>
+    <string name="salir">Please click back again to exit</string>
+
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="archivos">Files</string>
+    <string name="explorar">Explore</string>
+    <string name="exportall">Export all</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
+    <string name="data">Data</string>
+    <string name="miscalendarios">My calendars</string>
+    <string name="exportedTitleOk">Exported files</string>
+    <string name="eliminado">delete</string>
+    <string name="deshacer">Undo</string>
+
+
+    <string name="descargar">Donload</string>
+    <string name="noappxls">Need a viewer excel</string>
+
 
     <string name="col1excel">DATE</string>
     <string name="col1exce2">INTENSITY</string>
@@ -45,6 +65,7 @@
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+
 
 
     <!-- If you include it in your own library use this pattern: define_* -->

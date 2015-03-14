@@ -6,4 +6,9 @@
     <dimen name="activity_separa_bot">25dp</dimen>
     <dimen name="dialog">32dp</dimen>
     <dimen name="actions">150dp</dimen>
+
+    <dimen name="navigation_drawer_width">300dp</dimen>
+
+    <dimen name="material_drawer_item_secondary_text">14sp</dimen>
+
 </resources>

@@ -2,6 +2,14 @@
 <changelog>
 
 
+    <release version="1.1" versioncode="110">
+        <change>Drawer menu has been added</change>
+        <change>File explorer has been added</change>
+        <change>Option "Export all" has been added</change>
+        <change>"Days without pain" has been added</change>
+        <change>Snackbars have been added</change>
+        <change>Other visual changes</change>
+    </release>
     <release version="1.02" versioncode="102">
         <change>Minor fix bug</change>
     </release>

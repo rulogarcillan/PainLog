@@ -47,16 +47,18 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
         ImageButton edit;
         ImageButton export;
         LinearLayout layo;
+        TextView diasSinText;
 
 
         public ViewHolder(View container) {
             super(container);
 
             layo = (LinearLayout) container.findViewById(R.id.layo);
-            text = (TextView) container.findViewById(R.id.text);
+            diasSinText = (TextView) container.findViewById(R.id.diasSinText);
             delete = (ImageButton) container.findViewById(R.id.delete);
             edit = (ImageButton) container.findViewById(R.id.edit);
             export = (ImageButton) container.findViewById(R.id.export);
+            text = (TextView) container.findViewById(R.id.text);
 
         }
     }
@@ -96,6 +98,9 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
         viewHolder.text.setText(items.get(i).getNombre());
+
+        viewHolder.diasSinText.setText(Integer.toString(items.get(i).fechasDiferenciaEnDias()));
+
         viewHolder.layo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +124,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                                 int clave = items.get(i).getClave();
                                 /*items.remove(i);
                                 notifyDataSetChanged();*/
-                                ((DiariosActivity) activity).deleteItem(clave);
+                                ((MainActivity) activity).fragmentD.deleteItem(clave);
 
                             }
                         })
@@ -154,7 +159,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
 
                                    /*items.get(i).setNombre(titu);
                                     notifyDataSetChanged();*/
-                                    ((DiariosActivity) activity).editItem(clave, titu);
+                                    ((MainActivity) activity).fragmentD.editItem(clave, titu);
                                 }
                             }
                         })
@@ -172,7 +177,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
             @Override
             public void onClick(View v) {
                 int clave = items.get(i).getClave();
-                ((DiariosActivity) activity).exportItem(clave, items.get(i).getNombre(),v);
+                ((MainActivity) activity).fragmentD.exportItem(clave, items.get(i).getNombre(),v);
             }
         });
 
