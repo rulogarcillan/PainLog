@@ -1,8 +1,11 @@
 package com.pain.log.painlog.negocio;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,8 +13,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nispok.snackbar.Snackbar;
@@ -34,6 +43,7 @@ public class ExplorerFragment extends Fragment {
     private RecyclerView recyclerView;
     private TextView mensajeVacio, path;
     private AdapterFicheros adapter;
+    private Boolean eliminar = true;
 
     private ArrayList<FicherosExcel> items = new ArrayList<>();
 
@@ -99,7 +109,7 @@ public class ExplorerFragment extends Fragment {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-
+                                    eliminar = true;
                                     undo(items.get(position), position);
                                     items.remove(position);
                                     adapter.notifyItemRemoved(position);
@@ -128,6 +138,7 @@ public class ExplorerFragment extends Fragment {
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
+        setHasOptionsMenu(true);
 
         return rootView;
     }
@@ -199,11 +210,14 @@ public class ExplorerFragment extends Fragment {
 
     private void undo(final FicherosExcel item, final int pos) {
 
+
+
         SnackbarManager.show(
                 Snackbar.with(getActivity()).text(item.getNombre() + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.color_h).actionListener(new ActionClickListener() {
                     @Override
                     public void onActionClicked(Snackbar snackbar) {
 
+                        eliminar = false;
                         items.add(pos, item);
                         adapter.notifyItemInserted(pos);
                         adapter.notifyDataSetChanged();
@@ -233,23 +247,105 @@ public class ExplorerFragment extends Fragment {
                     @Override
                     public void onDismiss(Snackbar snackbar) {
 
-                        Ficheros.removeItem(item.getNombre());
+                        if (eliminar)Ficheros.removeItem(item.getNombre());
 
 
                     }
 
                     @Override
                     public void onDismissByReplace(Snackbar snackbar) {
-                        Ficheros.removeItem(item.getNombre());
+                        if (eliminar)Ficheros.removeItem(item.getNombre());
+
                     }
 
                     @Override
                     public void onDismissed(Snackbar snackbar) {
-                        Ficheros.removeItem(item.getNombre());
+                        if (eliminar)Ficheros.removeItem(item.getNombre());
+
 
                     }
                 }), getActivity());
 
+
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.help_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_help);
+
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                dialogAyuda();
+                return true;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+
+
+    private void dialogAyuda(){
+
+
+        Dialog dialog = new Dialog(getActivity());
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        RelativeLayout contentView = (RelativeLayout) ((getActivity()))
+                .getLayoutInflater().inflate(R.layout.help, null);
+        dialog.setContentView(contentView);
+
+        ImageView image = (ImageView) contentView.findViewById(R.id.helpDelete);
+        final AnimationDrawable animation = (AnimationDrawable) image.getDrawable();
+
+        ImageView image2 = (ImageView) contentView.findViewById(R.id.helpSend);
+        final AnimationDrawable animation2 = (AnimationDrawable) image2.getDrawable();
+        dialog.setCancelable(true);
+
+
+
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                animation.start();animation2.start();
+            }
+        });
+        dialog.show();
+
+       /* final View view = getActivity().getLayoutInflater().inflate(R.layout.help, null);
+
+
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+
+
+
+                ImageView image2 = (ImageView) view.findViewById(R.id.helpSend);
+                AnimationDrawable animation2 = (AnimationDrawable) image2.getDrawable();
+                animation2.start();
+
+                ImageView image = (ImageView) view.findViewById(R.id.helpDelete);
+                AnimationDrawable animation = (AnimationDrawable) image.getDrawable();
+                animation.start();
+
+
+
+            }
+        });
+
+
+        dialog.setView(view);
+        dialog.show();*/
 
     }
 

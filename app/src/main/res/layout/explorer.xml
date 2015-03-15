@@ -47,6 +47,7 @@
             android:text="@string/vacioFiles"
             android:textSize="30dp"
             android:typeface="sans" />
+
     </RelativeLayout>
 
 

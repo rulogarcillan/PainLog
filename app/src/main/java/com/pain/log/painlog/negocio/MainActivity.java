@@ -14,9 +14,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.pain.log.painlog.BD.Consultas;
@@ -26,6 +27,8 @@ import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.exportLog;
 
 import java.util.ArrayList;
+
+import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 public class MainActivity extends BaseActivity {
 
@@ -194,20 +197,24 @@ public class MainActivity extends BaseActivity {
         Toast mens;
         ArrayList<Diarios> items;
         items = consultas.getDiarios();
-        String ok= "";
-
+        String url= "<table>";
+        String si= "<b><font color='#45ab2d'>OK</font></b>", no ="<b><font color='#e71a03'>ERROR</font></b>";
+        String row ="<tr>\n" +
+                    "<td><b><font color='#B8B8B8' face=\"sans-serif\">%name</font><b></td>\n" +
+                    "<td>%result</td>\n" +
+                    "</tr>";
 
         for (Diarios item : items) {
 
             result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre());
 
             if (result)
-                ok = ok + "<b><font color='#45ab2d'>OK</font></b> -------- "  +  padLeft(Ficheros.generaNombre(item.getNombre()),10) + "<BR>";
+                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", si);
             else
-
-                ok = ok + "<b><font color='#e71a03'>ERROR</font></b> -- "  +  padLeft(Ficheros.generaNombre(item.getNombre()),10) + "<BR>";
+                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", no);
 
         }
+        url = url + "</table>";
 
         if (result)
             mens = Toast.makeText(this, getResources().getString(R.string.exportok), Toast.LENGTH_SHORT);
@@ -216,11 +223,10 @@ public class MainActivity extends BaseActivity {
 
         mens.show();
 
-        if (ok != "") {
+        if (url != "<table>") {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(Html.fromHtml(ok))
-                    .setCancelable(false)
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setCancelable(false)
                     .setTitle(R.string.exportedTitleOk)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -229,7 +235,21 @@ public class MainActivity extends BaseActivity {
                         }
 
                     });
-            AlertDialog alert = builder.create();
+
+            WebView wv = new WebView(this);
+
+            LOGI("URL", url);
+            wv.loadDataWithBaseURL("", url, "text/html", "UTF-8", "");
+            wv.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+
+                    return true;
+                }
+            });
+
+            alert.setView(wv);
             alert.show();
 
             if (tag == "EXPLORER"){

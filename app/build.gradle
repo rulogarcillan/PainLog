@@ -8,8 +8,8 @@ android {
         applicationId "com.pain.log.painlog"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 110
-        versionName "1.1"
+        versionCode 111
+        versionName "1.1.1"
     }
     buildTypes {
         release {

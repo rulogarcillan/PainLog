@@ -1,0 +1,20 @@
+<animation-list
+    android:id="@+id/animacion_delete"
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/frame_001" android:duration="90" />
+    <item android:drawable="@drawable/frame_003" android:duration="90" />
+    <item android:drawable="@drawable/frame_005" android:duration="90" />
+    <item android:drawable="@drawable/frame_007" android:duration="90" />
+    <item android:drawable="@drawable/frame_009" android:duration="90" />
+    <item android:drawable="@drawable/frame_011" android:duration="90" />
+    <item android:drawable="@drawable/frame_013" android:duration="90" />
+    <item android:drawable="@drawable/frame_015" android:duration="90" />
+    <item android:drawable="@drawable/frame_017" android:duration="90" />
+    <item android:drawable="@drawable/frame_019" android:duration="90" />
+    <item android:drawable="@drawable/frame_021" android:duration="90" />
+    <item android:drawable="@drawable/frame_023" android:duration="90" />
+    <item android:drawable="@drawable/frame_025" android:duration="90" />
+    <item android:drawable="@drawable/frame_027" android:duration="90" />
+
+</animation-list>

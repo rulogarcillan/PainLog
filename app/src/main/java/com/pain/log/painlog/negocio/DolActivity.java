@@ -1,6 +1,5 @@
 package com.pain.log.painlog.negocio;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -59,11 +58,14 @@ public class DolActivity extends BaseActivity {
 
                                                        viewLay.setBackgroundColor(getResources().getColor(R.color.color_b));
                                                        textDolor.setText(R.string.dolor1);
+                                                       textDolor.setTextColor(getResources().getColor(R.color.material_drawer_primary_text));
                                                    } else if (progress >= 33 && progress <= 65) {
                                                        viewLay.setBackgroundColor(getResources().getColor(R.color.color_f));
                                                        textDolor.setText(R.string.dolor2);
+                                                       textDolor.setTextColor(getResources().getColor(R.color.white));
                                                    } else if (progress >= 66) {
                                                        viewLay.setBackgroundColor(getResources().getColor(R.color.color_j));
+                                                       textDolor.setTextColor(getResources().getColor(R.color.white));
                                                        textDolor.setText(R.string.dolor3);
                                                    }
                                                }

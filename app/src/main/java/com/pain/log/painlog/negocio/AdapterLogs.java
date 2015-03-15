@@ -180,12 +180,15 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
 
         if (progress <= 32) {
             viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_b));
+            viewHolder.textDolor.setTextColor(activity.getResources().getColor(R.color.material_drawer_primary_text));
             viewHolder.textDolor.setText(R.string.dolor1);
         } else if (progress >= 33 && progress <= 65) {
             viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_f));
+            viewHolder.textDolor.setTextColor(activity.getResources().getColor(R.color.white));
             viewHolder.textDolor.setText(R.string.dolor2);
         } else if (progress >= 66) {
             viewHolder.viewLay.setBackgroundColor(activity.getResources().getColor(R.color.color_j));
+            viewHolder.textDolor.setTextColor(activity.getResources().getColor(R.color.white));
             viewHolder.textDolor.setText(R.string.dolor3);
         }
     }

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.1.1" versioncode="111">
+        <change>Añadida ayuda en explorador de archivos</change>
+        <change>Corregidos pequeños errores</change>
+    </release>
     <release version="1.1" versioncode="110">
         <change>Añadido menú lateral</change>
         <change>Añadido explorador de archivos</change>
@@ -10,10 +14,10 @@
         <change>Otros cambios visuales</change>
     </release>
 
-    <release version="1.02" versioncode="102">
+    <release version="1.0.2" versioncode="102">
         <change>Corregidos pequeños errores</change>
     </release>
-    <release version="1.01" versioncode="101">
+    <release version="1.0.1" versioncode="101">
         <change>Añadido PopupMenu expotar</change>
         <change>Añadida información en botones con pulsación larga</change>
         <change>Añadido título de calendario en actionbar</change>

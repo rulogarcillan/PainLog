@@ -41,18 +41,23 @@
     <string name="miscellaneous">Miscellaneous</string>
     <string name="archivos">Files</string>
     <string name="explorar">Explore</string>
-    <string name="exportall">Export all</string>
+    <string name="exportall">Export all to excel</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
     <string name="data">Data</string>
     <string name="miscalendarios">My calendars</string>
-    <string name="exportedTitleOk">Exported files</string>
+    <string name="exportedTitleOk">Exported files to excel</string>
     <string name="eliminado">delete</string>
     <string name="deshacer">Undo</string>
 
 
     <string name="descargar">Donload</string>
     <string name="noappxls">Need a viewer excel</string>
+
+    <string name="help_d">Swipe rigth to delete</string>
+    <string name="help_s">Swipe left to share</string>
+    <string name="help">Help</string>
+
 
 
     <string name="col1excel">DATE</string>
