@@ -32,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.cketti.library.changelog.ChangeLog;
-import jp.wasabeef.recyclerview.animators.FadeInAnimator;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 import static com.pain.log.painlog.negocio.LogUtils.copybd;
 
@@ -103,14 +101,12 @@ public class DiariosFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setItemAnimator(new SlideInLeftAnimator());
-        recyclerView.getItemAnimator().setAddDuration(300);
-        recyclerView.getItemAnimator().setRemoveDuration(300);
+
        /* RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);*/
         recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(new FadeInAnimator());
+
         recyclerView.setAdapter(adapter);
 
 

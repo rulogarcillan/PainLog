@@ -72,6 +72,11 @@
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
 
 
+    <string name="splash1">Cree calendarios para llevar un control de la zona dolorosa de su cuerpo.</string>
+    <string name="splash2">Cuando sienta dolor apunte la fecha y una breve nota.</string>
+    <string name="splash3">Exporte los resultados anotados durante un periodo de tiempo y visite su medico.</string>
+    <string name="splash4">Empezar</string>
+
 
     <!-- If you include it in your own library use this pattern: define_* -->
     <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
@@ -88,6 +93,9 @@
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
     <string name="library_sqliteassethelper_isOpenSource" translatable="false">true</string>
     <string name="library_sqliteassethelper_repositoryLink" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
