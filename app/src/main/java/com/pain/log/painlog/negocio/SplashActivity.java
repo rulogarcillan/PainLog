@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 
 import com.pain.log.painlog.R;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class SplashActivity extends FragmentActivity {
  
 
@@ -19,6 +21,8 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         this.setContentView(R.layout.splash);
+
+        CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (!prefs.getBoolean("first_time", true)) {
@@ -51,7 +55,7 @@ public class SplashActivity extends FragmentActivity {
         }
 
 
-
+        defaultIndicator.setViewPager(pager);
         this.pager.setAdapter(pagerAdapter);
  
     }

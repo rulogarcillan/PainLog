@@ -25,6 +25,7 @@ dependencies {
     compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
     //compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     compile 'com.nispok:snackbar:2.10.2'
+    compile 'me.relex:circleindicator:1.1.2@aar'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile('com.mikepenz.aboutlibraries:library:4.5.7@aar') {
         transitive = true
