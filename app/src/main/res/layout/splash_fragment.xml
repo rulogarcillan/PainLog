@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_h"
+    android:background="@color/color_nuevo"
     android:orientation="vertical">
     <TextView
         android:id="@+id/textplash"
@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:layout_below="@+id/imageSplash"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"/>
 

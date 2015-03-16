@@ -28,11 +28,12 @@ public class SplashActivity extends FragmentActivity {
         if (!prefs.getBoolean("first_time", true)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fadein,R.anim.fadeout);
             finish();
         } else{
-          /*  SharedPreferences.Editor editor = prefs.edit();
+           SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("first_time", false);
-            editor.commit();*/
+            editor.commit();
     }
 
 
@@ -55,8 +56,9 @@ public class SplashActivity extends FragmentActivity {
         }
 
 
-        defaultIndicator.setViewPager(pager);
+
         this.pager.setAdapter(pagerAdapter);
+        defaultIndicator.setViewPager(pager);
  
     }
  

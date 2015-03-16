@@ -2,6 +2,13 @@
 <changelog>
 
 
+
+    <release version="1.1.2" versioncode="112">
+        <change>Start tutorial</change>
+        <change>New transition animations</change>
+        <change>Minor fix bug</change>
+    </release>
+
     <release version="1.1.1" versioncode="111">
         <change>Add help in File explorer</change>
         <change>Minor fix bug</change>

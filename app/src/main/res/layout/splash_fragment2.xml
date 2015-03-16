@@ -1,8 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout  android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_h"
-    android:orientation="vertical">
+    android:background="@color/color_nuevo"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <Button
@@ -11,11 +11,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/boton_rojo"
         android:text="Empezar"
-        android:textColor="@color/cardview_light_background"  android:layout_below="@+id/imageSplash"
+        android:textColor="@color/cardview_light_background"
+        android:layout_below="@+id/imageSplash"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"/>
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"/>
+
+
+
 
 
 
@@ -27,6 +31,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
+
         android:scaleType="fitXY"
         android:src="@drawable/frame11"
         android:layout_gravity="center_horizontal"

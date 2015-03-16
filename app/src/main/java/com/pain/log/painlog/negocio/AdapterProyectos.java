@@ -109,6 +109,7 @@ public class AdapterProyectos extends RecyclerView.Adapter<AdapterProyectos.View
                 intent.putExtra("NOMBRE",items.get(i).getNombre());
                 LOGI("VALOR CLAVE", Integer.toString(items.get(i).getClave()));
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.fadein,R.anim.fadeout);
             }
         });
 

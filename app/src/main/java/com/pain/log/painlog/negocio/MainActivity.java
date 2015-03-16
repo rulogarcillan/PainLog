@@ -223,7 +223,7 @@ public class MainActivity extends BaseActivity {
 
         mens.show();
 
-        if (url != "<table>") {
+        if (!url.equalsIgnoreCase("<table></table>")) {
 
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setCancelable(false)
@@ -238,7 +238,7 @@ public class MainActivity extends BaseActivity {
 
             WebView wv = new WebView(this);
 
-            LOGI("URL", url);
+            LOGI("URL", "6"+url);
             wv.loadDataWithBaseURL("", url, "text/html", "UTF-8", "");
             wv.setWebViewClient(new WebViewClient() {
                 @Override

@@ -72,9 +72,6 @@
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
 
 
-    <string name="splash1">Cree calendarios para llevar un control de la zona dolorosa de su cuerpo.</string>
-    <string name="splash2">Cuando sienta dolor apunte la fecha y una breve nota.</string>
-    <string name="splash3">Exporte los resultados anotados durante un periodo de tiempo y visite su medico.</string>
     <string name="splash4">Start</string>
 
 
@@ -93,8 +90,11 @@
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
     <string name="library_sqliteassethelper_isOpenSource" translatable="false">true</string>
     <string name="library_sqliteassethelper_repositoryLink" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+    <string name="splash1">Create your own calendar to have a control of your pains.</string>
+    <string name="splash2">Whenever you feel a pain anywhere in your body, write down the date,the intensity and a brief description of it.</string>
+    <string name="splash3">Export all the information created for a period of time and give it to your doctor for a better analysis.</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

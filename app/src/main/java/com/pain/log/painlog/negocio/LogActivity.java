@@ -95,6 +95,7 @@ public class LogActivity extends BaseActivity {
                 LOGI("VALOR CLAVE", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "INS");
                 LogActivity.this.startActivity(intent);
+                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
             }
         });
 
