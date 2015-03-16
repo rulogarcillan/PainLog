@@ -3,20 +3,21 @@
     android:layout_height="match_parent"
     android:background="@color/color_h"
     android:orientation="vertical">
-    <TextView
+
+
+    <Button
         android:id="@+id/textplash"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Cree calendarios para controlar una zona dolorosa de su cuerpo"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_below="@+id/imageSplash"
+        android:background="@drawable/boton_rojo"
+        android:text="Empezar"
+        android:textColor="@color/cardview_light_background"  android:layout_below="@+id/imageSplash"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"/>
+
+
 
     <ImageView
         android:id="@+id/imageSplash"

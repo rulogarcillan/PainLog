@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class SplashFragment extends Fragment {
 
     private int pos;
     ImageView image;
+    Button boton;
     TextView text;
 
 
@@ -44,24 +46,30 @@ public class SplashFragment extends Fragment {
         image = (ImageView) rootView.findViewById(R.id.imageSplash);
         text = (TextView) rootView.findViewById(R.id.textplash);
 
+        if (pos== 4){
+            rootView = inflater.inflate(R.layout.splash_fragment2, container, false);
+            boton = (Button) rootView.findViewById(R.id.textplash);
+        }
+
+
         switch (pos){
             case 1:
-                image.setImageResource(R.drawable.frame1);
+                image.setImageResource(R.drawable.frame11);
                 text.setText(R.string.splash1);
                 break;
             case 2:
-                image.setImageResource(R.drawable.frame2);
+                image.setImageResource(R.drawable.frame22);
                 text.setText(R.string.splash2);
                 break;
             case 3:
-                image.setImageResource(R.drawable.frame3);
+                image.setImageResource(R.drawable.frame33);
                 text.setText(R.string.splash3);
                 break;
             case 4:
-                image.setImageResource(R.drawable.frame2);
-                text.setText(R.string.splash4);
+                image.setImageResource(R.drawable.frame44);
+                boton.setText(R.string.splash4);
 
-                text.setOnClickListener(new View.OnClickListener() {
+                boton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(),MainActivity.class);

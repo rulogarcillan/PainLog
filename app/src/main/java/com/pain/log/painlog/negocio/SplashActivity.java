@@ -26,9 +26,9 @@ public class SplashActivity extends FragmentActivity {
             startActivity(intent);
             finish();
         } else{
-            SharedPreferences.Editor editor = prefs.edit();
+          /*  SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("first_time", false);
-            editor.commit();
+            editor.commit();*/
     }
 
 

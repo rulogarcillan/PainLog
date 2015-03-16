@@ -35,6 +35,9 @@
     <color name="color_k">#2962FF</color>
     <color name="color_dark">#0F477E</color>
 
+    <color name="color_db">#C62828</color>
+    <color name="color_hb">#C62828</color>
+
 
 
     <color name="material_drawer_window_background">#F9F9F9</color>
