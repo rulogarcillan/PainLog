@@ -154,6 +154,7 @@ public class AdapterLogs extends RecyclerView.Adapter<AdapterLogs.ViewHolder> {
                 LOGI("VALOR CLAVE_I", Integer.toString(clave));
                 intent.putExtra("SERVICIO", "UPD");
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.fadein,R.anim.fadeout);
             }
         });
 

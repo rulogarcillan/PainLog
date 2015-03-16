@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nispok.snackbar.Snackbar;
@@ -296,7 +296,7 @@ public class ExplorerFragment extends Fragment {
 
         Dialog dialog = new Dialog(getActivity());
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        RelativeLayout contentView = (RelativeLayout) ((getActivity()))
+        LinearLayout contentView = (LinearLayout) ((getActivity()))
                 .getLayoutInflater().inflate(R.layout.help, null);
         dialog.setContentView(contentView);
 

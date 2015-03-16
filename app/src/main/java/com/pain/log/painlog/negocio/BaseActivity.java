@@ -77,6 +77,7 @@ public class BaseActivity extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
     }
 
 
@@ -84,6 +85,7 @@ public class BaseActivity extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
 
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
     }
 
 

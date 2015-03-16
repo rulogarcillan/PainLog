@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+
+    <release version="1.1.2" versioncode="112">
+        <change>Añadido tutorial de inicio</change>
+        <change>Nuevas animaciones</change>
+        <change>Corregidos pequeños errores</change>
+    </release>
     <release version="1.1.1" versioncode="111">
         <change>Añadida ayuda en explorador de archivos</change>
         <change>Corregidos pequeños errores</change>
