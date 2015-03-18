@@ -59,7 +59,9 @@
     <string name="splash1">Cree calendarios para llevar el control de una zona dolorosa de su cuerpo.</string>
     <string name="splash2">Cuando sienta dolor anote la fecha, la intensidad de dolor y una breve nota.</string>
     <string name="splash3">Exporte los resultados anotados durante un periodo de tiempo y visite su medico para su posterior análisis.</string>
-
+    <string name="backupUP">Copia de seguridad</string>
+    <string name="backupRES">Restaurar copia</string>
+    <string name="settings">Ajustes</string>
 
 </resources>
 
