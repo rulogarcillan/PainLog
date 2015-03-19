@@ -62,6 +62,9 @@
     <string name="backupUP">Copia de seguridad</string>
     <string name="backupRES">Restaurar copia</string>
     <string name="settings">Ajustes</string>
+    <string name="BackupoK">Copia de seguridad completada</string>
+    <string name="RestoreNotOK">Fallo al restaurar datos</string>
+    <string name="RestoreOK">Copia de seguridad restaurada</string>
 
 </resources>
 

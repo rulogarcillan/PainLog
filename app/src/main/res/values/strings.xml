@@ -74,8 +74,9 @@
     <string name="prefFile">Ruta de los archivos exportados</string>
     <string name="prefBackup">Ruta de la copia de seguridad</string>
 
-
-
+    <string name="BackupoK">Backup completed successfully</string>
+    <string name="RestoreOK">Restore completed successfully</string>
+    <string name="RestoreNotOK">Restore did not complete successfully</string>
 
             <!--               ABOUT LIBRARIES         -->
 
