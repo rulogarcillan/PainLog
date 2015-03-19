@@ -21,8 +21,8 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
-import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.Ficheros;
 import com.pain.log.painlog.export.exportLog;
 
 import java.io.File;

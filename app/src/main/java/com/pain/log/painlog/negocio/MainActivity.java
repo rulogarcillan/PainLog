@@ -3,6 +3,7 @@ package com.pain.log.painlog.negocio;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,8 +23,8 @@ import android.widget.Toast;
 
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
-import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.Ficheros;
 import com.pain.log.painlog.export.exportLog;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class MainActivity extends BaseActivity {
     AdapterDrawer adapter;
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
+
+
 
 
     @Override
@@ -147,22 +150,31 @@ public class MainActivity extends BaseActivity {
                 }  else if (adapter.getItems().get(i).getTitulo() == R.string.exportall){
                     mDrawerLayout.closeDrawers();
                     exportAllItem();
-                }/* else if (adapter.getItems().get(i).getTitulo() == R.string.puntuar) {
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.backupRES) {
                     mDrawerLayout.closeDrawers();
-                    LanzaRate();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.license) {
+
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.backupUP) {
                     mDrawerLayout.closeDrawers();
-                    lanzaLicense();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.more) {
+
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.settings) {
                     mDrawerLayout.closeDrawers();
-                    LanzaMore();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.changelog) {
-                    mDrawerLayout.closeDrawers();
-                    new LanzaChangelog(MainActivity.this).getFullLogDialog().show();
-                }*/
+                    LanzarSetting();
+                  //  mDrawerLayout.closeDrawers();
+                }
 
             }
         });
+    }
+
+
+
+    private void LanzarSetting(){
+
+        Intent intent = new Intent(this, PreferencesAct.class);
+        startActivity(intent);
+
+
+
     }
 
     private void LanzarMisDiarios(){

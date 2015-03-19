@@ -38,6 +38,11 @@
             android:theme="@style/AppThemeNoAction">
         </activity>
 
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".negocio.PreferencesAct">
+        </activity>
+
 
     </application>
 

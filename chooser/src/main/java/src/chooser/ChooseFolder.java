@@ -54,7 +54,7 @@ public class ChooseFolder  extends LinearLayout {
         this.list = (RecyclerView) findViewById(R.id.listadoFolder);
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
 
-        this.txtPath.setText(this.path);
+        this.txtPath.setText(this.path.replace(Files.root, "/sdcard"));
         this.items = Files.loadItems(this.path);
         this.mAdapter = new AdapterExplorer(items);
 
@@ -87,8 +87,8 @@ public class ChooseFolder  extends LinearLayout {
     public void setPath(String path) {
 
         this.path = path;
-        this.txtPath.setText(this.path);
-        this.items= Files.loadItems(path);
+        this.txtPath.setText(this.path.replace(Files.root, "/sdcard"));
+        this.items= Files.loadItems(this.path);
         this.mAdapter.setItems(this.items);
         this.mAdapter.notifyDataSetChanged();
 

@@ -3,6 +3,12 @@
 
 
 
+    <release version="1.2" versioncode="120">
+        <change>Added settings</change>
+        <change>Selectable path to files exported</change>
+        <change>selectable path to backup</change>
+    </release>
+
     <release version="1.1.2" versioncode="112">
         <change>Start tutorial</change>
         <change>New transition animations</change>
