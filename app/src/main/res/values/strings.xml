@@ -73,10 +73,25 @@
 
     <string name="prefFile">Ruta de los archivos exportados</string>
     <string name="prefBackup">Ruta de la copia de seguridad</string>
+    <string name="prefDelBackup">Delete all backups</string>
+    <string name="prefAlldelete">Deleted backups</string>
+
+
+    <string name="prefcautionRed">Attention, </string>
+    <string name="prefcaution"> all backups will be removed.</string>
+
 
     <string name="BackupoK">Backup completed successfully</string>
     <string name="RestoreOK">Restore completed successfully</string>
     <string name="RestoreNotOK">Restore did not complete successfully</string>
+    <string name="viaDrive" translatable="false">Google Drive</string>
+    <string name="viaDropbox" translatable="false">Dropbox</string>
+    <string name="viaMail">Email</string>
+    <string name="viaLocal">Local storage</string>
+
+
+
+
 
             <!--               ABOUT LIBRARIES         -->
 

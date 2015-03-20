@@ -48,8 +48,6 @@ public class MainActivity extends BaseActivity {
     Boolean doubleBackToExitPressedOnce = false;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +96,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-       // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
+        // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
         mDrawerToggle.syncState();
 
 
@@ -137,7 +135,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void optionDrawer(){
+    private void optionDrawer() {
 
 
         adapter.SetOnItemClickListener(new AdapterDrawer.OnItemClickListener() {
@@ -147,27 +145,27 @@ public class MainActivity extends BaseActivity {
                 if (adapter.getItems().get(i).getTitulo() == R.string.miscalendarios) {
                     mDrawerLayout.closeDrawers();
                     LanzarMisDiarios();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar){
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar) {
                     mDrawerLayout.closeDrawers();
                     LanzaExplorer();
-                }  else if (adapter.getItems().get(i).getTitulo() == R.string.exportall){
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.exportall) {
                     mDrawerLayout.closeDrawers();
                     exportAllItem();
                 } else if (adapter.getItems().get(i).getTitulo() == R.string.backupRES) {
-                   LanzarRestorefrom();
 
+                    lanzarContextMenuBackup(BackUp.OPRESTORE);
                     mDrawerLayout.closeDrawers();
 
                 } else if (adapter.getItems().get(i).getTitulo() == R.string.backupUP) {
-                    mDrawerLayout.closeDrawers();
-                   // LanzarBackup();
 
-                    IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
-                    cm.show();
+                    lanzarContextMenuBackup(BackUp.OPBACKUP);
+                    mDrawerLayout.closeDrawers();
+
+
                 } else if (adapter.getItems().get(i).getTitulo() == R.string.settings) {
                     mDrawerLayout.closeDrawers();
                     LanzarSetting();
-                  //  mDrawerLayout.closeDrawers();
+                    //  mDrawerLayout.closeDrawers();
                 }
 
             }
@@ -175,47 +173,89 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    private void lanzarContextMenuBackup(final int op) {
+        IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
+        if (op == BackUp.OPBACKUP)
+            cm.setTitle(getResources().getString(R.string.backupUP));
 
-    private void LanzarSetting(){
+        else if (op == BackUp.OPRESTORE)
+            cm.setTitle(getResources().getString(R.string.backupRES));
+        cm.show();
+
+        cm.setOnIconContextItemSelectedListener(new IconContextMenu.IconContextItemSelectedListener() {
+            @Override
+            public void onIconContextItemSelected(MenuItem item, Object info) {
+               if (op == BackUp.OPBACKUP)
+                    LanzarBackupTo(item.getItemId());
+
+                else if (op == BackUp.OPRESTORE)
+                    LanzarRestorefrom(item.getItemId());
+            }
+        });
+    }
+
+
+    private void LanzarSetting() {
 
         Intent intent = new Intent(this, PreferencesAct.class);
         startActivity(intent);
     }
 
 
-    private void LanzarRestorefrom(){
+    private void LanzarRestorefrom(int id) {
 
 
         android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
         String tag = (String) fragment.getTag();
 
-        BackUp.ReadXMLFile(new File(BackUp.path + BackUp.fileName),MainActivity.this, false);
-
-
-        if (tag == "DIARIOS"){
-            fragmentD.carga();
+        switch (id) {
+            case R.id.backup_st:
+                BackUp.ReadXMLFile(new File(BackUp.path + BackUp.fileName), MainActivity.this, false);
+                break;
+            case R.id.backup_dr:
+                break;
+            case R.id.backup_db:
+                break;
+            case R.id.backup_em:
+                break;
+            default:
+                break;
         }
 
+        if (tag == "DIARIOS") {
+            fragmentD.carga();
+        }
+    }
+
+    private void LanzarBackupTo(int id) {
+
+        switch (id) {
+            case R.id.backup_st:
+                BackUp.dump(this);
+                break;
+            case R.id.backup_dr:
+                break;
+            case R.id.backup_db:
+                break;
+            case R.id.backup_em:
+                break;
+            default:
+                break;
+        }
 
     }
 
-    private void LanzarBackup(){
-
-        BackUp.dump(this);
-
-    }
-
-    private void LanzarMisDiarios(){
+    private void LanzarMisDiarios() {
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragmentD,"DIARIOS")
+                .replace(R.id.container, fragmentD, "DIARIOS")
                 .commit();
         getSupportActionBar().setTitle(R.string.miscalendarios);
 
     }
 
-    public void  LanzaExplorer(){
+    public void LanzaExplorer() {
 
 
         fragmentManager = getSupportFragmentManager();
@@ -237,21 +277,21 @@ public class MainActivity extends BaseActivity {
         Toast mens;
         ArrayList<Diarios> items;
         items = consultas.getDiarios();
-        String url= "<table>";
-        String si= "<b><font color='#45ab2d'>OK</font></b>", no ="<b><font color='#e71a03'>ERROR</font></b>";
-        String row ="<tr>\n" +
-                    "<td><b><font color='#B8B8B8' face=\"sans-serif\">%name</font><b></td>\n" +
-                    "<td>%result</td>\n" +
-                    "</tr>";
+        String url = "<table>";
+        String si = "<b><font color='#45ab2d'>OK</font></b>", no = "<b><font color='#e71a03'>ERROR</font></b>";
+        String row = "<tr>\n" +
+                "<td><b><font color='#B8B8B8' face=\"sans-serif\">%name</font><b></td>\n" +
+                "<td>%result</td>\n" +
+                "</tr>";
 
         for (Diarios item : items) {
 
             result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre());
 
             if (result)
-                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", si);
+                url = url + row.replace("%name", padLeft(Ficheros.generaNombre(item.getNombre()), 10)).replace("%result", si);
             else
-                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", no);
+                url = url + row.replace("%name", padLeft(Ficheros.generaNombre(item.getNombre()), 10)).replace("%result", no);
 
         }
         url = url + "</table>";
@@ -278,7 +318,7 @@ public class MainActivity extends BaseActivity {
 
             WebView wv = new WebView(this);
 
-            LOGI("URL", "6"+url);
+            LOGI("URL", "6" + url);
             wv.loadDataWithBaseURL("", url, "text/html", "UTF-8", "");
             wv.setWebViewClient(new WebViewClient() {
                 @Override
@@ -292,14 +332,13 @@ public class MainActivity extends BaseActivity {
             alert.setView(wv);
             alert.show();
 
-            if (tag == "EXPLORER"){
+            if (tag == "EXPLORER") {
                 fragmentE.carga();
             }
 
         }
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -315,11 +354,10 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
-
 
 
     public String padLeft(String value, int length) {
@@ -332,9 +370,6 @@ public class MainActivity extends BaseActivity {
 
         return result.toString();
     }
-
-
-
 
 
 }

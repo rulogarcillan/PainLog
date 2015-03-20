@@ -20,6 +20,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:text="@string/vacio"
         android:textSize="30dp"
         android:typeface="sans" />

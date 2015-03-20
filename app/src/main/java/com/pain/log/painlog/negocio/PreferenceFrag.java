@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,12 +15,14 @@ import com.pain.log.painlog.R;
 import com.pain.log.painlog.export.BackUp;
 import com.pain.log.painlog.export.Ficheros;
 
+import java.io.File;
+
 import src.chooser.ChooseFolder;
 
 public class PreferenceFrag extends android.preference.PreferenceFragment {
 
     private ChooseFolder chos;
-    SharedPreferences prefs ;
+    SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,26 +33,25 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
         android.preference.Preference pref1 = findPreference("opcion1");
         android.preference.Preference pref2 = findPreference("opcion2");
+        android.preference.Preference pref3 = findPreference("opcion3");
 
         pref1.setSummary(Ficheros.path.replace(Ficheros.root, "/sdcard"));
         pref2.setSummary(BackUp.path.replace(BackUp.root, "/sdcard"));
+
+        pref3.setSummary(Html.fromHtml( "<font color='red'>" +  getResources().getString(R.string.prefcautionRed) +"</font>" + " " + getResources().getString(R.string.prefcaution)));
+
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, final android.preference.Preference preference) {
 
-        Toast.makeText(getActivity(), preference.getSummary().toString(), Toast.LENGTH_SHORT).show();
-
-
-
         switch (preference.getKey()) {
             case "opcion1":
 
 
-
                 final View view = getActivity().getLayoutInflater().inflate(R.layout.chooser, null);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                chos  = (ChooseFolder) view.findViewById(R.id.chooserview);
+                chos = (ChooseFolder) view.findViewById(R.id.chooserview);
                 chos.setPath(Ficheros.path);
 
                 dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -76,10 +78,9 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
             case "opcion2":
 
 
-
                 final View view2 = getActivity().getLayoutInflater().inflate(R.layout.chooser, null);
                 AlertDialog.Builder dialog2 = new AlertDialog.Builder(getActivity());
-                chos  = (ChooseFolder) view2.findViewById(R.id.chooserview);
+                chos = (ChooseFolder) view2.findViewById(R.id.chooserview);
                 chos.setPath(BackUp.path);
 
                 dialog2.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -103,11 +104,32 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 dialog2.show();
 
                 break;
+            case "opcion3":
+
+                File archivos[];
+                File carpeta;
+                Boolean mens = false;
+
+                carpeta = new File(BackUp.path);
+                if (carpeta.exists()) {
+                    archivos = carpeta.listFiles();
+                    for (File file : archivos) {
+                        String name = file.getName();
+                        if (name.contains("PL ")) {
+                            mens= true;
+                            BackUp.removeItem(name);
+                        }
+                    }
+                }
+                if (mens) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.prefAlldelete), Toast.LENGTH_SHORT).show();
+                }
+
+                break;
             default:
                 break;
 
         }
-
 
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

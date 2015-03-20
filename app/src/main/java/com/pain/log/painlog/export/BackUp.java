@@ -16,6 +16,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,37 +34,41 @@ public class BackUp {
 
     public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog/backup";
 
-    public static String fileName = "/" + "painLog_Backup" + ".xml";
-    public static String fileNameTemp = "/" + "fileNameTemp" + ".xml";
+    public static String fileName = "/NAMEFILE.xml";
+    public static String fileNameTemp = "fileNameTemp";
 
     public static int numErr = 0;
+    public static final int OPBACKUP = 0;
+    public static final int OPRESTORE = 1;
 
 
     public static void dump(Activity act) {
+
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm");
+        String name = "PL " +  formatter.format(today);
 
 
         MyDatabase db = new MyDatabase(act);
 
         File sd = new File(path);
-        String path = sd + fileName;
+        String pathFile = sd + fileName.replace("NAMEFILE", name);
 
-        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), path);
+        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
         databaseDump.exportData();
         Toast.makeText(act, act.getResources().getString(R.string.BackupoK),Toast.LENGTH_SHORT).show();
 
     }
 
-
-    public static void dumpAir(Activity act) {
+    public static void dumpTemp(Activity act) {
 
         MyDatabase db = new MyDatabase(act);
 
         File sd = new File(path);
-        String path = sd + fileNameTemp;
+        String pathFile = sd + fileName.replace("NAMEFILE", fileNameTemp);
 
-        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), path);
+        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
         databaseDump.exportData();
-
 
     }
 
@@ -72,7 +79,7 @@ public class BackUp {
         Consultas consultas = new Consultas(act);
 
         if (!err) {//no es error
-            dumpAir(act);
+            dumpTemp(act);
             numErr = 0;
 
          }
@@ -167,8 +174,6 @@ public class BackUp {
                         default:
                             break;
                     }
-
-
                 }
             }
             if (!err)
@@ -185,7 +190,16 @@ public class BackUp {
             e.printStackTrace();
         }
 
-        new File (BackUp.path + BackUp.fileNameTemp).delete(); // delete file temp
+        removeItem(BackUp.fileNameTemp + ".xml"); // delete file temp
+    }
+
+
+    public static void removeItem(String nombre) {
+        File archivo;
+        archivo = new File(path + "/" + nombre);
+        if (archivo.exists())
+            archivo.delete();
+
     }
 
 }

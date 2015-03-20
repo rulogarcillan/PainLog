@@ -65,6 +65,12 @@
     <string name="BackupoK">Copia de seguridad completada</string>
     <string name="RestoreNotOK">Fallo al restaurar datos</string>
     <string name="RestoreOK">Copia de seguridad restaurada</string>
+    <string name="viaLocal">Almacenamiento local</string>
+    <string name="viaMail">Correo electrónico</string>
+    <string name="prefDelBackup">Eliminar todas las copias de seguridad</string>
+    <string name="prefAlldelete">Copias de seguridad eliminadas</string>
+    <string name="prefcaution"> todas las copias de seguridad serán eliminadas.</string>
+    <string name="prefcautionRed">Atención,</string>
 
 </resources>
 
