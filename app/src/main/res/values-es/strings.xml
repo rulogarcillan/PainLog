@@ -71,6 +71,9 @@
     <string name="prefAlldelete">Copias de seguridad eliminadas</string>
     <string name="prefcaution"> todas las copias de seguridad serán eliminadas.</string>
     <string name="prefcautionRed">Atención,</string>
+    <string name="RestoreTitle">Elija copia de seguridad</string>
+    <string name="noBackups">No hay copias de seguridad</string>
+    <string name="confirmarDelBackup">¿Está seguro que desea eliminar todas las copias de seguridad?</string>
 
 </resources>
 

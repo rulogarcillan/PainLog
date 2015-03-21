@@ -18,10 +18,10 @@
             android:icon="@drawable/ic_dropbox"
             android:title="@string/viaDropbox"
             com.pain.log.painlog:showAsAction="ifRoom" />
-
+<!--
         <item
             android:id="@+id/backup_em"
             android:icon="@drawable/ic_mail"
             android:title="@string/viaMail"
-            com.pain.log.painlog:showAsAction="ifRoom" />
+            com.pain.log.painlog:showAsAction="ifRoom" />-->
     </menu>

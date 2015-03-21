@@ -106,24 +106,43 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 break;
             case "opcion3":
 
-                File archivos[];
-                File carpeta;
-                Boolean mens = false;
 
-                carpeta = new File(BackUp.path);
-                if (carpeta.exists()) {
-                    archivos = carpeta.listFiles();
-                    for (File file : archivos) {
-                        String name = file.getName();
-                        if (name.contains("PL ")) {
-                            mens= true;
-                            BackUp.removeItem(name);
-                        }
-                    }
-                }
-                if (mens) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.prefAlldelete), Toast.LENGTH_SHORT).show();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.confirmarDelBackup)
+                        .setCancelable(true)
+                        .setTitle(R.string.eliminarTittle)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                File archivos[];
+                                File carpeta;
+                                Boolean mens = false;
+
+                                carpeta = new File(BackUp.path);
+                                if (carpeta.exists()) {
+                                    archivos = carpeta.listFiles();
+                                    for (File file : archivos) {
+                                        String name = file.getName();
+                                        if (name.contains("PL ")) {
+                                            mens= true;
+                                            BackUp.removeItem(name);
+                                        }
+                                    }
+                                }
+
+                                Toast.makeText(getActivity(), getResources().getString(R.string.prefAlldelete), Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
 
                 break;
             default:

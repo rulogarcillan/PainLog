@@ -74,6 +74,10 @@ public class BackUp {
 
     public static void ReadXMLFile(File fXmlFile, Activity act, boolean err) {
 
+
+
+        LOGI("NAMEFILE", fXmlFile.getName());
+
         Diarios diario = new Diarios();
         Logs log = new Logs();
         Consultas consultas = new Consultas(act);

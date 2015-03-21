@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.pain.log.painlog.BD.Consultas;
@@ -31,6 +32,8 @@ import com.pain.log.painlog.export.exportLog;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
@@ -46,6 +49,7 @@ public class MainActivity extends BaseActivity {
     AdapterDrawer adapter;
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
+    ArrayList<String> resItem = new ArrayList<>();
 
 
     @Override
@@ -174,7 +178,7 @@ public class MainActivity extends BaseActivity {
 
 
     private void lanzarContextMenuBackup(final int op) {
-        IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
+        final IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
         if (op == BackUp.OPBACKUP)
             cm.setTitle(getResources().getString(R.string.backupUP));
 
@@ -185,11 +189,14 @@ public class MainActivity extends BaseActivity {
         cm.setOnIconContextItemSelectedListener(new IconContextMenu.IconContextItemSelectedListener() {
             @Override
             public void onIconContextItemSelected(MenuItem item, Object info) {
-               if (op == BackUp.OPBACKUP)
+                if (op == BackUp.OPBACKUP)
                     LanzarBackupTo(item.getItemId());
 
-                else if (op == BackUp.OPRESTORE)
+
+                else if (op == BackUp.OPRESTORE) {
+
                     LanzarRestorefrom(item.getItemId());
+                }
             }
         });
     }
@@ -202,29 +209,81 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    private void restoreLocal() {
+
+        ArrayList<String> items = new ArrayList<>();
+        ArrayAdapter<String> filesXML = new ArrayAdapter<String>(this, R.layout.list_item_backup, items);
+
+        File[] files;
+        File folder;
+        resItem.clear();
+
+        folder = new File(BackUp.path);
+        if (folder.exists()) {
+            files = folder.listFiles();
+            Arrays.sort(files, new Comparator<File>() {
+                public int compare(File f1, File f2) {
+                    return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+                }
+            });
+
+
+            for (File file : files) {
+
+                String name = file.getName();
+
+                if (name.contains("PL ")) {
+                    resItem.add(name);
+                    items.add(name.replace("-", "/").replace(".xml", "").replace(".", ":").replace("PL", "Backup"));
+
+                }
+            }
+        }
+
+        if (!items.isEmpty()) {
+
+
+            new AlertDialog.Builder(MainActivity.this)
+                    .setAdapter(filesXML, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            BackUp.ReadXMLFile(new File(BackUp.path + "/" + resItem.get(which)), MainActivity.this, false);
+                            android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
+                            String tag = (String) fragment.getTag();
+                            if (tag == "DIARIOS") {
+                                fragmentD.carga();
+
+                            }
+                        }
+                    })
+                    .setCancelable(true).setTitle(R.string.RestoreTitle)
+                    .show();
+        } else {
+            Toast.makeText(MainActivity.this, getResources().getString(R.string.noBackups), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     private void LanzarRestorefrom(int id) {
 
 
-        android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
-        String tag = (String) fragment.getTag();
-
         switch (id) {
             case R.id.backup_st:
-                BackUp.ReadXMLFile(new File(BackUp.path + BackUp.fileName), MainActivity.this, false);
+                restoreLocal();
                 break;
             case R.id.backup_dr:
                 break;
             case R.id.backup_db:
                 break;
-            case R.id.backup_em:
-                break;
+            // case R.id.backup_em:
+            //    break;
             default:
                 break;
         }
 
-        if (tag == "DIARIOS") {
-            fragmentD.carga();
-        }
+
     }
 
     private void LanzarBackupTo(int id) {
@@ -237,8 +296,8 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.backup_db:
                 break;
-            case R.id.backup_em:
-                break;
+            // case R.id.backup_em:
+            //   break;
             default:
                 break;
         }

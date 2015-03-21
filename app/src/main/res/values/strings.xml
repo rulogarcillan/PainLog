@@ -7,6 +7,7 @@
     <string name="vacioFiles">No files</string>
     <string name="vacioreg">Press the button to add a record</string>
     <string name="confirmar">Are you sure to delete?</string>
+    <string name="confirmarDelBackup">Are you sure to delete all backups?</string>
     <string name="errorvacio">Error, you must enter text</string>
     <string name="errorfecha">The date is invalid</string>
     <string name="editarTittle">Edit</string>
@@ -80,7 +81,8 @@
     <string name="prefcautionRed">Attention, </string>
     <string name="prefcaution"> all backups will be removed.</string>
 
-
+    <string name="RestoreTitle">Select Backup</string>
+    <string name="noBackups">No backups</string>
     <string name="BackupoK">Backup completed successfully</string>
     <string name="RestoreOK">Restore completed successfully</string>
     <string name="RestoreNotOK">Restore did not complete successfully</string>
