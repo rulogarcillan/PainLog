@@ -22,6 +22,7 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
 import com.pain.log.painlog.ContextIconMenu.IconContextMenu;
@@ -37,7 +38,10 @@ import java.util.Comparator;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
-public class MainActivity extends BaseActivity {
+
+
+
+public class MainActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
     DiariosFragment fragmentD = new DiariosFragment();
@@ -52,6 +56,25 @@ public class MainActivity extends BaseActivity {
     ArrayList<String> resItem = new ArrayList<>();
 
 
+
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onPause();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +97,9 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(itemDecoration);*/
         mRecyclerView.setAdapter(adapter);
         optionDrawer();
+        clienteDrive();
+
+
 
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
@@ -137,6 +163,9 @@ public class MainActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+
 
 
     private void optionDrawer() {
@@ -215,7 +244,7 @@ public class MainActivity extends BaseActivity {
         ArrayAdapter<String> filesXML = new ArrayAdapter<String>(this, R.layout.list_item_backup, items);
 
         File[] files;
-        File folder;
+        java.io.File folder;
         resItem.clear();
 
         folder = new File(BackUp.path);
@@ -274,11 +303,11 @@ public class MainActivity extends BaseActivity {
                 restoreLocal();
                 break;
             case R.id.backup_dr:
+                mGoogleApiClient.connect();
                 break;
             case R.id.backup_db:
                 break;
-            // case R.id.backup_em:
-            //    break;
+
             default:
                 break;
         }
@@ -293,6 +322,7 @@ public class MainActivity extends BaseActivity {
                 BackUp.dump(this);
                 break;
             case R.id.backup_dr:
+                mGoogleApiClient.connect();
                 break;
             case R.id.backup_db:
                 break;
