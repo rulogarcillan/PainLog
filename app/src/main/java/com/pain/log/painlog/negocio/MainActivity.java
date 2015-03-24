@@ -55,24 +55,14 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
 
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
-
 
     @Override
     protected void onPause() {
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.disconnect();
-        }
+        DisconectDrive();
         super.onPause();
     }
     @Override
@@ -98,8 +88,6 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
         mRecyclerView.setAdapter(adapter);
         optionDrawer();
         clienteDrive();
-
-
 
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
@@ -165,9 +153,6 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     }
 
 
-
-
-
     private void optionDrawer() {
 
 
@@ -207,7 +192,8 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
 
 
     private void lanzarContextMenuBackup(final int op) {
-        final IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
+        IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
+
         if (op == BackUp.OPBACKUP)
             cm.setTitle(getResources().getString(R.string.backupUP));
 
@@ -303,7 +289,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                 restoreLocal();
                 break;
             case R.id.backup_dr:
-                mGoogleApiClient.connect();
+                ConenectDrive();
                 break;
             case R.id.backup_db:
                 break;
@@ -322,7 +308,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                 BackUp.dump(this);
                 break;
             case R.id.backup_dr:
-                mGoogleApiClient.connect();
+                ConenectDrive();
                 break;
             case R.id.backup_db:
                 break;

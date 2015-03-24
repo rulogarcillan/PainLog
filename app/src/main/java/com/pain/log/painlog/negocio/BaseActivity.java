@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,13 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveFolder;
+import com.google.android.gms.drive.DriveId;
+import com.google.android.gms.drive.DriveResource;
+import com.google.android.gms.drive.Metadata;
+import com.google.android.gms.drive.MetadataChangeSet;
 import com.mikepenz.aboutlibraries.Libs;
 import com.pain.log.painlog.R;
 
@@ -184,6 +192,14 @@ public class BaseActivity extends ActionBarActivity implements GoogleApiClient.C
     public void onConnected(Bundle connectionHint) {
         LOGI(TAG, "GoogleApiClient connected");
 
+        DriveId folderId = DriveId.decodeFromString(EXISTING_FOLDER_ID);
+        DriveFolder folder = Drive.DriveApi.getFolder(mGoogleApiClient, folderId);
+        folder.getMetadata(mGoogleApiClient).setResultCallback(metadataRetrievedCallback);
+
+
+        MetadataChangeSet changeSet = new MetadataChangeSet.Builder().setTitle("PainLog Backup").build();
+        Drive.DriveApi.getRootFolder(getGoogleApiClient()).createFolder(getGoogleApiClient(), changeSet).setResultCallback(callback);
+
     }
 
     /**
@@ -236,6 +252,37 @@ public class BaseActivity extends ActionBarActivity implements GoogleApiClient.C
             mGoogleApiClient.connect();
         }
     }
+
+
+    final ResultCallback<DriveFolder.DriveFolderResult> callback = new ResultCallback<DriveFolder.DriveFolderResult>() {
+        @Override
+        public void onResult(DriveFolder.DriveFolderResult result) {
+            if (!result.getStatus().isSuccess()) {
+                showMessage("Error while trying to create the folder");
+                return;
+            }
+            showMessage("Created a folder: " + result.getDriveFolder().getDriveId());
+        }
+    };
+
+    final private ResultCallback<DriveResource.MetadataResult> metadataRetrievedCallback = new
+            ResultCallback<DriveResource.MetadataResult>() {
+                @Override
+                public void onResult(DriveResource.MetadataResult result) {
+                    if (!result.getStatus().isSuccess()) {
+                        Log.v(TAG, "Problem while trying to fetch metadata.");
+                        return;
+                    }
+
+                    Metadata metadata = result.getMetadata();
+                    if(metadata.isTrashed()){
+                        Log.v(TAG, "Folder is trashed");
+                    }else{
+                        Log.v(TAG, "Folder is not trashed");
+                    }
+
+                }
+            };
 
 }
 

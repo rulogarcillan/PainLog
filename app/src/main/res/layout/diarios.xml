@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/stroke"
+android:background="@color/white"
     tools:context=".DiariosActivity">
 
 
@@ -23,7 +23,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/vacio"
-        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:typeface="sans" />
 
     <com.melnykov.fab.FloatingActionButton

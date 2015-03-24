@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/stroke"
     tools:context=".LogActivity">
 
 
@@ -23,7 +22,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:text="@string/vacioreg"
-        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:typeface="sans" />
 
     <com.melnykov.fab.FloatingActionButton
