@@ -74,6 +74,7 @@
     <string name="RestoreTitle">Elija copia de seguridad</string>
     <string name="noBackups">No hay copias de seguridad</string>
     <string name="confirmarDelBackup">¿Está seguro que desea eliminar todas las copias de seguridad?</string>
+    <string name="download_progress">Progreso:</string>
 
 </resources>
 

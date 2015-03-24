@@ -91,6 +91,8 @@
     <string name="viaMail">Email</string>
     <string name="viaLocal">Local storage</string>
 
+    <string name="download_progress">Download Progress:</string>
+
 
 
 
