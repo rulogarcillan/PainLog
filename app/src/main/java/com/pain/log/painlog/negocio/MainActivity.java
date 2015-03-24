@@ -2,8 +2,10 @@ package com.pain.log.painlog.negocio;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +24,16 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveApi;
+import com.google.android.gms.drive.DriveFolder;
+import com.google.android.gms.drive.MetadataBuffer;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.drive.query.Query;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
 import com.pain.log.painlog.ContextIconMenu.IconContextMenu;
@@ -36,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import static com.pain.log.painlog.negocio.LogUtils.LOGE;
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 
@@ -54,17 +66,9 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
+    ProgressDialog dialog;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
-    @Override
-    protected void onPause() {
-        DisconectDrive();
-        super.onPause();
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +91,8 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
         mRecyclerView.addItemDecoration(itemDecoration);*/
         mRecyclerView.setAdapter(adapter);
         optionDrawer();
-        clienteDrive();
 
+         dialog = new ProgressDialog(MainActivity.this);
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
@@ -289,7 +293,19 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                 restoreLocal();
                 break;
             case R.id.backup_dr:
-                ConenectDrive();
+                mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(Bundle bundle) {
+                        showMessage("Noooo");
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+
+                    }
+                });
+                mGoogleApiClient.connect();
+
                 break;
             case R.id.backup_db:
                 break;
@@ -308,7 +324,29 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                 BackUp.dump(this);
                 break;
             case R.id.backup_dr:
-                ConenectDrive();
+
+                if (mGoogleApiClient.isConnected())
+                    mGoogleApiClient.disconnect();
+                mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(Bundle bundle) {
+
+                        Query query = new Query.Builder().build();
+                        Drive.DriveApi.query(getGoogleApiClient(), query)
+                                .setResultCallback(metadataCallback);
+
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+
+                    }
+                });
+                mGoogleApiClient.connect();
+                dialog.setMessage("Conectando a Google drive");
+                dialog.show();
+
+
                 break;
             case R.id.backup_db:
                 break;
@@ -319,6 +357,52 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
         }
 
     }
+
+    final private ResultCallback<DriveApi.MetadataBufferResult> metadataCallback = new
+            ResultCallback<DriveApi.MetadataBufferResult>() {
+                @Override
+                public void onResult(DriveApi.MetadataBufferResult result) {
+                    boolean existe = false;
+
+                    if (!result.getStatus().isSuccess()) {
+
+                        return;
+                    }
+                   MetadataBuffer files = result.getMetadataBuffer();
+                    for (int i = files.getCount() -1 ; i >= 0; i--) {
+                        if (!files.get(i).isExplicitlyTrashed()){
+                            showMessage(files.get(i).getTitle());
+                            if ((files.get(i).isFolder()) && (files.get(i).getTitle().equals("PainLog Backup"))){
+                                folderID = files.get(i).getDriveId().toString();
+                                existe = true;
+                            }
+
+                        }
+
+                    }
+
+                    showMessage(Boolean.toString(existe));
+                    if (!existe){
+                        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                                .setTitle("PainLog Backup").build();
+                        Drive.DriveApi.getRootFolder(getGoogleApiClient()).createFolder(
+                                getGoogleApiClient(), changeSet).setResultCallback(callback);
+                    }
+                }
+            };
+
+
+
+    final ResultCallback<DriveFolder.DriveFolderResult> callback = new ResultCallback<DriveFolder.DriveFolderResult>() {
+        @Override
+        public void onResult(DriveFolder.DriveFolderResult result) {
+            if (!result.getStatus().isSuccess()) {
+                showMessage("Error while trying to create the folder");
+                return;
+            }
+            folderID =  result.getDriveFolder().getDriveId().toString();
+        }
+    };
 
     private void LanzarMisDiarios() {
 
@@ -445,6 +529,126 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
 
         return result.toString();
     }
+
+/************************************************/
+
+
+    private static final String TAG = "BaseDriveActivity";
+
+    /**
+     * DriveId of an existing folder to be used as a parent folder in
+     * folder operations samples.
+     */
+    private String folderID;
+
+
+    /**
+     * Request code for auto Google Play Services error resolution.
+     */
+    protected static final int REQUEST_CODE_RESOLUTION = 1;
+
+
+    /**
+     * Google API client.
+     */
+    private GoogleApiClient mGoogleApiClient;
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Drive.API)
+                    .addScope(Drive.SCOPE_FILE)
+                    .addScope(Drive.SCOPE_APPFOLDER) // required for App Folder sample
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
+
+    }
+
+    /**
+     * Handles resolution callbacks.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_RESOLUTION && resultCode == RESULT_OK) {
+            mGoogleApiClient.connect();
+        }
+    }
+
+    /**
+     * Called when activity gets invisible. Connection to Drive service needs to
+     * be disconnected as soon as an activity is invisible.
+     */
+    @Override
+    protected void onPause() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onPause();
+    }
+
+    /**
+     * Called when {@code mGoogleApiClient} is connected.
+     */
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        dialog.dismiss();
+    }
+
+    /**
+     * Called when {@code mGoogleApiClient} is disconnected.
+     */
+    @Override
+    public void onConnectionSuspended(int cause) {
+
+    }
+
+    /**
+     * Called when {@code mGoogleApiClient} is trying to connect but failed.
+     * Handle {@code result.getResolution()} if there is a resolution is
+     * available.
+     */
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        LOGI(TAG, "GoogleApiClient connection failed: " + result.toString());
+        if (!result.hasResolution()) {
+            // show the localized error dialog.
+            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
+
+            return;
+        }
+        try {
+            result.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+        } catch (IntentSender.SendIntentException e) {
+            LOGE(TAG, "Exception while starting resolution activity");
+        }
+    }
+
+    /**
+     * Shows a toast message.
+     */
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Getter for the {@code GoogleApiClient}.
+     */
+    public GoogleApiClient getGoogleApiClient() {
+        return mGoogleApiClient;
+    }
+
+
+
+
+
 
 
 }

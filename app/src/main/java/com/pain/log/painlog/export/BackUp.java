@@ -58,6 +58,29 @@ public class BackUp {
         databaseDump.exportData();
         Toast.makeText(act, act.getResources().getString(R.string.BackupoK),Toast.LENGTH_SHORT).show();
 
+
+
+    }
+
+
+    public static File dumpForUpload(Activity act) {
+
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm");
+        String name = "PL " +  formatter.format(today);
+
+
+        MyDatabase db = new MyDatabase(act);
+
+        File sd = new File(path);
+        String pathFile = sd + fileName.replace("NAMEFILE", name);
+
+        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
+        databaseDump.exportData();
+        Toast.makeText(act, act.getResources().getString(R.string.BackupoK),Toast.LENGTH_SHORT).show();
+
+            return new File(pathFile);
+
     }
 
     public static void dumpTemp(Activity act) {
