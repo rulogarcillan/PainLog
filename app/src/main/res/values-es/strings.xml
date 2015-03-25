@@ -74,7 +74,13 @@
     <string name="RestoreTitle">Elija copia de seguridad</string>
     <string name="noBackups">No hay copias de seguridad</string>
     <string name="confirmarDelBackup">¿Está seguro que desea eliminar todas las copias de seguridad?</string>
-    <string name="download_progress">Progreso:</string>
+    <string name="prefBackup">Ruta de la copia de seguridad</string>
+    <string name="prefFile">Ruta de los archivos exportados</string>
+    <string name="dialogBackup1">Conectando a Google drive</string>
+    <string name="dialogBackup2">Sincronizando cuenta</string>
+    <string name="dialogBackup3">Comprobando carpetas</string>
+    <string name="errBackup1">Error al  sincronizar, ¡Por Favor! intentaló más tarde</string>
+    <string name="errBackup2">Error al intentar crear la carpeta</string>
 
 </resources>
 
