@@ -9,6 +9,7 @@ import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
     ProgressDialog dialog;
-
+    miHilo t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -466,13 +467,12 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
 
     private static final String TAG = "BaseDriveActivity";
 
-    private DriveId sFolderId;
     private DriveId mFolderDriveId;
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final String FOLDER = "PainLog Backup";
 
     private GoogleApiClient mGoogleApiClient;
-    private Thread t;
+
 
 
     @Override
@@ -571,8 +571,8 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                     MetadataBuffer files = result.getMetadataBuffer();
                     if (files.getCount() > 0) {
 
-                        sFolderId = files.get(0).getDriveId();
-
+                        t.setsFolderId_ResourceID(files.get(0).getDriveId().getResourceId());
+                        showMessage(t.getsFolderId_ResourceID());
                         /*Drive.DriveApi.fetchDriveId(getGoogleApiClient(), files.get(0).getDriveId().getResourceId())
                                 .setResultCallback(idCallback);*/
 
@@ -604,7 +604,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
         @Override
         public void onConnected(Bundle bundle) {
             boolean flag;
-            LOGI("sii","empieza");
+
             procesoDriveBackup();
 
         }
@@ -616,17 +616,30 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     };
 
 
+    private Handler puente = new Handler() {
+        public void handleMessage(Message texto) {
+            dialog.setMessage(texto.obj.toString());
+            //showMessage(texto.obj.toString());
+            }
+
+    };
+
+    private Message creaMensajehandelr(String mens){
+        Message localMessage = new Message();
+        localMessage.obj = mens;
+        return  localMessage;
+    }
+
+
     private void procesoDriveBackup() {
-
-        sFolderId = null;
-
+       // t.setsFolderId_ResourceID("");
         final Query query = new Query.Builder()
                 .addFilter(Filters.eq(SearchableField.TITLE, FOLDER))
                 .addFilter(Filters.eq(SearchableField.TRASHED, false))
                 .build();
 
-
         dialog.setMessage(getResources().getString(R.string.dialogBackup2));
+
 
         Drive.DriveApi.requestSync(mGoogleApiClient)
                 .setResultCallback(new ResultCallback<Status>() {
@@ -634,23 +647,22 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                     public void onResult(Status result) {
 
                         if (!result.isSuccess()) {
-
                             showMessage(getResources().getString(R.string.errBackup1));
                             dialog.dismiss();
                             return;
                         }
 
-                        t = new Thread(new Runnable() {
+                        t = new miHilo(new Runnable() {
                             @Override
                             public void run() {
                                 //sincroniza ok
-                                MainActivity.this.dialog.setMessage(getResources().getString(R.string.dialogBackup3));
+                                MainActivity.this.puente.sendMessage(creaMensajehandelr(getResources().getString(R.string.dialogBackup3)));
 
                                 Drive.DriveApi.query(getGoogleApiClient(), query).setResultCallback(getIdFolder);
                                 LOGI("sii","tenemos id?");
                                 //id nulo tenemos que ccrear carpeta porque no existe
-                                if (sFolderId  == null) {
-
+                                if (t.getsFolderId_ResourceID().equals("")) {
+                                    showMessage(t.getsFolderId_ResourceID());
                                     MetadataChangeSet changeSet = new MetadataChangeSet.Builder().setTitle(FOLDER).build();
                                     Drive.DriveApi.getRootFolder(getGoogleApiClient()).createFolder(
                                             getGoogleApiClient(), changeSet).setResultCallback(creaCarpeta);
@@ -661,7 +673,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-
+                                    MainActivity.this.puente.sendMessage(creaMensajehandelr(getResources().getString(R.string.dialogBackup2)));
                                     //sincronizamos
                                     Drive.DriveApi.requestSync(mGoogleApiClient)
                                             .setResultCallback(new ResultCallback<Status>() {
@@ -676,6 +688,7 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                                                     }
 
                                                     //backup
+                                                    Drive.DriveApi.query(getGoogleApiClient(), query).setResultCallback(getIdFolder);
                                                     dialog.dismiss();
 
                                                 }
@@ -771,6 +784,27 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
                     showMessage("Created a file: " + result.getDriveFile().getDriveId());
                 }
             };
+
+
+    public class  miHilo extends Thread{
+
+        public miHilo(Runnable runnable) {
+            super(runnable);
+        }
+
+        public String getsFolderId_ResourceID() {
+
+            return sFolderId_ResourceID;
+        }
+
+        public void setsFolderId_ResourceID(String sFolderId_ResourceID) {
+            this.sFolderId_ResourceID = sFolderId_ResourceID;
+        }
+
+        String sFolderId_ResourceID;
+
+
+    };
 
 }
 
