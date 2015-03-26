@@ -5,11 +5,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,20 +23,6 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveApi;
-import com.google.android.gms.drive.DriveFolder;
-import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.MetadataBuffer;
-import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.drive.query.Filters;
-import com.google.android.gms.drive.query.Query;
-import com.google.android.gms.drive.query.SearchableField;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
 import com.pain.log.painlog.ContextIconMenu.IconContextMenu;
@@ -51,13 +35,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 
-import static com.pain.log.painlog.negocio.LogUtils.LOGE;
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 
-public class MainActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends BaseActivity  {
 
 
     DiariosFragment fragmentD = new DiariosFragment();
@@ -71,7 +53,8 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
     ProgressDialog dialog;
-    miHilo t;
+
+    private static String a="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,16 +279,10 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
             case R.id.backup_st:
                 restoreLocal();
                 break;
-            case R.id.backup_dr:
-
-                mGoogleApiClient.registerConnectionCallbacks(llamadaRestore);
-                mGoogleApiClient.connect();
-                dialog.setMessage(getResources().getString(R.string.dialogBackup1));
-                dialog.show();
-
+        /*    case R.id.backup_dr:
                 break;
             case R.id.backup_db:
-                break;
+                break;*/
 
             default:
                 break;
@@ -320,11 +297,11 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
             case R.id.backup_st:
                 BackUp.dump(this);
                 break;
-            case R.id.backup_dr:
-                driveBackup();
+           /* case R.id.backup_dr:
+               // driveBackup();
                 break;
             case R.id.backup_db:
-                break;
+                break;*/
             // case R.id.backup_em:
             //   break;
             default:
@@ -459,352 +436,6 @@ public class MainActivity extends BaseActivity implements GoogleApiClient.Connec
 
         return result.toString();
     }
-
-    /**
-     * ********************************************
-     */
-
-
-    private static final String TAG = "BaseDriveActivity";
-
-    private DriveId mFolderDriveId;
-    protected static final int REQUEST_CODE_RESOLUTION = 1;
-    private static final String FOLDER = "PainLog Backup";
-
-    private GoogleApiClient mGoogleApiClient;
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(Drive.API)
-                    .addScope(Drive.SCOPE_FILE)
-                    .addScope(Drive.SCOPE_APPFOLDER)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
-        }
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_RESOLUTION && resultCode == RESULT_OK) {
-            mGoogleApiClient.connect();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        if (mGoogleApiClient != null) {
-
-            mGoogleApiClient.unregisterConnectionCallbacks(llamadaBackup);
-            mGoogleApiClient.unregisterConnectionCallbacks(llamadaRestore);
-            mGoogleApiClient.disconnect();
-
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-    }
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        LOGI(TAG, "GoogleApiClient connection failed: " + result.toString());
-        if (!result.hasResolution()) {
-            // show the localized error dialog.
-            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
-
-            return;
-        }
-        try {
-            result.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
-        } catch (IntentSender.SendIntentException e) {
-            LOGE(TAG, "Exception while starting resolution activity");
-        }
-    }
-
-    /**
-     * Shows a toast message.
-     */
-    private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    private GoogleApiClient getGoogleApiClient() {
-        return mGoogleApiClient;
-    }
-
-    private void driveBackup() {
-
-        dialog.setMessage(getResources().getString(R.string.dialogBackup1));
-        dialog.show();
-        mGoogleApiClient.registerConnectionCallbacks(llamadaBackup);
-        mGoogleApiClient.connect();
-        LOGI("sii","Conecta");
-
-
-    }
-
-    final private ResultCallback<DriveApi.MetadataBufferResult> getIdFolder = new
-            ResultCallback<DriveApi.MetadataBufferResult>() {
-                @Override
-                public void onResult(DriveApi.MetadataBufferResult result) {
-
-                    if (!result.getStatus().isSuccess()) {
-
-                        return;
-                    }
-
-                    MetadataBuffer files = result.getMetadataBuffer();
-                    if (files.getCount() > 0) {
-
-                        t.setsFolderId_ResourceID(files.get(0).getDriveId().getResourceId());
-                        showMessage(t.getsFolderId_ResourceID());
-                        /*Drive.DriveApi.fetchDriveId(getGoogleApiClient(), files.get(0).getDriveId().getResourceId())
-                                .setResultCallback(idCallback);*/
-
-                        return;
-
-                    }
-                }
-            };
-
-
-    final ResultCallback<DriveFolder.DriveFolderResult> creaCarpeta = new ResultCallback<DriveFolder.DriveFolderResult>() {
-        @Override
-        public void onResult(DriveFolder.DriveFolderResult result) {
-
-            if (!result.getStatus().isSuccess()) {
-                showMessage(getResources().getString(R.string.errBackup2));
-                return;
-            }
-            //ok
-        }
-    };
-
-
-    /**
-     * ***********CALLS*****************
-     */
-
-    final GoogleApiClient.ConnectionCallbacks llamadaBackup = new GoogleApiClient.ConnectionCallbacks() {
-        @Override
-        public void onConnected(Bundle bundle) {
-            boolean flag;
-
-            procesoDriveBackup();
-
-        }
-
-        @Override
-        public void onConnectionSuspended(int i) {
-            dialog.dismiss();
-        }
-    };
-
-
-    private Handler puente = new Handler() {
-        public void handleMessage(Message texto) {
-            dialog.setMessage(texto.obj.toString());
-            //showMessage(texto.obj.toString());
-            }
-
-    };
-
-    private Message creaMensajehandelr(String mens){
-        Message localMessage = new Message();
-        localMessage.obj = mens;
-        return  localMessage;
-    }
-
-
-    private void procesoDriveBackup() {
-       // t.setsFolderId_ResourceID("");
-        final Query query = new Query.Builder()
-                .addFilter(Filters.eq(SearchableField.TITLE, FOLDER))
-                .addFilter(Filters.eq(SearchableField.TRASHED, false))
-                .build();
-
-        dialog.setMessage(getResources().getString(R.string.dialogBackup2));
-
-
-        Drive.DriveApi.requestSync(mGoogleApiClient)
-                .setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status result) {
-
-                        if (!result.isSuccess()) {
-                            showMessage(getResources().getString(R.string.errBackup1));
-                            dialog.dismiss();
-                            return;
-                        }
-
-                        t = new miHilo(new Runnable() {
-                            @Override
-                            public void run() {
-                                //sincroniza ok
-                                MainActivity.this.puente.sendMessage(creaMensajehandelr(getResources().getString(R.string.dialogBackup3)));
-
-                                Drive.DriveApi.query(getGoogleApiClient(), query).setResultCallback(getIdFolder);
-                                LOGI("sii","tenemos id?");
-                                //id nulo tenemos que ccrear carpeta porque no existe
-                                if (t.getsFolderId_ResourceID().equals("")) {
-                                    showMessage(t.getsFolderId_ResourceID());
-                                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder().setTitle(FOLDER).build();
-                                    Drive.DriveApi.getRootFolder(getGoogleApiClient()).createFolder(
-                                            getGoogleApiClient(), changeSet).setResultCallback(creaCarpeta);
-
-                                    //Dormimos para que se cree la id y la buscamos
-                                    try {
-                                        t.sleep(5000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    MainActivity.this.puente.sendMessage(creaMensajehandelr(getResources().getString(R.string.dialogBackup2)));
-                                    //sincronizamos
-                                    Drive.DriveApi.requestSync(mGoogleApiClient)
-                                            .setResultCallback(new ResultCallback<Status>() {
-                                                @Override
-                                                public void onResult(Status result) {
-
-                                                    if (!result.isSuccess()) {
-
-                                                        showMessage(getResources().getString(R.string.errBackup1));
-                                                        dialog.dismiss();
-                                                        return;
-                                                    }
-
-                                                    //backup
-                                                    Drive.DriveApi.query(getGoogleApiClient(), query).setResultCallback(getIdFolder);
-                                                    dialog.dismiss();
-
-                                                }
-                                            });
-
-
-                                } else{
-
-                                    //backup
-
-                                    dialog.dismiss();
-
-                                }
-
-                            }
-                        });
-                        t.start();
-
-                    }
-                });
-
-    }
-
-
-    private final GoogleApiClient.ConnectionCallbacks llamadaRestore = new GoogleApiClient.ConnectionCallbacks() {
-        @Override
-        public void onConnected(Bundle bundle) {
-            dialog.setMessage(getResources().getString(R.string.dialogBackup2));
-            Drive.DriveApi.requestSync(mGoogleApiClient)
-                    .setResultCallback(new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status result) {
-                            if (!result.isSuccess()) {
-                                // Sync not ok
-                                showMessage(getResources().getString(R.string.errBackup1));
-                                dialog.dismiss();
-                                return;
-                            }
-
-                            showMessage("Noooo");
-                            dialog.dismiss();
-                        }
-                    }, 10, TimeUnit.SECONDS);
-        }
-
-        @Override
-        public void onConnectionSuspended(int i) {
-            dialog.dismiss();
-        }
-    };
-
-
-    final private ResultCallback<DriveApi.DriveIdResult> idCallback = new ResultCallback<DriveApi.DriveIdResult>() {
-        @Override
-        public void onResult(DriveApi.DriveIdResult result) {
-            if (!result.getStatus().isSuccess()) {
-                showMessage("Cannot find DriveId. Are you authorized to view this file?");
-                return;
-            }
-            mFolderDriveId = result.getDriveId();
-            Drive.DriveApi.newDriveContents(getGoogleApiClient())
-                    .setResultCallback(driveContentsCallback);
-        }
-    };
-
-    final private ResultCallback<DriveApi.DriveContentsResult> driveContentsCallback =
-            new ResultCallback<DriveApi.DriveContentsResult>() {
-                @Override
-                public void onResult(DriveApi.DriveContentsResult result) {
-                    if (!result.getStatus().isSuccess()) {
-                        showMessage("Error while trying to create new file contents");
-                        return;
-                    }
-                    DriveFolder folder = Drive.DriveApi.getFolder(getGoogleApiClient(), mFolderDriveId);
-                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                            .setTitle("New file")
-                            .setMimeType("text/plain")
-                            .setStarred(true).build();
-                    folder.createFile(getGoogleApiClient(), changeSet, result.getDriveContents())
-                            .setResultCallback(fileCallback);
-                }
-            };
-
-
-    final private ResultCallback<DriveFolder.DriveFileResult> fileCallback =
-            new ResultCallback<DriveFolder.DriveFileResult>() {
-                @Override
-                public void onResult(DriveFolder.DriveFileResult result) {
-                    if (!result.getStatus().isSuccess()) {
-                        showMessage("Error while trying to create the file");
-                        return;
-                    }
-                    showMessage("Created a file: " + result.getDriveFile().getDriveId());
-                }
-            };
-
-
-    public class  miHilo extends Thread{
-
-        public miHilo(Runnable runnable) {
-            super(runnable);
-        }
-
-        public String getsFolderId_ResourceID() {
-
-            return sFolderId_ResourceID;
-        }
-
-        public void setsFolderId_ResourceID(String sFolderId_ResourceID) {
-            this.sFolderId_ResourceID = sFolderId_ResourceID;
-        }
-
-        String sFolderId_ResourceID;
-
-
-    };
 
 }
 

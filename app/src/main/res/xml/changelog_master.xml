@@ -4,9 +4,12 @@
 
 
     <release version="1.2" versioncode="120">
+        <change>Backup in local storage</change>
         <change>Added settings</change>
         <change>Selectable path to files exported</change>
-        <change>selectable path to backup</change>
+        <change>Selectable path to backup</change>
+        <change>Other visual changes</change>
+        <change>Minor fix bug in moon phase</change>
     </release>
 
     <release version="1.1.2" versioncode="112">
