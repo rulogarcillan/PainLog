@@ -21,8 +21,8 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.BD.MyDatabase;
-import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.Ficheros;
 import com.pain.log.painlog.export.exportLog;
 
 import java.io.File;
@@ -52,11 +52,7 @@ public class DiariosFragment extends Fragment {
     public void onResume() {
         super.onResume();
         //carga de recyclerview
-        items = consultas.getDiarios(); // llamada a query BBDD
-        adapter.setItems(items);
-        adapter.notifyDataSetChanged();
-        if (!items.isEmpty())
-            mensajeVacio.setVisibility(View.INVISIBLE);
+        carga();
 
     }
 
@@ -110,9 +106,6 @@ public class DiariosFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-
-
-
         //add diario
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +130,7 @@ public class DiariosFragment extends Fragment {
                             Diarios nuevo = new Diarios(consultas.genKeyIdTablaDia(), editText.getText().toString(), dateFormat.format(c.getTime()).toString());
                             consultas.addDiario(nuevo);
                             carga();
-                            mensajeVacio.setVisibility(View.INVISIBLE);
+
                         }
 
                     }
@@ -160,8 +153,6 @@ public class DiariosFragment extends Fragment {
 
         consultas.deleteDiario(clave);
         carga();
-        if (items.isEmpty())
-            mensajeVacio.setVisibility(View.VISIBLE);
 
     }
 
@@ -171,8 +162,6 @@ public class DiariosFragment extends Fragment {
         carga();
 
     }
-
-
 
 
     protected void exportItem(final int clave, final String name, View v) {
@@ -229,6 +218,7 @@ public class DiariosFragment extends Fragment {
 
         popup.show();
 
+
     }
 
     private void scroll() {
@@ -253,15 +243,19 @@ public class DiariosFragment extends Fragment {
         });
     }
 
-    private void carga() {
+    public void carga() {
         items = consultas.getDiarios(); // llamada a query BBDD
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
+        if (!items.isEmpty())
+            mensajeVacio.setVisibility(View.INVISIBLE);
+        else
+            mensajeVacio.setVisibility(View.VISIBLE);
         fab.show();
     }
 
 
-    private void export(String name){
+    private void export(String name) {
 
 
         File file = Ficheros.getFile(Ficheros.generaNombre(name));
@@ -272,8 +266,6 @@ public class DiariosFragment extends Fragment {
         shareIntent.setType("application/excel");
         getActivity().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.exportSendTittle)));
     }
-
-
 
 
 }

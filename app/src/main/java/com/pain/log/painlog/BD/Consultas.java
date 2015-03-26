@@ -285,4 +285,57 @@ public class Consultas {
     }
 
 
+    public void deleteBBDD() {
+
+
+        Cursor cur = null;
+        String query, query2;
+
+        query = "delete from diarios";
+        query2 = "delete from registros";
+        LOGI("deleteRegistros", query2);
+
+
+
+        cur = db.query(query2, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        LOGI("deleteDiarios", query);
+        cur = db.query(query, ESCRIBIR); //Borra proyectos
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        query = "DeLETE FROM sqlite_sequence WHERE name='diarios'";
+        query2 = "DeLETE FROM sqlite_sequence WHERE name='registros'";
+
+        LOGI("deleteSeqDiarios", query);
+        cur = db.query(query2, ESCRIBIR); //Borra
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+        LOGI("deleteSeqDiarios", query);
+        cur = db.query(query, ESCRIBIR); //Borra proyectos
+        if (cur.moveToFirst()) {
+            do {
+
+            } while (cur.moveToNext());
+        }
+
+
+        db.close();
+
+    }
+
+
+
 }

@@ -155,7 +155,7 @@ public class MoonCalculation {
 
         //Al resultado se le resta 30 tantas veces como se pueda sin llegar a un numero negativo
 
-        while (codPhase > 30) {
+        while (codPhase >= 30) {
             codPhase -= 30;
         }
 

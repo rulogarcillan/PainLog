@@ -7,7 +7,10 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import com.pain.log.painlog.Constantes.PreferencesCons;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.BackUp;
+import com.pain.log.painlog.export.Ficheros;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -23,8 +26,12 @@ public class SplashActivity extends FragmentActivity {
         this.setContentView(R.layout.splash);
 
         CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Ficheros.path =  prefs.getString(PreferencesCons.RUTAFILE, Ficheros.path);
+        BackUp.path =  prefs.getString(PreferencesCons.RUTABACKUP, BackUp.path);
+
+
         if (!prefs.getBoolean("first_time", true)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -34,9 +41,9 @@ public class SplashActivity extends FragmentActivity {
            SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("first_time", false);
             editor.commit();
-    }
+        }
 
-
+        Ficheros.CreaRuta();
         // Instantiate a ViewPager
         this.pager = (ViewPager) this.findViewById(R.id.viewpager);
 

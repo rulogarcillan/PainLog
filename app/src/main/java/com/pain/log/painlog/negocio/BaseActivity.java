@@ -17,7 +17,7 @@ import de.cketti.library.changelog.ChangeLog;
 /**
  * Created by raul.rodriguezconcep on 20/02/15.
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity  extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

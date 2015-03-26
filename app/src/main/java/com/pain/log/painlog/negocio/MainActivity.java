@@ -2,7 +2,9 @@ package com.pain.log.painlog.negocio;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,19 +20,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
-import com.pain.log.painlog.Constantes.Ficheros;
+import com.pain.log.painlog.ContextIconMenu.IconContextMenu;
 import com.pain.log.painlog.R;
+import com.pain.log.painlog.export.BackUp;
+import com.pain.log.painlog.export.Ficheros;
 import com.pain.log.painlog.export.exportLog;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
-public class MainActivity extends BaseActivity {
+
+public class MainActivity extends BaseActivity  {
 
 
     DiariosFragment fragmentD = new DiariosFragment();
@@ -42,7 +51,10 @@ public class MainActivity extends BaseActivity {
     AdapterDrawer adapter;
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
+    ArrayList<String> resItem = new ArrayList<>();
+    ProgressDialog dialog;
 
+    private static String a="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +79,7 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setAdapter(adapter);
         optionDrawer();
 
+        dialog = new ProgressDialog(MainActivity.this);
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
@@ -92,7 +105,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-       // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
+        // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
         mDrawerToggle.syncState();
 
 
@@ -131,7 +144,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void optionDrawer(){
+    private void optionDrawer() {
 
 
         adapter.SetOnItemClickListener(new AdapterDrawer.OnItemClickListener() {
@@ -141,41 +154,174 @@ public class MainActivity extends BaseActivity {
                 if (adapter.getItems().get(i).getTitulo() == R.string.miscalendarios) {
                     mDrawerLayout.closeDrawers();
                     LanzarMisDiarios();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar){
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.explorar) {
                     mDrawerLayout.closeDrawers();
-                    lanzaExplorer();
-                }  else if (adapter.getItems().get(i).getTitulo() == R.string.exportall){
+                    LanzaExplorer();
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.exportall) {
                     mDrawerLayout.closeDrawers();
                     exportAllItem();
-                }/* else if (adapter.getItems().get(i).getTitulo() == R.string.puntuar) {
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.backupRES) {
+
+                    lanzarContextMenuBackup(BackUp.OPRESTORE);
                     mDrawerLayout.closeDrawers();
-                    LanzaRate();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.license) {
+
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.backupUP) {
+
+                    lanzarContextMenuBackup(BackUp.OPBACKUP);
                     mDrawerLayout.closeDrawers();
-                    lanzaLicense();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.more) {
+
+
+                } else if (adapter.getItems().get(i).getTitulo() == R.string.settings) {
                     mDrawerLayout.closeDrawers();
-                    LanzaMore();
-                } else if (adapter.getItems().get(i).getTitulo() == R.string.changelog) {
-                    mDrawerLayout.closeDrawers();
-                    new LanzaChangelog(MainActivity.this).getFullLogDialog().show();
-                }*/
+                    LanzarSetting();
+                    //  mDrawerLayout.closeDrawers();
+                }
 
             }
         });
     }
 
-    private void LanzarMisDiarios(){
+
+    private void lanzarContextMenuBackup(final int op) {
+        IconContextMenu cm = new IconContextMenu(MainActivity.this, R.menu.backup);
+
+        if (op == BackUp.OPBACKUP)
+            cm.setTitle(getResources().getString(R.string.backupUP));
+
+        else if (op == BackUp.OPRESTORE)
+            cm.setTitle(getResources().getString(R.string.backupRES));
+        cm.show();
+
+        cm.setOnIconContextItemSelectedListener(new IconContextMenu.IconContextItemSelectedListener() {
+            @Override
+            public void onIconContextItemSelected(MenuItem item, Object info) {
+                if (op == BackUp.OPBACKUP)
+                    LanzarBackupTo(item.getItemId());
+
+
+                else if (op == BackUp.OPRESTORE) {
+
+                    LanzarRestorefrom(item.getItemId());
+                }
+            }
+        });
+    }
+
+
+    private void LanzarSetting() {
+
+        Intent intent = new Intent(this, PreferencesAct.class);
+        startActivity(intent);
+    }
+
+
+    private void restoreLocal() {
+
+        ArrayList<String> items = new ArrayList<>();
+        ArrayAdapter<String> filesXML = new ArrayAdapter<String>(this, R.layout.list_item_backup, items);
+
+        File[] files;
+        java.io.File folder;
+        resItem.clear();
+
+        folder = new File(BackUp.path);
+        if (folder.exists()) {
+            files = folder.listFiles();
+            Arrays.sort(files, new Comparator<File>() {
+                public int compare(File f1, File f2) {
+                    return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+                }
+            });
+
+
+            for (File file : files) {
+
+                String name = file.getName();
+
+                if (name.contains("PL ")) {
+                    resItem.add(name);
+                    items.add(name.replace("-", "/").replace(".xml", "").replace(".", ":").replace("PL", "Backup"));
+
+                }
+            }
+        }
+
+        if (!items.isEmpty()) {
+
+
+            new AlertDialog.Builder(MainActivity.this)
+                    .setAdapter(filesXML, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            BackUp.ReadXMLFile(new File(BackUp.path + "/" + resItem.get(which)), MainActivity.this, false);
+                            android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
+                            String tag = (String) fragment.getTag();
+                            if (tag == "DIARIOS") {
+                                fragmentD.carga();
+
+                            }
+                        }
+                    })
+                    .setCancelable(true).setTitle(R.string.RestoreTitle)
+                    .show();
+        } else {
+            Toast.makeText(MainActivity.this, getResources().getString(R.string.noBackups), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void LanzarRestorefrom(int id) {
+
+
+        switch (id) {
+            case R.id.backup_st:
+                restoreLocal();
+                break;
+        /*    case R.id.backup_dr:
+                break;
+            case R.id.backup_db:
+                break;*/
+
+            default:
+                break;
+        }
+
+
+    }
+
+    private void LanzarBackupTo(int id) {
+
+        switch (id) {
+            case R.id.backup_st:
+                BackUp.dump(this);
+                break;
+           /* case R.id.backup_dr:
+               // driveBackup();
+                break;
+            case R.id.backup_db:
+                break;*/
+            // case R.id.backup_em:
+            //   break;
+            default:
+                break;
+        }
+
+    }
+
+
+    private void LanzarMisDiarios() {
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragmentD,"DIARIOS")
+                .replace(R.id.container, fragmentD, "DIARIOS")
                 .commit();
         getSupportActionBar().setTitle(R.string.miscalendarios);
 
     }
 
-    public void  lanzaExplorer(){
+    public void LanzaExplorer() {
 
 
         fragmentManager = getSupportFragmentManager();
@@ -197,21 +343,21 @@ public class MainActivity extends BaseActivity {
         Toast mens;
         ArrayList<Diarios> items;
         items = consultas.getDiarios();
-        String url= "<table>";
-        String si= "<b><font color='#45ab2d'>OK</font></b>", no ="<b><font color='#e71a03'>ERROR</font></b>";
-        String row ="<tr>\n" +
-                    "<td><b><font color='#B8B8B8' face=\"sans-serif\">%name</font><b></td>\n" +
-                    "<td>%result</td>\n" +
-                    "</tr>";
+        String url = "<table>";
+        String si = "<b><font color='#45ab2d'>OK</font></b>", no = "<b><font color='#e71a03'>ERROR</font></b>";
+        String row = "<tr>\n" +
+                "<td><b><font color='#B8B8B8' face=\"sans-serif\">%name</font><b></td>\n" +
+                "<td>%result</td>\n" +
+                "</tr>";
 
         for (Diarios item : items) {
 
             result = exp.exportToExcel(consultas.getLogs(item.getClave()), item.getNombre());
 
             if (result)
-                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", si);
+                url = url + row.replace("%name", padLeft(Ficheros.generaNombre(item.getNombre()), 10)).replace("%result", si);
             else
-                url = url +  row.replace("%name",padLeft(Ficheros.generaNombre(item.getNombre()),10)).replace("%result", no);
+                url = url + row.replace("%name", padLeft(Ficheros.generaNombre(item.getNombre()), 10)).replace("%result", no);
 
         }
         url = url + "</table>";
@@ -238,7 +384,7 @@ public class MainActivity extends BaseActivity {
 
             WebView wv = new WebView(this);
 
-            LOGI("URL", "6"+url);
+            LOGI("URL", "6" + url);
             wv.loadDataWithBaseURL("", url, "text/html", "UTF-8", "");
             wv.setWebViewClient(new WebViewClient() {
                 @Override
@@ -252,14 +398,13 @@ public class MainActivity extends BaseActivity {
             alert.setView(wv);
             alert.show();
 
-            if (tag == "EXPLORER"){
+            if (tag == "EXPLORER") {
                 fragmentE.carga();
             }
 
         }
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -275,11 +420,10 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
-
 
 
     public String padLeft(String value, int length) {
@@ -292,61 +436,6 @@ public class MainActivity extends BaseActivity {
 
         return result.toString();
     }
-
-
-
-   /* private void LanzaRate() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.pain.log.painlog"));
-        startActivity(intent);
-    }
-
-    private void LanzaMore() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
-        startActivity(intent);
-    }
-
-    public static class LanzaChangelog extends ChangeLog {
-
-        public static final String DEFAULT_CSS =
-
-                "body {                                                           " + "	font-family: Verdana, Helvetica, Arial, sans-serif;   " + "	font-size: 11px;                                      " + "	color: #000000;                                       " + "	background-color: #ffffff;                            " + "	margin: 0px;                                          " + "	padding: 0px;                                         " + "}                                                        "
-                        + "h1 {                                                     " + "	font-size: 14px;                                      " + "	font-weight: bold;                                    " + "	text-transform: uppercase;                            " + "	color: #000000;                                       " + "	margin: 0px;                                          " + "	padding: 10px 0px 0px 8px;                            " + "}                                                        "
-                        + "h2 {                                                     " + "	font-size: 10px;                                      " + "	color: #999999;                                       " + "	font-weight: normal;                                  " + "	margin: 0px 0px 0px 8px;                              " + "	padding: 0px;                                         " + "}                                                        " + "ul {                                                     "
-                        + "	margin: 0px 0px 10px 15px;                            " + "	padding-left: 15px;                                " + "	padding-top: 8px;                                     " + "	list-style-type: square;                              " + "	color: #999999;                                       " + "}";
-        public LanzaChangelog(Context context) {
-            super(new ContextThemeWrapper(context, R.style.AppTheme), DEFAULT_CSS);
-        }
-
-
-    }
-
-    public void lanzaLicense() {
-
-
-        Fragment fragment =  new Libs.Builder()
-                //Pass the fields of your application to the lib so it can find all external lib information
-                .withFields(R.string.class.getFields())
-                .withVersionShown(true)
-                .withLicenseShown(true)
-                .withAutoDetect(true)
-                .withLibraries("sqliteassethelper")
-                .withAboutDescription(getResources().getString(R.string.escrita) + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/PainLog\">Project in Github</a>")
-                .withActivityTheme(R.style.AppTheme)
-                        .withAnimations(false)
-                        //start the activity
-                .fragment();
-
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
-
-        getSupportActionBar().setTitle(R.string.license);
-
-    }*/
-
-
 
 }
 

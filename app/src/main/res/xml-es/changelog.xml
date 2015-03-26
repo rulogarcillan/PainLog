@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-
+    <release version="1.2" versioncode="120">
+        <change>Copias de seguridad locales</change>
+        <change>Añadido ajustes</change>
+        <change>Ruta de archivos exportados</change>
+        <change>Ruta de copias de seguridad</change>
+        <change>Otros cambios visuales</change>
+        <change>Corregido pequeño error en imágenes de la fase lunar</change>
+    </release>
     <release version="1.1.2" versioncode="112">
         <change>Añadido tutorial de inicio</change>
         <change>Nuevas animaciones</change>

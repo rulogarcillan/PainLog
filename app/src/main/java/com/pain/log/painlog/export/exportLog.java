@@ -2,7 +2,6 @@ package com.pain.log.painlog.export;
 
 import android.app.Activity;
 
-import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.negocio.Logs;
 import com.pain.log.painlog.negocio.MoonCalculation;

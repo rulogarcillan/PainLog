@@ -1,4 +1,4 @@
-package com.pain.log.painlog.Constantes;
+package com.pain.log.painlog.export;
 
 import android.os.Environment;
 
@@ -12,11 +12,11 @@ import java.util.Date;
 
 public final class Ficheros {
 
-	public static final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog/";
+    public static final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    public static String customPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog/";
+	public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PainLog";
 
-	public static String generaNombre(String titu) {
+  	public static String generaNombre(String titu) {
 
 		String name = parseChar(titu) + ".xls";
         return name;
@@ -91,6 +91,12 @@ public final class Ficheros {
 	public static void CreaRuta() {
 
 		File file = new File(path);
+
+        if (!file.isDirectory()) {
+            file.mkdirs();
+        }
+
+        file = new File(BackUp.path);
 
         if (!file.isDirectory()) {
             file.mkdirs();

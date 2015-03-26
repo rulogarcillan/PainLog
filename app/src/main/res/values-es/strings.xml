@@ -59,7 +59,28 @@
     <string name="splash1">Cree calendarios para llevar el control de una zona dolorosa de su cuerpo.</string>
     <string name="splash2">Cuando sienta dolor anote la fecha, la intensidad de dolor y una breve nota.</string>
     <string name="splash3">Exporte los resultados anotados durante un periodo de tiempo y visite su medico para su posterior análisis.</string>
-
+    <string name="backupUP">Copia de seguridad</string>
+    <string name="backupRES">Restaurar copia</string>
+    <string name="settings">Ajustes</string>
+    <string name="BackupoK">Copia de seguridad completada</string>
+    <string name="RestoreNotOK">Fallo al restaurar datos</string>
+    <string name="RestoreOK">Copia de seguridad restaurada</string>
+    <string name="viaLocal">Almacenamiento local</string>
+    <string name="viaMail">Correo electrónico</string>
+    <string name="prefDelBackup">Eliminar todas las copias de seguridad</string>
+    <string name="prefAlldelete">Copias de seguridad eliminadas</string>
+    <string name="prefcaution"> todas las copias de seguridad serán eliminadas.</string>
+    <string name="prefcautionRed">Atención,</string>
+    <string name="RestoreTitle">Elija copia de seguridad</string>
+    <string name="noBackups">No hay copias de seguridad</string>
+    <string name="confirmarDelBackup">¿Está seguro que desea eliminar todas las copias de seguridad?</string>
+    <string name="prefBackup">Ruta de la copia de seguridad</string>
+    <string name="prefFile">Ruta de los archivos exportados</string>
+    <string name="dialogBackup1">Conectando a Google drive</string>
+    <string name="dialogBackup2">Sincronizando cuenta</string>
+    <string name="dialogBackup3">Comprobando carpetas</string>
+    <string name="errBackup1">Error al  sincronizar, ¡Por Favor! intentaló más tarde</string>
+    <string name="errBackup2">Error al intentar crear la carpeta</string>
 
 </resources>
 

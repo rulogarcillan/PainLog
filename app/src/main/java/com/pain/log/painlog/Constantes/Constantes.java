@@ -19,11 +19,11 @@ public class Constantes {
                                         R.string.exportall,
                                         R.string.archivos,
                                         R.string.explorar,
-                                        /* R.string.miscellaneous,
-                                         R.string.puntuar,
-                                         R.string.changelog,
-                                         R.string.license,
-                                         R.string.more*/};
+                                         R.string.backup,
+                                         R.string.backupUP,
+                                         R.string.backupRES,
+                                         R.string.settings,
+                                         R.string.settings};
 
     private static final int icono[] = {-1,
                                         -1,
@@ -31,11 +31,11 @@ public class Constantes {
                                         R.drawable.ic_export_all,
                                         -1,
                                         R.drawable.ic_folder,
-                                        /*-1,
-                                        R.drawable.ic_action_rating,
-                                        R.drawable.ic_action_changelog,
-                                        R.drawable.ic_license,
-                                        R.drawable.ic_more*/};
+                                        -1,
+                                        R.drawable.ic_backup,
+                                        R.drawable.ic_restore,
+                                        -1,
+                                        R.drawable.ic_setting};
 
     private static final int type[] = {MenuDrawer.TYPE_GRAN_HEADER,
                                        MenuDrawer.TYPE_HEADER,
@@ -43,11 +43,11 @@ public class Constantes {
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_HEADER,
                                        MenuDrawer.TYPE_ITEM,
-                                      /* MenuDrawer.TYPE_HEADER,
+                                       MenuDrawer.TYPE_HEADER,
                                        MenuDrawer.TYPE_ITEM,
                                        MenuDrawer.TYPE_ITEM,
-                                       MenuDrawer.TYPE_ITEM,
-                                       MenuDrawer.TYPE_ITEM*/};
+                                       MenuDrawer.TYPE_HEADER,
+                                       MenuDrawer.TYPE_ITEM};
 
 
     public static ArrayList<MenuDrawer> genItemsDrawerMenu() {

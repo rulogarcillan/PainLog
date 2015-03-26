@@ -27,9 +27,9 @@ import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.listeners.ActionClickListener;
 import com.nispok.snackbar.listeners.EventListener;
-import com.pain.log.painlog.Constantes.Ficheros;
 import com.pain.log.painlog.R;
 import com.pain.log.painlog.SwipeRecycler.SwipeableRecyclerViewTouchListener;
+import com.pain.log.painlog.export.Ficheros;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,6 +65,8 @@ public class ExplorerFragment extends Fragment {
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
+        path.setText(Ficheros.path.replace(Ficheros.root, "/sdcard"));
+
     }
 
     @Override
@@ -81,7 +83,6 @@ public class ExplorerFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
 
-        path.setText(Ficheros.customPath);
 
         adapter = new AdapterFicheros(getActivity(), items, 0); //Agregamos los items al adapter
         carga();
@@ -348,6 +349,8 @@ public class ExplorerFragment extends Fragment {
         dialog.show();*/
 
     }
+
+
 
 
 }

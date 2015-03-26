@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--              OTHERS         -->
+    <string name="license">License</string>
+    <string name="more">Others app</string>
+    <string name="settings">Settings</string>
+    <string name="help_d">Swipe rigth to delete</string>
+    <string name="help_s">Swipe left to share</string>
+    <string name="help">Help</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="archivos">Files</string>
+    <string name="explorar">Explore</string>
+    <string name="changelog" translatable="false">Changelog</string>
+    <string name="puntuar">Rate this app</string>
+    <string name="data">Data</string>
+    <string name="miscalendarios">My calendars</string>
+    <string name="eliminado">delete</string>
+    <string name="deshacer">Undo</string>
+    <string name="descargar">Donload</string>
+    <string name="salir">Please click back again to exit</string>
     <string name="app_name" translatable="false">Pain Log</string>
     <string name="action_settings">Options</string>
     <string name="vacio">Press the button to add a calendar</string>
     <string name="vacioFiles">No files</string>
     <string name="vacioreg">Press the button to add a record</string>
     <string name="confirmar">Are you sure to delete?</string>
+    <string name="confirmarDelBackup">Are you sure to delete all backups?</string>
     <string name="errorvacio">Error, you must enter text</string>
     <string name="errorfecha">The date is invalid</string>
     <string name="editarTittle">Edit</string>
@@ -15,16 +34,27 @@
     <string name="exportSendTittle">Export and send</string>
     <string name="addLog">Add</string>
     <string name="nombre">Name</string>
-    <string name="notas">Type in your note</string>
-    <string name="diassindolor">Days without pain</string>
 
+    <!--              Splash        -->
+    <string name="splash1">Create your own calendar to have a control of your pains.</string>
+    <string name="splash2">Whenever you feel a pain anywhere in your body, write down the date,the intensity and a brief description of it.</string>
+    <string name="splash3">Export all the information created for a period of time and give it to your doctor for a better analysis.</string>
+    <string name="splash4">Start</string>
+
+
+    <!--              Pain        -->
     <string name="dolor1">Mild pain</string>
     <string name="dolor2">Moderate pain</string>
     <string name="dolor3">Severe pain</string>
     <string name="sinnotas">No notes</string>
     <string name="fechadol">Date of ailment</string>
     <string name="notascom">Notes and comments</string>
+    <string name="diassindolor">Days without pain</string>
+    <string name="notas">Type in your note</string>
 
+
+
+    <!--              MOON         -->
     <string name="luna0">New</string>
     <string name="luna1">Waxing crescent</string>
     <string name="luna2">First quarter</string>
@@ -34,47 +64,57 @@
     <string name="luna6">Third quarter</string>
     <string name="luna7">Waning crescent</string>
 
-    <string name="exportok">Export terminated successfully</string>
-    <string name="exportnotok">Export terminated unsuccessfully</string>
-    <string name="salir">Please click back again to exit</string>
-
-    <string name="miscellaneous">Miscellaneous</string>
-    <string name="archivos">Files</string>
-    <string name="explorar">Explore</string>
-    <string name="exportall">Export all to excel</string>
-    <string name="changelog" translatable="false">Changelog</string>
-    <string name="puntuar">Rate this app</string>
-    <string name="data">Data</string>
-    <string name="miscalendarios">My calendars</string>
-    <string name="exportedTitleOk">Exported files to excel</string>
-    <string name="eliminado">delete</string>
-    <string name="deshacer">Undo</string>
 
 
-    <string name="descargar">Donload</string>
-    <string name="noappxls">Need a viewer excel</string>
-
-    <string name="help_d">Swipe rigth to delete</string>
-    <string name="help_s">Swipe left to share</string>
-    <string name="help">Help</string>
-
-
-
+    <!--              EXCEL         -->
     <string name="col1excel">DATE</string>
     <string name="col1exce2">INTENSITY</string>
     <string name="col1exce3">NOTES</string>
     <string name="col1exce4">MOON PHASE</string>
+    <string name="exportedTitleOk">Exported files to excel</string>
+    <string name="noappxls">Need a viewer excel</string>
+    <string name="exportall">Export all to excel</string>
+    <string name="exportok">Export terminated successfully</string>
+    <string name="exportnotok">Export terminated unsuccessfully</string>
 
-    <string name="license">License</string>
-    <string name="more">Others app</string>
+
+
+       <!--               BACKUP        -->
+    <string name="backup" translatable="false">Backup</string>
+    <string name="backupUP">Backup</string>
+    <string name="backupRES">Restore</string>
+    <string name="RestoreTitle">Select Backup</string>
+    <string name="noBackups">No backups</string>
+    <string name="BackupoK">Backup completed successfully</string>
+    <string name="RestoreOK">Restore completed successfully</string>
+    <string name="RestoreNotOK">Restore did not complete successfully</string>
+    <string name="viaDrive" translatable="false">Google Drive</string>
+    <string name="viaDropbox" translatable="false">Dropbox</string>
+    <string name="viaMail">Email</string>
+    <string name="viaLocal">Local storage</string>
+
+    <string name="dialogBackup1">Connecting to Google Drive</string>
+    <string name="dialogBackup2">Synchronizing account</string>
+    <string name="dialogBackup3">Checking folders</string>
+    <string name="errBackup1">Sync error, Please! will try later</string>
+    <string name="errBackup2">Error while trying to create the folder</string>
+
+
+
+
+
+    <!--               PREFERENCE        -->
+    <string name="prefBackup">Backup Path</string>
+    <string name="prefFile">Exported files path</string>
+    <string name="prefDelBackup">Delete all backups</string>
+    <string name="prefAlldelete">Deleted backups</string>
+    <string name="prefcautionRed">Attention, </string>
+    <string name="prefcaution"> all backups will be removed.</string>
+            <!--               ABOUT LIBRARIES         -->
+
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
-
-
-    <string name="splash4">Start</string>
-
-
     <!-- If you include it in your own library use this pattern: define_* -->
     <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
     <string name="define_int_sqliteassethelper" translatable="false"></string>
@@ -90,9 +130,6 @@
     <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
     <string name="library_sqliteassethelper_isOpenSource" translatable="false">true</string>
     <string name="library_sqliteassethelper_repositoryLink" translatable="false">https://github.com/jgilfelt/android-sqlite-asset-helper</string>
-    <string name="splash1">Create your own calendar to have a control of your pains.</string>
-    <string name="splash2">Whenever you feel a pain anywhere in your body, write down the date,the intensity and a brief description of it.</string>
-    <string name="splash3">Export all the information created for a period of time and give it to your doctor for a better analysis.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
