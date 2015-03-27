@@ -95,7 +95,7 @@
 
     <string name="dialogBackup1">Connecting to Google Drive</string>
     <string name="dialogBackup2">Synchronizing account</string>
-    <string name="dialogBackup3">Checking folders</string>
+    <string name="dialogBackup3">Making backup</string>
     <string name="errBackup1">Sync error, Please! will try later</string>
     <string name="errBackup2">Error while trying to create the folder</string>
 
