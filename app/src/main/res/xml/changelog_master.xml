@@ -2,6 +2,9 @@
 <changelog>
 
 
+    <release version="1.2.1" versioncode="121">
+        <change>Backup in Google Drive</change>
+    </release>
 
     <release version="1.2" versioncode="120">
         <change>Backup in local storage</change>

@@ -24,7 +24,7 @@ public class DriveActivity extends BaseActivity implements GoogleApiClient.Conne
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     protected GoogleApiClient mGoogleApiClient;
     protected Boolean flag_ini = false;
-    ProgressDialog dialog;
+    protected ProgressDialog dialog;
 
     @Override
     protected void onResume() {
@@ -73,9 +73,10 @@ public class DriveActivity extends BaseActivity implements GoogleApiClient.Conne
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         LOGI(TAG, "GoogleApiClient connection failed: " + connectionResult.toString());
+        flag_ini = true;
         if (!connectionResult.hasResolution()) {
             // show the localized error dialog.
-            flag_ini = true;
+
             GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
 
             return;

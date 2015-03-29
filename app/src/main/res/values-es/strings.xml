@@ -81,6 +81,7 @@
     <string name="dialogBackup3">Creando copia de seguridad</string>
     <string name="errBackup1">Error al  sincronizar, ¡Por Favor! intentaló más tarde</string>
     <string name="errBackup2">Error al intentar crear la carpeta</string>
+    <string name="dialogBackup4">Restaurando copia de seguridad</string>
 
 </resources>
 

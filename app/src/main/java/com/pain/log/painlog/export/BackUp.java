@@ -104,8 +104,6 @@ public class BackUp {
     }
 
 
-
-
     public static void ReadXMLFile(File fXmlFile, Activity act, boolean err) {
 
 

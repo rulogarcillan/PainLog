@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+
+    <release version="1.2.1" versioncode="121">
+        <change>Copias de seguridad desde Google Drive</change>
+    </release>
     <release version="1.2" versioncode="120">
         <change>Copias de seguridad locales</change>
         <change>Añadido ajustes</change>
