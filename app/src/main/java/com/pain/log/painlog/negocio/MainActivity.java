@@ -3,9 +3,11 @@ package com.pain.log.painlog.negocio;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -23,6 +26,21 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveApi;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.drive.DriveFolder;
+import com.google.android.gms.drive.DriveId;
+import com.google.android.gms.drive.MetadataBuffer;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.drive.query.Filters;
+import com.google.android.gms.drive.query.Query;
+import com.google.android.gms.drive.query.SearchableField;
 import com.pain.log.painlog.BD.Consultas;
 import com.pain.log.painlog.Constantes.Constantes;
 import com.pain.log.painlog.ContextIconMenu.IconContextMenu;
@@ -31,15 +49,25 @@ import com.pain.log.painlog.export.BackUp;
 import com.pain.log.painlog.export.Ficheros;
 import com.pain.log.painlog.export.exportLog;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.concurrent.CountDownLatch;
 
+import static com.google.android.gms.drive.DriveApi.DriveContentsResult;
 import static com.pain.log.painlog.negocio.LogUtils.LOGI;
 
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends DriveActivity {
 
 
     DiariosFragment fragmentD = new DiariosFragment();
@@ -52,9 +80,19 @@ public class MainActivity extends BaseActivity  {
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
-    ProgressDialog dialog;
+    ArrayList<DriveFiles> drivefiles = new ArrayList<>();
 
-    private static String a="";
+
+    @Override
+    protected void onPause() {
+        if (mGoogleApiClient != null && !flag_ini) {
+
+            mGoogleApiClient.unregisterConnectionCallbacks(llamadaBackup);
+            mGoogleApiClient.unregisterConnectionCallbacks(llamadaRestore);
+            mGoogleApiClient.disconnect();
+        }
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -279,9 +317,11 @@ public class MainActivity extends BaseActivity  {
             case R.id.backup_st:
                 restoreLocal();
                 break;
-        /*    case R.id.backup_dr:
+            case R.id.backup_dr:
+                flag_ini = false;
+                driveRestore();
                 break;
-            case R.id.backup_db:
+        /*    case R.id.backup_db:
                 break;*/
 
             default:
@@ -297,13 +337,12 @@ public class MainActivity extends BaseActivity  {
             case R.id.backup_st:
                 BackUp.dump(this);
                 break;
-           /* case R.id.backup_dr:
-               // driveBackup();
+            case R.id.backup_dr:
+                flag_ini = false;
+                driveBackup();
                 break;
-            case R.id.backup_db:
+           /* case R.id.backup_db:
                 break;*/
-            // case R.id.backup_em:
-            //   break;
             default:
                 break;
         }
@@ -437,6 +476,325 @@ public class MainActivity extends BaseActivity  {
         return result.toString();
     }
 
+
+    /**
+     * *****DRIVE********
+     */
+
+    private void driveBackup() {
+
+        mGoogleApiClient.registerConnectionCallbacks(llamadaBackup);
+        dialog.setMessage(getResources().getString(R.string.dialogBackup1));
+        dialog.show();
+        mGoogleApiClient.connect();
+
+    }
+
+    private void driveRestore() {
+
+        mGoogleApiClient.registerConnectionCallbacks(llamadaRestore);
+        dialog.setMessage(getResources().getString(R.string.dialogBackup1));
+        dialog.show();
+        mGoogleApiClient.connect();
+
+    }
+
+    final GoogleApiClient.ConnectionCallbacks llamadaBackup = new GoogleApiClient.ConnectionCallbacks() {
+        @Override
+        public void onConnected(Bundle bundle) {
+            dialog.setMessage(getResources().getString(R.string.dialogBackup2));
+            Drive.DriveApi.newDriveContents(getGoogleApiClient())
+                    .setResultCallback(driveContentsCallback);
+            dialog.dismiss();
+
+        }
+
+        @Override
+        public void onConnectionSuspended(int i) {
+            dialog.dismiss();
+        }
+    };
+
+    final private ResultCallback<DriveContentsResult> driveContentsCallback = new
+            ResultCallback<DriveContentsResult>() {
+                @Override
+                public void onResult(DriveContentsResult result) {
+                    if (!result.getStatus().isSuccess()) {
+                        dialog.dismiss();
+                        return;
+                    }
+                    final DriveContents driveContents = result.getDriveContents();
+
+                    // Perform I/O off the UI thread.
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            // write content to DriveContents
+                            OutputStream outputStream = driveContents.getOutputStream();
+                            Writer writer = new OutputStreamWriter(outputStream);
+                            try {
+                                writer.write(BackUp.getTextdumpTemp(MainActivity.this));
+                                writer.close();
+                            } catch (IOException e) {
+
+                            }
+
+                            MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                                    .setTitle(BackUp.genName())
+                                    .setMimeType("text/xml")
+                                    .setStarred(true).build();
+
+                            // create a file on root folder
+                            Drive.DriveApi.getRootFolder(getGoogleApiClient())
+                                    .createFile(getGoogleApiClient(), changeSet, driveContents)
+                                    .setResultCallback(fileCallback);
+                        }
+                    }.start();
+                }
+            };
+
+    final private ResultCallback<DriveFolder.DriveFileResult> fileCallback = new
+            ResultCallback<DriveFolder.DriveFileResult>() {
+                @Override
+                public void onResult(DriveFolder.DriveFileResult result) {
+                    if (!result.getStatus().isSuccess()) {
+                        dialog.dismiss();
+                        return;
+                    }
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.BackupoK), Toast.LENGTH_SHORT).show();
+                }
+            };
+
+
+    private final GoogleApiClient.ConnectionCallbacks llamadaRestore = new GoogleApiClient.ConnectionCallbacks() {
+        @Override
+        public void onConnected(Bundle bundle) {
+
+
+            final Query query = new Query.Builder()
+                    .addFilter(Filters.eq(SearchableField.MIME_TYPE, "text/xml"))
+                    .addFilter(Filters.eq(SearchableField.TRASHED, false))
+                    .build();
+
+            dialog.setMessage(getResources().getString(R.string.dialogBackup2));
+
+            Drive.DriveApi.requestSync(mGoogleApiClient)
+                    .setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status result) {
+
+                            if (!result.isSuccess()) {
+                                showMessage(getResources().getString(R.string.errBackup1));
+                                dialog.dismiss();
+                                return;
+                            }
+                            Drive.DriveApi.query(getGoogleApiClient(), query).setResultCallback(genListFiles);
+
+
+                        }
+                    });
+
+
+        }
+
+        @Override
+        public void onConnectionSuspended(int i) {
+            dialog.dismiss();
+        }
+    };
+
+    final private ResultCallback<DriveApi.MetadataBufferResult> genListFiles = new
+            ResultCallback<DriveApi.MetadataBufferResult>() {
+                @Override
+                public void onResult(DriveApi.MetadataBufferResult result) {
+
+                    if (!result.getStatus().isSuccess()) {
+
+                        return;
+                    }
+
+
+                    itemsName.clear();
+                    itemsId.clear();
+
+                    MetadataBuffer files = result.getMetadataBuffer();
+                    if (files.getCount() > 0) {
+                        for (int i = files.getCount() - 1; i >= 0; i--) {
+                            itemsName.add(files.get(i).getTitle().replace("-", "/").replace(".xml", "").replace(".", ":").replace("PL", "Backup"));
+                            itemsId.add(files.get(i).getDriveId().getResourceId());
+                        }
+
+                        ArrayAdapter<String> filesXML = new ArrayAdapter<String>(MainActivity.this, R.layout.list_item_backup, itemsName);
+
+
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setAdapter(filesXML, new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialogList, int which) {
+
+                                        dialog.setMessage(getResources().getString(R.string.dialogBackup4));
+                                        dialog.show();
+                                        Drive.DriveApi.fetchDriveId(getGoogleApiClient(), itemsId.get(which))
+                                                .setResultCallback(idCallback);
+                                    }
+                                })
+                                .setCancelable(true).setTitle(R.string.RestoreTitle)
+                                .show();
+
+
+                    } else {
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.noBackups), Toast.LENGTH_SHORT).show();
+                    }
+                    dialog.dismiss();
+
+
+                }
+            };
+
+    ArrayList<String> itemsName = new ArrayList<>();
+    ArrayList<String> itemsId = new ArrayList<>();
+
+
+
+    final private ResultCallback<DriveApi.DriveIdResult> idCallback = new ResultCallback<DriveApi.DriveIdResult>() {
+        @Override
+        public void onResult(DriveApi.DriveIdResult result) {
+            new RetrieveDriveFileContentsAsyncTask(
+                    MainActivity.this).execute(result.getDriveId());
+        }
+    };
+
+    final private class RetrieveDriveFileContentsAsyncTask
+            extends ApiClientAsyncTask<DriveId, Boolean, String> {
+
+        public RetrieveDriveFileContentsAsyncTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected String doInBackgroundConnected(DriveId... params) {
+            String contents = null;
+            DriveFile file = Drive.DriveApi.getFile(getGoogleApiClient(), params[0]);
+            DriveContentsResult driveContentsResult =
+                    file.open(getGoogleApiClient(), DriveFile.MODE_READ_ONLY, null).await();
+            if (!driveContentsResult.getStatus().isSuccess()) {
+                return null;
+            }
+            DriveContents driveContents = driveContentsResult.getDriveContents();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(driveContents.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                contents = builder.toString();
+            } catch (IOException e) {
+
+            }
+
+            driveContents.discard(getGoogleApiClient());
+            return contents;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result == null) {
+                showMessage("Error while reading from the file");
+                dialog.dismiss();
+                return;
+            }
+
+
+            try {
+                File file = new File(BackUp.path + "/" + "drive.xml");
+                BufferedWriter output = new BufferedWriter(new FileWriter(file));
+                output.write(result);
+                output.close();
+
+                BackUp.ReadXMLFile(file, MainActivity.this, false);
+                file.delete();
+                android.support.v4.app.Fragment fragment = fragmentManager.findFragmentById(R.id.container);
+                String tag = (String) fragment.getTag();
+                if (tag == "DIARIOS") {
+                    fragmentD.carga();
+
+                }
+
+
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+        }
+    }
+
+    public abstract class ApiClientAsyncTask<Params, Progress, Result>
+            extends AsyncTask<Params, Progress, Result> {
+
+        private GoogleApiClient mClient;
+
+        public ApiClientAsyncTask(Context context) {
+            GoogleApiClient.Builder builder = new GoogleApiClient.Builder(context)
+                    .addApi(Drive.API)
+                    .addScope(Drive.SCOPE_FILE);
+            mClient = builder.build();
+        }
+
+        @Override
+        protected final Result doInBackground(Params... params) {
+            Log.d("TAG", "in background");
+            final CountDownLatch latch = new CountDownLatch(1);
+            mClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                @Override
+                public void onConnectionSuspended(int cause) {
+                }
+
+                @Override
+                public void onConnected(Bundle arg0) {
+                    latch.countDown();
+                }
+            });
+            mClient.registerConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                @Override
+                public void onConnectionFailed(ConnectionResult arg0) {
+                    latch.countDown();
+                }
+            });
+            mClient.connect();
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                return null;
+            }
+            if (!mClient.isConnected()) {
+                return null;
+            }
+            try {
+                return doInBackgroundConnected(params);
+            } finally {
+                mClient.disconnect();
+            }
+        }
+
+        /**
+         * Override this method to perform a computation on a background thread, while the client is
+         * connected.
+         */
+        protected abstract Result doInBackgroundConnected(Params... params);
+
+        /**
+         * Gets the GoogleApliClient owned by this async task.
+         */
+        protected GoogleApiClient getGoogleApiClient() {
+            return mClient;
+        }
+    }
 }
+
 
 

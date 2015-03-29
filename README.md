@@ -1,4 +1,4 @@
-# Pain Log 1.2
+# Pain Log 1.2.1
 
 
 <img src="app/src/main/logogrande.png" width="50%">

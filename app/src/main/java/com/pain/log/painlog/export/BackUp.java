@@ -16,6 +16,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,33 +44,16 @@ public class BackUp {
     public static final int OPRESTORE = 1;
 
 
-    public static void dump(Activity act) {
-
+    public static String genName(){
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm");
-        String name = "PL " +  formatter.format(today);
-
-
-        MyDatabase db = new MyDatabase(act);
-
-        File sd = new File(path);
-        String pathFile = sd + fileName.replace("NAMEFILE", name);
-
-        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
-        databaseDump.exportData();
-        Toast.makeText(act, act.getResources().getString(R.string.BackupoK),Toast.LENGTH_SHORT).show();
-
-
-
+        return ("PL " +  formatter.format(today));
     }
 
 
-    public static File dumpForUpload(Activity act) {
+    public static void dump(Activity act) {
 
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm");
-        String name = "PL " +  formatter.format(today);
-
+        String name = genName();
 
         MyDatabase db = new MyDatabase(act);
 
@@ -78,9 +63,6 @@ public class BackUp {
         DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
         databaseDump.exportData();
         Toast.makeText(act, act.getResources().getString(R.string.BackupoK),Toast.LENGTH_SHORT).show();
-
-            return new File(pathFile);
-
     }
 
     public static void dumpTemp(Activity act) {
@@ -94,6 +76,33 @@ public class BackUp {
         databaseDump.exportData();
 
     }
+
+    public static String getTextdumpTemp(Activity act) throws IOException {
+        MyDatabase db = new MyDatabase(act);
+
+        File sd = new File(path);
+        String pathFile = sd + fileName.replace("NAMEFILE", fileNameTemp);
+        DatabaseDump databaseDump = new DatabaseDump(db.getReadableDatabase(), pathFile);
+        databaseDump.exportData();
+
+        File file = new File(pathFile);
+        int len;
+        char[] chr = new char[4096];
+        final StringBuffer buffer = new StringBuffer();
+        final FileReader reader = new FileReader(file);
+        try {
+            while ((len = reader.read(chr)) > 0) {
+                buffer.append(chr, 0, len);
+            }
+        } finally {
+            reader.close();
+        }
+        file.delete();
+
+        return buffer.toString();
+
+    }
+
 
     public static void ReadXMLFile(File fXmlFile, Activity act, boolean err) {
 
