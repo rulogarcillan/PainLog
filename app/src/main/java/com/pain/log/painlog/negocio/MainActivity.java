@@ -80,7 +80,7 @@ public class MainActivity extends DriveActivity {
     FragmentManager fragmentManager;
     Boolean doubleBackToExitPressedOnce = false;
     ArrayList<String> resItem = new ArrayList<>();
-    ArrayList<DriveFiles> drivefiles = new ArrayList<>();
+
 
 
     @Override
