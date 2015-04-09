@@ -17,6 +17,9 @@
 
 
 #Description en-EN
+<p align="justify"> Are you fed up with your headaches? Would you like to know the reason of your pain in the ribs? Don't you know why do you have pain somewhere in your body? Download right now Pain log and write down whenever you have a pain, you can easily have a diary with all the information in order to look for a solution. Export, send or share easily the results through vía google Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc... What are you waiting for downloading the best app about pain's register in internet? Moreover, pain log is free,without publicity and open source.</p>
+
+
 <p align="justify"> 
 Collecting information about your headaches on a notebook can help you to get the deseases. Stress, depression or not sleeping properly can cause a headache. Moreover, having these pains registered could help your doctor to identify the kind of headache that you have, because it can be migraines or tension headaches. In this way, your doctor will help you to find a correct solution to your problem and probably to eliminate it.
 </p>
