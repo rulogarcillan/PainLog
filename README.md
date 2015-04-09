@@ -48,9 +48,9 @@ If you are interested in the project, you can visit this link:
 Pain Log es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
 <p align="justify"> 
-¿Harto de tus dolores de cabeza? ¿Cansado de no saber el foco del dolor de tus costillas? ¿No sabes por qué te duele alguna zona de tu cuerpo? descárgate ya mismo Pain log y anota cada momento del día en el que sientas dolor, lleva fácilmente un diario con todos los registros dolorosos para poder encontrar una solución. Exporta, envía, comparte todos tus resultados fácilmente  vía google Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc... ¿A qué esperas para descargarte la mejor aplicación de registros de dolores de todo Internet? Además Pain log es gratuita, sin publicidad y de código abierto.
+¿Harto de tus dolores de cabeza? ¿Cansado de no saber el foco del dolor de tus costillas? ¿No sabes por qué te duele alguna zona de tu cuerpo? descárgate ya mismo Pain log y anota cada momento del día en el que sientas dolor, lleva fácilmente un diario con todos los registros dolorosos para poder encontrar una solución. Exporta, envía, comparte todos tus resultados fácilmente  vía google Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc... ¿A qué esperas para descargarte la mejor aplicación de registros de dolores de todo Internet? Además Pain log es gratuita, sin publicidad y de código abierto.</p>
 
-
+<p align="justify"> 
 Recopilar información acerca de tus dolores de cabeza en una libreta de notas puede ayudarte a encontrar sus desencadenantes. El estrés, la depresión, la falta de sueño pueden provocar un dolor de cabeza. Además, llevar un registro de estos dolores puede ayudar a tu médico a identificar el tipo de dolor de cabeza que padeces, ya que puede ser tensional o migrañoso. Brindar indicios a tu médico puede ayudarte a obtener un tratamiento eficaz y, quizás, a eliminar la causa del dolor.</p>
 
 Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pasos:
